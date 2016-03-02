@@ -1,0 +1,49 @@
+Wet Frog Studios
+Logo Design Guide
+Creative Brief
+
+
+Contact:
+  Göteborg Bit Factory
+  http://yootabory.org
+  http://taskwarrior.org
+  http://tasktools.org
+  fredde@yootabory.org
+  paul@yootabory.org
+
+What product of services do you offer?
+  We help people organize and manage and view task lists.  The product is
+  Taskwarrior, documented and supported at http://taskwarrior.org.  Our websites
+  are in need of overhaul, and we're starting with you, and a new logo, if
+  that's agreeable.
+
+Who is your target audience?
+  Folks who spend a lot of time in front of a computer, and are busy, who must
+  keep track of work.  Folks who are comfortable at the command line prompt.
+  Folks who might work with their smart-phone.
+
+Project deadline?
+  2011-06-01 or thereabouts.
+
+What is your company tag-line or slogan?
+  We don't have one
+
+Do you have specific images or icons that you wish to portray in your logo?
+  No, but we have exclusions:
+    - no pseudo-Japanese font
+    - no check-marks or clip boards, everyone uses them
+
+Any specific colors you are interested in seeing incorporated?
+  No restrictions.
+
+What attributes of your business would you like your logo to reflect?
+  Dependable, solid
+  Simple
+
+What else would you like?
+  Color palette
+
+Extra Notes?
+  It is likely that we will return with one or two further icon requests for
+  other products, and there might be similarities.
+
