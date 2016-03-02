@@ -1,0 +1,11 @@
+http://taskwarrior.org/
+http://status.tasktools.org/
+http://statuspage.tasktools.org/
+https://bug.tasktools.org/
+https://git.tasktools.org/
+http://tasktools.org/
+http://tasktools.org/tinderbox/
+http://holidata.net/
+http://flod.us/
+https://torp.tasktools.org/
+http://answers.tasktools.org/

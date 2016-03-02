@@ -1,0 +1,188 @@
+Introduction, 5 minutes
++ About me (myself, Ubuntu, Taskwarrior)
++ About this session
++ Reason for using beta-version
++ Reason for doing the slides in English
++ Reasons pro Taskwarrior
+
+Taskwarrior installation, 15 (total 20) minutes
++ Installation (packages management, prerequisite, self-compile, custom directory)
++ task version to check installation
+
+Simple example, 5 (25) minutes
++ task add
++ task list
++ task done
+task add Pay rents # Our first task
+task add Check Taskwarrior # and now the second one
+task list # lists all open tasks
+task 2 start
+task list
+---
+task 2 stop
+task 2 done
+task list
++ That's all?
+
+General, 10 (40) minutes
++ Maybe handout of cheat sheet
++ task <filter> command <mod>
++ everything maybe abbreviated, but it has to be clear what is meant
++ task <filter> modify
++ task <filter> edit
++ task undo
++ task help
++ man task
++ Syntax higlighting in vim
++ <tab> completion in bash
+ls /usr/local/share/doc/task/scripts/*
+. /usr/local/share/doc/task/scripts/bash/task_completion.sh 
+cp -r /usr/local/share/doc/task/scripts/vim ~/.vim
+
+Working with dates, 15 (55) minutes
++ set date format (task show dateformat, possible formats, mine: YMD-HN)
+task show dateformat
+task config dateformat YMD
+task config dateformat.annotation YMD
+task config dateformat.report YMD
+# my dateformat is YMD-HN
++ set start of the week (task show weekstart ; task config weekstart Monday)
+task show weekstart
+task config weekstart Monday
+- Everything can be customized: task show (without parameters)
+$ task show | wc -l # nearly everything can be customized
+225
+# try it yourself without '| wc -l'
++ "special dates" (weekday, today, yesterday, 21st, so*, eo*)
++ due
++ wait
+task add due:20111231 "Celebrate Sylvester"
+task add due:Sunday "Drive home"
+task list
+task 2 modify wait:20111201
+task list
++ task waiting
++ recur / until (task recurring)
+task waiting
+task 1 modify due:eom recur:monthly
+task list
+task recurring
+# task id changed from 1 (task modify) to 4
+# try task 1 edit
++ entry
+task add due:eom recur:monthly until:20121231 "Pay installment for credit"
+task add "Prepare slides for workshop"
+task 10 modify entry:yesterday
+task list
++ starting and stopping of tasks
+task list
+task 10 start
+task list
+task 10 stop
++ adding holidays (reference to holidata.net)
++ task cal
+task config holiday.carnivalstart.name Carnival Start
+task config holiday.carnivalstart.date 20111111
+task cal
+task show calendar
+task config calendar.holidays full
+task cal
+task config calendar.holidays sparse 
+task config calendar.details full
+task cal
+# did a 'task config calendar.holidays sparse' before
++ task timesheet
+task add Drive to Leipzig
+task 12 done
+task 10 start
+task timesheet
+
+Getting sorted, 10 (65) minutes
++ projects (task projects as well)
++ subprojects
+task 3 modify pro:ubucon
+task 10 modify pro:ubucon.workshop
+task 4 modify pro:private
+task list
+task projects
+task pro:ubucon ls
+task 10 done
++ tags
+task 3 modify +leipzig
+task 4 modify +banking
+task +leipzig list
++ priorities
+task long
+task 4 modify pri:H # can be either (H)igh, (M)edium or (L)ow
+task long
+# Displayed in bold now
+#
++ annotations (annotate, denotate)
+task list
+task 3 annotate "Do not forget your head"
+task 4 annotate "Use wifes account"
+task list
+task 4 denotate "Use wifes account"
+
+Dependencies, 5 (70) minutes
++ task blocking
++ depends
+task add "Send letter to Fritz"
+task add "Write letter"
+task 10 modify depends:11
+task blocked
+task unblocked
+task 10 done
+task undo
+task 10,11 done
+task blocked
+
+Reports, 20 (90) minutes
++ existing reports (task reports)
+task burndown.daily
+task ghistory.annual
+task ghistory.monthly
+task history.monthly
+task ls
+task minimal
+task summary
++ customising/own reports
+task show report.minimal
+task show report.list
+echo "
+report.ll.description=Dirks task list
+report.ll.columns=id,project,priority,due,due.countdown,tags,description
+report.ll.labels=ID,Project,Pri,Due,Countdown,Tags,Description
+report.ll.sort=due+,priority-,project+,description+
+report.ll.filter=status:pending
+" >> ~/.taskrc
+task ll
+task show default
+task config default.command ll
+task
+
+Filtering, 10 (100) minutes
++ filtering project, tags, dates, ...
++ combining searches
++ boolean combinations 
+task
+task pay
+task /[Pp]ay/
+task due.before:20111020
+task project.not:ubucon
+task project:ubucon +banking
+task project:ubucon -banking
+task status:completed project:ubucon
+task status:completed project:ubucon completed
+task show report.ll.filter
+task list
+task \( pro:ubucon or pro:private \) list
+# Brackets must be escaped for the shell
+task show search
+task show regex
+task show filter
+
+Misc (only if time)
++ task log
++ task diag to help support
++ task shell

@@ -1,0 +1,9 @@
+taskwarrior.org
+status.tasktools.org
+statuspage.tasktools.org
+bug.tasktools.org
+git.tasktools.org
+tasktools.org
+holidata.net
+flod.us
+torp.tasktools.org
