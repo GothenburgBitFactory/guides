@@ -1,16 +1,1 @@
-*.dvi
-*.aeb
-*.aux
-*.idx
-*.ilg
-*.ind
-*.ivz
-*.ivz.xml
-*.log
-*.pic.xml
-*.toc
-*.nav
-*.out
-*.snm
-*.vrb
-*~
+.gitconfig
