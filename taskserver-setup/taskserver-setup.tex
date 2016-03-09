@@ -119,19 +119,30 @@
 %	\tableofcontents
 %\end{frame}
 
+\parskip1ex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Introduction}
+    \vfill
+    This guide leads you through all the necessary steps to setup your own Taskserver to sync your Taskwarrior-tasks.
+
+    Please follow the steps carefully and note all things you do differently.
+    \vfill
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preparation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\parskip1ex
-
 \begin{frame}[fragile]\frametitle{Preparation -- Backup Your Data}\label{backup}
-
     Let's reinforce a good habit and make a backup copy of your data first. Here is a very easy way to backup your data:
 
     \begin{lstlisting}
-        $ cd ~/.task
-        $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
+$ cd ~/.task
+$ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
     \end{lstlisting}
 
     Now move that file somewhere safe. All software contains bugs, so make regular backups.
@@ -140,19 +151,15 @@
 	\begin{alertblock}{Attention!}
 		This is not only due to a good habit, we will modify your data, so this backup is highly recommended.
 	\end{alertblock}
-
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Preparation -- Choose A  Machine}
-
 	A suitable machine to run your Taskserver is one that is always available. If you have such a machine, or have access to a hosted machine, that is ideal.
 
 	If your machine is not continuously available, it can still be a suitable Taskserver because the sync mechanism doesn't require continuous access. When a client cannot sync, it simply accumulates local, unpropagated changes until it can sync.
 
 	A laptop is a poor choice for a Taskserver host.
-
 \end{frame}
-
 
 \begin{frame}[fragile]\frametitle{Preparation -- Choose A  Port}
 	\vfill
@@ -162,10 +169,7 @@
 
 \begin{frame}[fragile]\frametitle{Preparation -- User/Group}
 	\vfill
-  Ideally you will create a new user and group solely to run the
-  Taskserver. This helps you keep the data secure from other users
-  on the machine, as well as controlling the privileges of
-  Taskserver.
+    Ideally you will create a new user and group solely to run the Taskserver. This helps you keep the data secure from other users on the machine, as well as controlling the privileges of Taskserver.
 	\vfill
 \end{frame}
 
@@ -174,7 +178,6 @@
 	Depending on what devices you use to access your server, you may need to configure the firewall to allow incoming TCP/IP traffic on your chosen port.
 	\vfill
 \end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Installation}
@@ -190,60 +193,44 @@
     Meanwhile, there is installation from either git or tarball.
 \end{frame}
 
+\begin{frame}[fragile]\frametitle{Installation -- Introduction}
+    \vfill
+    Installing Taskserver from a tarball is a matter of downloading the tarball, extracting it, satisfying dependencies and building the server.
+    \vfill
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Dependencies}
+    Before building the software, you will need to satisfy the dependencies by installing the following:
+
+    \begin{itemize}
+        \item GnuTLS (likely \verb+libgnutls-dev+, ideally version 3.2 or newer)
+        \item \verb+libuuid+
+        \item CMake (2.8 or newer)
+        \item \verb+make+
+        \item A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)
+    \end{itemize}
+
+    Note that some OSes (Darwin, FreeBSD ...) include <code>libuuid</code> functionality in libc.
+
+    You don't necessarily need the latest version of all components, but it is a good idea if you can.  GnuTLS is a security component, and as such, it is very important that it is current.
+
+    \textbf{Using GnuTLS version 2.12.x is neither adequately secure, nor production quality.}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Download}
+    The next step is to obtain the code. This means getting the Task Server 1.0.0 (or newer) source tarball.  You should check for the latest stable release here:
+
+    \href{http://taskwarrior.org/download/}{http://taskwarrior.org/download/}
+
+    \vfill
+    You can download the tarball with \verb+curl+, as an example of just one of many ways to download the tarball.
+
+    \begin{lstlisting}
+$ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz
+    \end{lstlisting}
+\end{frame}
+
 \iffalse
-<h3><span class="label label-success">2.2</span> Installation</h3>
-<p>
-  Installing Taskserver from a tarball is a matter of downloading
-  the tarball, extracting it, satisfying dependencies and building
-  the server.
-</p>
-
-<a name="depends"></a>
-<h4>Dependencies</h4>
-<p>
-  Before building the software, you will need to satisfy the
-  dependencies by installing the following:
-
-  <ul>
-    <li>GnuTLS (likely <code>libgnutls-dev</code>, ideally version 3.2 or newer)</li>
-    <li><code>libuuid</code></li>
-    <li>CMake (2.8 or newer)</li>
-    <li><code>make</code></li>
-    <li>A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)</li>
-  </ul>
-
-  Note that some OSes (Darwin, FreeBSD ...) include <code>libuuid</code>
-  functionality in libc.
-</p>
-
-<p>
-  You don't necessarily need the latest version of all components,
-  but it is a good idea if you can.  GnuTLS is a security component,
-  and as such, it is very important that it is current.
-
-  Using GnuTLS version 2.12.x is neither adequately secure, nor
-  production quality.
-</p>
-
-<a name="download"></a>
-<h4>Download</h4>
-<p>
-  The next step is to obtain the code. This means getting the
-  Task Server 1.0.0 (or newer) source tarball.  You should check
-  for the latest stable release here:
-</p>
-
-<p>
-  <a href="http://taskwarrior.org/download/">http://taskwarrior.org/download/</a>
-</p>
-
-<p>
-  You can download the tarball with <code>curl</code>, as an example
-  of just one of many ways to download the tarball.
-</p>
-
-<pre>$ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz</pre>
-
 <a name="build"></a>
 <h4>Build</h4>
 <p>
@@ -1466,20 +1453,3 @@ $ taskd server
 \fi
 
 \end{document}
-
-% \begin{frame}[fragile]\frametitle{Title}
-% \begin{lstlisting}
-% \end{lstlisting}
-% \end{frame}
-%
-% \begin{frame}\frametitle{title}
-% \begin{center}
-% \includegraphics[width=10cm,height=7.5cm]{name.png}
-% \end{center}
-% \end{frame}
-%
-% \begin{frame}\frametitle{title}
-% \begin{itemize}
-% \item \textbf{task {\tt<}filter{\tt>} modify}
-% \end{itemize}
-% \end{frame}
