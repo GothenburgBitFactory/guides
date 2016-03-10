@@ -199,25 +199,76 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Installation -- Dependencies}
+\begin{frame}[fragile]\frametitle{Installation -- Dependencies (general)}
     Before building the software, you will need to satisfy the dependencies by installing the following:
 
     \begin{itemize}
-        \item GnuTLS (likely \verb+libgnutls-dev+, ideally version 3.2 or newer)
+        \item \verb+GnuTLS+ (ideally version 3.2 or newer)
         \item \verb+libuuid+
-        \item CMake (2.8 or newer)
+        \item \verb+CMake+ (2.8 or newer)
         \item \verb+make+
         \item A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)
     \end{itemize}
 
-    Note that some OSes (Darwin, FreeBSD ...) include <code>libuuid</code> functionality in libc.
+    Note that some OSes (Darwin, FreeBSD ...) include \verb+ibuuid+ functionality in libc, check the following slides for more detailed instructions.
 
     You don't necessarily need the latest version of all components, but it is a good idea if you can.  GnuTLS is a security component, and as such, it is very important that it is current.
 
     \textbf{Using GnuTLS version 2.12.x is neither adequately secure, nor production quality.}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Installation -- Download}
+\begin{frame}[fragile]\frametitle{Installation -- Dependencies (OS)}
+    We have detailed instructions for the following operating operating systems (click on the name to continue):
+
+    \begin{itemize}
+        \item \hyperlink{centos}{CentOS}
+        \item \hyperlink{debian}{Debian}
+        \item \hyperlink{fedora}{Fedora}
+        \item \hyperlink{opensuse}{openSUSE}
+        \item \hyperlink{ubuntu}{Ubuntu}
+        \item \hyperlink{windows}{Windows with Cygwin}
+        \item \hyperlink{macosx}{Mac OS X}
+    \end{itemize}
+
+    In case you can add your operating system of choice, please send an email to \href{mailto:support@taskwarrior.org}{support@taskwarrior.org} (Thank you!).
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- CentOS}\label{centos}
+
+    Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Debian}\label{debian}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Fedora}\label{fedora}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- openSUSE}\label{opensuse}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Ubuntu}\label{ubuntu}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Windows}\label{windows}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Mac OS X}\label{macosx}
+
+        Continue with \hyperlink{download}{Download}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Download}\label{download}
     The next step is to obtain the code. This means getting the Task Server 1.0.0 (or newer) source tarball.  You should check for the latest stable release here:
 
     \href{http://taskwarrior.org/download/}{http://taskwarrior.org/download/}
