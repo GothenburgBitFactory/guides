@@ -141,8 +141,8 @@
     Let's reinforce a good habit and make a backup copy of your data first. Here is a very easy way to backup your data:
 
     \begin{lstlisting}
-cd ${HOME}/.task
-tar czf task-backup-$(date +'%Y%m%d').tar.gz * 
+$ cd ~/.task
+$ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
     \end{lstlisting}
 
     Now move that file somewhere safe. All software contains bugs, so make regular backups.
@@ -238,11 +238,11 @@ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
 
     % TODO Add exact package names
     \begin{lstlisting}
-sudo yum install gcc-c++
-sudo yum install gnutls-devel
-sudo yum install libuuid-devel
-sudo yum install cmake
-sudo yum install make
+$ sudo yum install gcc-c++
+$ sudo yum install gnutls-devel
+$ sudo yum install libuuid-devel
+$ sudo yum install cmake
+$ sudo yum install make
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -253,11 +253,11 @@ sudo yum install make
 
     % TODO Add exact package names
     \begin{lstlisting}
-sudo apt install gcc-c++
-sudo apt install gnutls-devel
-sudo apt install libuuid-devel
-sudo apt install cmake
-sudo apt install make
+$ sudo apt install gcc-c++
+$ sudo apt install gnutls-devel
+$ sudo apt install libuuid-devel
+$ sudo apt install cmake
+$ sudo apt install make
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -268,11 +268,11 @@ sudo apt install make
 
     % TODO Add exact package names
     \begin{lstlisting}
-sudo dnf install gcc-c++
-sudo dnf install gnutls-devel
-sudo dnf install libuuid-devel
-sudo dnf install cmake
-sudo dnf install make
+$ sudo dnf install gcc-c++
+$ sudo dnf install gnutls-devel
+$ sudo dnf install libuuid-devel
+$ sudo dnf install cmake
+$ sudo dnf install make
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -283,11 +283,11 @@ sudo dnf install make
 
     % TODO Add exact package names
     \begin{lstlisting}
-sudo zypper install gcc-c++
-sudo zypper install gnutls-devel
-sudo zypper install libuuid-devel
-sudo zypper install cmake
-sudo zypper install make
+$ sudo zypper install gcc-c++
+$ sudo zypper install gnutls-devel
+$ sudo zypper install libuuid-devel
+$ sudo zypper install cmake
+$ sudo zypper install make
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -298,11 +298,11 @@ sudo zypper install make
 
     % TODO Add exact package names
     \begin{lstlisting}
-sudo apt install gcc-c++
-sudo apt install gnutls-devel
-sudo apt install libuuid-devel
-sudo apt install cmake
-sudo apt install make
+$ sudo apt install gcc-c++
+$ sudo apt install gnutls-devel
+$ sudo apt install libuuid-devel
+$ sudo apt install cmake
+$ sudo apt install make
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -327,16 +327,16 @@ sudo apt install make
 
 \begin{frame}[fragile]\frametitle{Installation -- Mac OS X}\label{macosx}
     Before building the software, you will need to satisfy the dependencies by installing the following:
-    
+
     % TODO confirmation needed
-    Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools. 
+    Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
 
     We expect you to have \href{http://brew.sh/}{Homebrew} installed on your Mac.
 
     \begin{lstlisting}
-brew install cmake
-brew install git
-brew install gnutls
+$ brew install cmake
+$ brew install git
+$ brew install gnutls
     \end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
@@ -355,19 +355,32 @@ $ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz
     \end{lstlisting}
 \end{frame}
 
-\iffalse
-<a name="build"></a>
-<h4>Build</h4>
-<p>
-  Expand the tarball, and build the Taskserver.
-</p>
+\begin{frame}[fragile]\frametitle{Installation -- Build}\label{build}
+    Expand the tarball, and build the Taskserver.
 
-<pre>$ tar xzf taskd-latest.tar.gz
+    \begin{lstlisting}
+$ tar xzf taskd-latest.tar.gz
 $ cd taskd-latest
 $ cmake -DCMAKE_BUILD_TYPE=release .
 ...
 $ make
-...</pre>
+...
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Build Again}\label{buildagain}
+    If you ever want to build the software again, do some cleanup.
+
+    \begin{lstlisting}
+$ cd taskd-latest
+$ make clean
+...
+$ rm CMakeCache.txt
+...
+    \end{lstlisting}
+\end{frame}
+
+\iffalse
 
 <a name="install"></a>
 <h4>Install</h4>
