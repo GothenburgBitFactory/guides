@@ -380,63 +380,64 @@ $ rm CMakeCache.txt
     \end{lstlisting}
 \end{frame}
 
-\iffalse
 
-<a name="install"></a>
-<h4>Install</h4>
-<p>
-  Now install Taskserver.  This copies files into the right place,
-  and installs man pages.
-</p>
 
-<pre>$ sudo make install
-...</pre>
+\begin{frame}[fragile]\frametitle{Installation -- make install}
+    Now install Taskserver.  This copies files into the right place, and installs man pages.
 
-<a name="verify"></a>
-<h4>Verify</h4>
-<p>
-  Run the <code>taskd</code> command to verify that the server is
-  installed, and the location is in your <code>$PATH</code>.
-  You should see something like this:
-</p>
+    \begin{lstlisting}
+$ sudo make install
+...
+    \end{lstlisting}
+\end{frame}
 
-<pre>$ taskd
+\begin{frame}[fragile]\frametitle{Installation -- Verify installation}
+    Run the \verb+taskd+ command to verify that the server is installed, and the location is in your \verb+$PATH+.
+
+    You should see something like this:
+
+    \begin{lstlisting}
+$ taskd
 
 Usage: taskd -v|--version
-taskd -h|--help
-taskd diagnostics
-taskd validate &lt;JSON | file&gt;
-taskd help [&lt;command&gt;]
+       taskd -h|--help
+       taskd diagnostics
+       taskd validate <JSON | file>
+       taskd help [<command>]
 
 Commands run only on server:
-taskd add     [options] org   &lt;org&gt;
-taskd add     [options] group &lt;org&gt; &lt;group&gt;
-taskd add     [options] user  &lt;org&gt; &lt;user&gt;
-taskd config  [options] [--force] [&lt;name&gt; [&lt;value&gt;]]
-taskd init    [options]
-taskd remove  [options] org   &lt;org&gt;
-taskd remove  [options] group &lt;org&gt; &lt;group&gt;
-taskd remove  [options] user  &lt;org&gt; &lt;user&gt;
-taskd resume  [options] org   &lt;org&gt;
-taskd resume  [options] group &lt;org&gt; &lt;group&gt;
-taskd resume  [options] user  &lt;org&gt; &lt;user&gt;
-taskd server  [options] [--daemon]
-taskd status  [options]
-taskd suspend [options] org   &lt;org&gt;
-taskd suspend [options] group &lt;org&gt; &lt;group&gt;
-taskd suspend [options] user  &lt;org&gt; &lt;user&gt;
-
-Commands run remotely:
-taskd client  [options] &lt;host:port&gt; &lt;file&gt; [&lt;file&gt; ...]
-
-Common Options:
---quiet        Turns off verbose output
---debug        Generates debugging diagnostics
---data &lt;root&gt;  Data directory, otherwise $TASKDDATA
---NAME=VALUE   Temporary configuration override
-</pre>
+       taskd add     [options] org   <org>
+       taskd add     [options] group <org> <group>
+       taskd add     [options] user  <org> <user>
+       taskd config  [options] [--force] [<name> [<value>]]
+       taskd init    [options]
+       taskd remove  [options] org   <org>
+       taskd remove  [options] group <org> <group>
+       taskd remove  [options] user  <org> <user>
+       taskd resume  [options] org   <org>
+       taskd resume  [options] group <org> <group>
+       taskd resume  [options] user  <org> <user>
+       taskd server  [options] [--daemon]
+       taskd status  [options]
+...
+    \end{lstlisting}
+%    taskd suspend [options] org   <org>
+%    taskd suspend [options] group <org> <group>
+%    taskd suspend [options] user  <org> <user>
+%
+%    Commands run remotely:
+%    taskd client  [options] <host:port> <file> [<file> ...]
+%
+%    Common Options:
+%    --quiet        Turns off verbose output
+%    --debug        Generates debugging diagnostics
+%    --data <root>  Data directory, otherwise $TASKDDATA
+%    --NAME=VALUE   Temporary configuration override
+\end{frame}
 
 %%%
+
+\iffalse
 
 <h3><span class="label label-success">2.3</span> Installation</h3>
 <p>
