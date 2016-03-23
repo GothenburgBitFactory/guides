@@ -25,5 +25,4 @@ get_screenshot http://holidata.net/                      holidata-net.png
 get_screenshot http://flod.us/                           flod-us.png
 get_screenshot https://torp.tasktools.org/               torp-tasktools-org.png
 get_screenshot https://botbot.me/freenode/taskwarrior/   botbot-me-taskwarrior.png
-
-# get_screenshot http://d5e.org/                           d5e-org.png
+get_screenshot https://twitter.com/taskwarrior           twitter-taskwarrior.png
