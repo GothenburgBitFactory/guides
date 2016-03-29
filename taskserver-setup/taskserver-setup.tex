@@ -215,7 +215,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Installation -- Dependencies (general)}
+\begin{frame}[fragile]\frametitle{Installation -- Dependencies (general)}\label{dependencies}
     Before building the software, you will need to satisfy the dependencies by installing the following:
 
     \begin{itemize}
@@ -371,7 +371,7 @@ $ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Installation -- Build}\label{build}
+\begin{frame}[fragile]\frametitle{Installation -- Build}\label{buildtar}
     Expand the tarball, and build the Taskserver.
 
     \begin{lstlisting}
@@ -395,8 +395,6 @@ $ rm CMakeCache.txt
 ...
     \end{lstlisting}
 \end{frame}
-
-
 
 \begin{frame}[fragile]\frametitle{Installation -- make install}
     Now install Taskserver.  This copies files into the right place, and installs man pages.
@@ -453,113 +451,81 @@ Commands run only on server:
 
 %%%
 
-\iffalse
+\begin{frame}[fragile]\frametitle{Installation -- from Git-Repository}\label{git}
+    \vfill
+    Installing Taskserver from git is a matter of cloning the git repository and building the server.
 
-<h3><span class="label label-success">2.3</span> Installation</h3>
-<p>
-  Installing Taskserver from git is a matter of cloning the git
-  repository and building the server.
-</p>
+    The same \hyperlink{dependencies}{dependencies} as for installation from tarball apply. We have detailed instructions for the following operating operating systems (click on the name to continue), afterwards come back to this slide (\pageref{git}) or continue with \hyperlink{cloning}{cloning} the repository:
 
-<a name="depends"></a>
-<h4>Dependencies</h4>
-<p>
-  Before building the software, you will need to satisfy the
-  dependencies by installing the following:
+    \begin{itemize}
+        \item \hyperlink{centos}{CentOS}
+        \item \hyperlink{debian}{Debian}
+        \item \hyperlink{fedora}{Fedora}
+        \item \hyperlink{opensuse}{openSUSE}
+        \item \hyperlink{ubuntu}{Ubuntu}
+        \item \hyperlink{windows}{Windows with Cygwin}
+        \item \hyperlink{macosx}{Mac OS X}
+    \end{itemize}
+\end{frame}
 
-  <ul>
-    <li><code>git</code></li>
-    <li>GnuTLS (likely <code>libgnutls-dev</code>, ideally version 3.2 or newer)</li>
-    <li><code>libuuid</code></li>
-    <li>CMake (2.8 or newer)</li>
-    <li><code>make</code></li>
-    <li>A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)</li>
-  </ul>
+\begin{frame}[fragile]\frametitle{Installation -- Cloning the repository}\label{cloning}
+    Now clone the repository like this:
 
-  Note that some OSes (Darwin, FreeBSD ...) include <code>libuuid</code>
-  functionality in libc.
-</p>
+    \begin{lstlisting}
+$ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
+...
+    \end{lstlisting}
 
-<p>
-  You don't necessarily need the latest version of all components,
-  but it is a good idea if you can.  GnuTLS is a security component,
-  and as such, it is very important that it is current.
+    \vfill
+    \begin{alertblock}{Use stable!}
+        It is highly recommended that you build the stable version. This involves simply moving on to the next step, \hyperlink{buildgit}{build}.
 
-  Using GnuTLS version 2.12.x is neither adequately secure, nor
-  production quality.
-</p>
+        Only under \hyperlink{special}{special circumstances} should you build the unstable development version.
+    \end{alertblock}
+\end{frame}
 
-<a name="clone"></a>
-<h4>Clone</h4>
-<p>
-  Now clone the repository like this:
-</p>
+\begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (1)}\label{special}
+    The unstable development version is at no point guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release, so you are running a supported version.
 
-<pre>$ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
-...</pre>
+    The stable version is always merged to the \verb+master+ branch, which is the default branch, so ordinarily nothing needs to be done. To build an unstable branch, first determine which branch by looking at the available branches:
 
-<div class="alert alert-info">
-  <p>
-    It is hightly recommended that you build the stable version.
-    This involves simply moving on to the next step,
-    <a href="#build">'Build'</a>.
-    Only under special circumstances should you build the unstable
-    development version.
-  </p>
-
-  <p>
-    The unstable development version is at no point guaranteed to
-    work or even compile. The only time it does ѕtabilize is right at
-    the end of the development cycle, and in that case, you should
-    wait until the release, so you are running a supported version.
-  </p>
-
-  <p>
-    The stable version is always merged to the <code>master</code>
-    branch, which is the default branch, so ordinarily nothing needs
-    to be done. To build an unstable branch, first determine which
-    branch by looking at the available branches:
-  </p>
-
-  <pre>$ cd taskd.git
+    \begin{lstlisting}
+$ cd taskd.git
 $ git branch -a
 * master
-remotes/origin/1.1.0
-remotes/origin/1.1.1
-remotes/origin/1.2.0
-remotes/origin/HEAD -&gt; origin/master
-remotes/origin/master
-</pre>
+  remotes/origin/1.1.0
+  remotes/origin/1.1.1
+  remotes/origin/1.2.0
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+    \end{lstlisting}
+\end{frame}
 
-  <p>
-    The convention we use is that <code>master</code> represents the
-    stable release.  The numbered branches represent the latest
-    development (1.2.0, the 'highest' branch number, ending in '.0')
-    and a patch branch (1.1.1, ending in a non-zero number).
-  </p>
+\begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (2)}
+    The convention we use is that \verb+master+ represents the stable release.  The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
 
-  <p>
-    Patch branches are reserved for emeergency releases, so in this
-    example you would choose to build 1.2.0 as the latest development
-    branch like this:
-  </p>
+    Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this:
 
-  <pre>$ git checkout 1.2.0
+    \begin{lstlisting}
+$ git checkout 1.2.0
 Branch 1.2.0 set up to track remote branch 1.2.0 from origin.
-Switched to a new branch '1.2.0'</pre>
-</div>
+Switched to a new branch '1.2.0'
+    \end{lstlisting}
+\end{frame}
 
-<a name="build"></a>
-<h4>Build</h4>
-<p>
-  Now build the Taskserver.
-</p>
+\begin{frame}[fragile]\frametitle{Installation -- Build from Git}\label{buildgit}
+    Now build the Taskserver.
 
-<pre>$ cd taskd.git
+    \begin{lstlisting}
+$ cd taskd.git
 $ cmake -DCMAKE_BUILD_TYPE=release .
 ...
 $ make
-...</pre>
+...
+    \end{lstlisting}
+\end{frame}
+
+\iffalse
 
 <a name="test"></a>
 <h4>Test</h4>
