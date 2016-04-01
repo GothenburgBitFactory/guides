@@ -1,23 +1,21 @@
-Taskwarrior & Taskserver setup guides.
-======================================
+Taskwarrior & Taskserver guides and presentations
+=================================================
 
 
 Talks from conferences
 ----------------------
 
-20111015_germany_ubucon
-20111112_germany_openrheinruhr
-20140510_switzerland_ubucon
-20140905_swiss_perl_workshop
+20111015_de_ubucon
+20111112_de_openrheinruhr
+20140510_ch_ubucon
+20140905_ch_swiss_perl_workshop
 
 
-Supporting data
----------------
+Guides
+------
 
-logo
-Makefile
-README
-LICENSE
+taskserver-setup
+universe
 
 
 Templates
@@ -27,10 +25,10 @@ template-guide
 template-presentation
 
 
-Guides
-------
+Supporting data
+---------------
 
-taskserver-setup
-universe
-
+logo
+Makefile
+README
 
