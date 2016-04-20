@@ -10,7 +10,8 @@
   basicstyle=\ttfamily\color{black}\tiny,
   columns=fullflexible,
   breaklines=true,
-  frame=single
+  frame=single,
+  keepspaces=true
 }
 
 \usepackage{hyperref}
@@ -99,7 +100,7 @@
 \setbeamercolor{block title}{fg=black,bg=gelb}
 \setbeamercolor{block body}{fg=black,bg=gelb}
 
-% block alert color
+% block  color
 \setbeamercolor{block title alerted}{fg=black,bg=gelb}
 \setbeamercolor{block body alerted}{fg=black,bg=gelb}
 
@@ -158,8 +159,7 @@
 
     \begin{lstlisting}
 $ cd ~/.task
-$ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
-    \end{lstlisting}
+$ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
     Now move that file somewhere safe. All software contains bugs, so make regular backups.
 
@@ -256,8 +256,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *
 $ sudo yum install gcc-c++
 $ sudo yum install gnutls-devel
 $ sudo yum install libuuid-devel
-$ sudo yum install cmake
-    \end{lstlisting}
+$ sudo yum install cmake\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -269,8 +268,7 @@ $ sudo yum install cmake
 $ sudo apt install g++
 $ sudo apt install libgnutls28-dev
 $ sudo apt install uuid-dev
-$ sudo apt install cmake
-    \end{lstlisting}
+$ sudo apt install cmake\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -282,8 +280,7 @@ $ sudo apt install cmake
 $ sudo dnf install gcc-c++
 $ sudo dnf install gnutls-devel
 $ sudo dnf install libuuid-devel
-$ sudo dnf install cmake
-    \end{lstlisting}
+$ sudo dnf install cmake\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -295,8 +292,7 @@ $ sudo dnf install cmake
 $ sudo zypper install gcc-c++
 $ sudo zypper install libgnutls-devel
 $ sudo zypper install libuuid-devel
-$ sudo zypper install cmake
-    \end{lstlisting}
+$ sudo zypper install cmake\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -308,8 +304,7 @@ $ sudo zypper install cmake
 $ sudo apt install g++
 $ sudo apt install libgnutls28-dev
 $ sudo apt install uuid-dev
-$ sudo apt install cmake
-    \end{lstlisting}
+$ sudo apt install cmake\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -342,8 +337,7 @@ $ sudo apt install cmake
     \begin{lstlisting}
 $ brew install cmake
 $ brew install git
-$ brew install gnutls
-    \end{lstlisting}
+$ brew install gnutls\end{lstlisting}
 
     Continue with \hyperlink{download}{Download}.
 \end{frame}
@@ -357,8 +351,7 @@ $ brew install gnutls
     You can download the tarball with \verb+curl+, as an example of just one of many ways to download the tarball.
 
     \begin{lstlisting}
-$ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz
-    \end{lstlisting}
+$ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build}\label{buildtar}
@@ -370,8 +363,7 @@ $ cd taskd-latest
 $ cmake -DCMAKE_BUILD_TYPE=release .
 ...
 $ make
-...
-    \end{lstlisting}
+...\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build Again}\label{buildagain}
@@ -382,8 +374,7 @@ $ cd taskd-latest
 $ make clean
 ...
 $ rm CMakeCache.txt
-...
-    \end{lstlisting}
+...\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- make install}
@@ -391,8 +382,7 @@ $ rm CMakeCache.txt
 
     \begin{lstlisting}
 $ sudo make install
-...
-    \end{lstlisting}
+...\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Verify installation}
@@ -423,23 +413,8 @@ Commands run only on server:
        taskd resume  [options] user  <org> <user>
        taskd server  [options] [--daemon]
        taskd status  [options]
-...
-    \end{lstlisting}
-%    taskd suspend [options] org   <org>
-%    taskd suspend [options] group <org> <group>
-%    taskd suspend [options] user  <org> <user>
-%
-%    Commands run remotely:
-%    taskd client  [options] <host:port> <file> [<file> ...]
-%
-%    Common Options:
-%    --quiet        Turns off verbose output
-%    --debug        Generates debugging diagnostics
-%    --data <root>  Data directory, otherwise $TASKDDATA
-%    --NAME=VALUE   Temporary configuration override
+...\end{lstlisting}
 \end{frame}
-
-%%%
 
 \begin{frame}[fragile]\frametitle{Installation -- from Git-Repository}\label{git}
     \vfill
@@ -463,8 +438,7 @@ Commands run only on server:
 
     \begin{lstlisting}
 $ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
-...
-    \end{lstlisting}
+...\end{lstlisting}
 
     \vfill
     \begin{alertblock}{Use stable!}
@@ -487,8 +461,7 @@ $ git branch -a
   remotes/origin/1.1.1
   remotes/origin/1.2.0
   remotes/origin/HEAD -> origin/master
-  remotes/origin/master
-    \end{lstlisting}
+  remotes/origin/master\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (2)}
@@ -499,8 +472,7 @@ $ git branch -a
     \begin{lstlisting}
 $ git checkout 1.2.0
 Branch 1.2.0 set up to track remote branch 1.2.0 from origin.
-Switched to a new branch '1.2.0'
-    \end{lstlisting}
+Switched to a new branch '1.2.0'\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build from Git}\label{buildgit}
@@ -511,21 +483,14 @@ $ cd taskd.git
 $ cmake -DCMAKE_BUILD_TYPE=release .
 ...
 $ make
-...
-    \end{lstlisting}
+...\end{lstlisting}
 \end{frame}
 
-\iffalse
+\begin{frame}[fragile]\frametitle{Installation -- Test your build}\label{buildtest}
+    Having built the server, now build and run the unit tests. Although this is an optional step, it is a good idea to know whether the build works on your platform.
 
-<a name="test"></a>
-<h4>Test</h4>
-<p>
-  Having built the server, now build and run the unit tests.
-  Although this is an optional step, it is a good idea to know
-  whether the build works on your platform.
-</p>
-
-<pre>$ cd test
+    \begin{lstlisting}
+$ cd test
 $ make
 ...
 $ ./run_all
@@ -535,299 +500,204 @@ Fail:        0
 Skipped:     0
 Runtime:     1 seconds
 
-$ cd ..
-$</pre>
+$ cd ..\end{lstlisting}
 
-<p>
-  This example shows that all 2,920 tests pass.  If you see test
-  failures, stop and report them.
+    This example shows that all 2,920 tests pass.  If you see test failures, stop and report them.
 
-  Note that there are some unit tests that fail if you have not
-  built the latest commit. Seeing 4 test failures may mean all is
-  well.  Seeing 30 failures does not.
-</p>
+    Note that there are some unit tests that fail if you have not built the latest commit. Seeing 4 test failures may mean all is well. Seeing 30 failures does not.
+\end{frame}
 
-<a name="install"></a>
-<h4>Install</h4>
-<p>
-  Now install Taskserver.  This copies files into the right place,
-  and installs man pages.
-</p>
+\begin{frame}[fragile]\frametitle{Installation}
+    Now install Taskserver. This copies files into the right place, and installs man pages.
 
-<pre>$ sudo make install
-...</pre>
+    \begin{lstlisting}
+$ sudo make install
+...\end{lstlisting}
+\end{frame}
 
-<a name="verify"></a>
-<h4>Verify</h4>
-<p>
-  Run the <code>taskd</code> command to verify that the server is
-  installed, and the location is in your <code>$PATH</code>.
-  You should see something like this:
-</p>
+\begin{frame}[fragile]\frametitle{Verify your Installation}
+    Run the \verb+taskd+ command to verify that the server is installed, and the location is in your \verb+$PATH+. You should see something like this:
 
-<pre>$ taskd
+    \begin{lstlisting}
+$ taskd
 
 Usage: taskd -v|--version
 taskd -h|--help
 taskd diagnostics
-taskd validate &lt;JSON | file&gt;
-taskd help [&lt;command&gt;]
+taskd validate <JSON | file>
+taskd help [<command>]
 
 Commands run only on server:
-taskd add     [options] org   &lt;org&gt;
-taskd add     [options] group &lt;org&gt; &lt;group&gt;
-taskd add     [options] user  &lt;org&gt; &lt;user&gt;
-taskd config  [options] [--force] [&lt;name&gt; [&lt;value&gt;]]
+taskd add     [options] org   <org>
+taskd add     [options] group <org> <group>
+taskd add     [options] user  <org> <user>
+taskd config  [options] [--force] [<name> [<value>]]
 taskd init    [options]
-taskd remove  [options] org   &lt;org&gt;
-taskd remove  [options] group &lt;org&gt; &lt;group&gt;
-taskd remove  [options] user  &lt;org&gt; &lt;user&gt;
-taskd resume  [options] org   &lt;org&gt;
-taskd resume  [options] group &lt;org&gt; &lt;group&gt;
-taskd resume  [options] user  &lt;org&gt; &lt;user&gt;
+taskd remove  [options] org   <org>
+taskd remove  [options] group <org> <group>
+taskd remove  [options] user  <org> <user>
+taskd resume  [options] org   <org>
+taskd resume  [options] group <org> <group>
+taskd resume  [options] user  <org> <user>
 taskd server  [options] [--daemon]
 taskd status  [options]
-taskd suspend [options] org   &lt;org&gt;
-taskd suspend [options] group &lt;org&gt; &lt;group&gt;
-taskd suspend [options] user  &lt;org&gt; &lt;user&gt;
-
-Commands run remotely:
-taskd client  [options] &lt;host:port&gt; &lt;file&gt; [&lt;file&gt; ...]
-
-Common Options:
---quiet        Turns off verbose output
---debug        Generates debugging diagnostics
---data &lt;root&gt;  Data directory, otherwise $TASKDDATA
---NAME=VALUE   Temporary configuration override
-</pre>
-
+taskd suspend [options] org   <org>
+taskd suspend [options] group <org> <group>
+taskd suspend [options] user  <org> <user>
+...\end{lstlisting}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Server Setup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<h3><span class="label label-success">3</span> Server Configuration</h3>
-<p>
-  Configuring the server is straightforward, but needs a little
-  planning.
-</p>
+\begin{frame}[fragile]\frametitle{Server Configuration -- Data Location}\label{serverconfiguration}
+    Configuring the server is straightforward, but needs a little planning.
 
-<a name="location"></a>
-<h4>Choose a Data Location</h4>
-<p>
-  A location for the data must be chosen and created.  The
-  <code>TASKDDATA</code> environment variable will be used to
-  indicate that location to all the <code>taskd</code> commands.
-</p>
+    A location for the data must be chosen and created. The \verb+TASKDDATA+ environment variable will be used to indicate that location to all the \verb+taskd+ commands.
 
-<pre>$ export TASKDDATA=/var/taskd
-$ mkdir -p $TASKDDATA</pre>
+    \begin{lstlisting}
+$ export TASKDDATA=/var/taskd
+$ mkdir -p $TASKDDATA\end{lstlisting}
 
-<p>
-  If the <code>TASKDDATA</code> variable is not set, then most
-  <code>taskd</code> commands require the <code>--data ...</code>
-  argument, otherwise the commands rely on the <code>TASKDDATA</code>
-  value to indicate the location.
+    If the \verb+TASKDDATA+ variable is not set, then most \verb+taskd+ commands require the \verb+--data ...+ argument, otherwise the commands rely on the \verb+TASKDDATA+ value to indicate the location.
 
-  Everything the server does will be confined to that directory.
-</p>
+        \begin{alertblock}{Everything the server does will be confined to that directory.}
+        There are two 'D's in \verb+TASKDDATA+, and omitting one is a common mistake.
 
-<p>
-  Note that there are two 'D's in <code>TASKDDATA</code>, and
-  omitting one is a common mistake to make.
-</p>
+        The user that will run the server must have write permissions in that directory.
+	\end{alertblock}
+\end{frame}
 
-<p>
-  Note that there must be write permission in the directory for the
-  user that will run the server.
-</p>
 
-<a name="init"></a>
-<h4>Initialization</h4>
-<p>
-  Now we let the server initialize that directory:
-</p>
+\begin{frame}[fragile]\frametitle{Server Configuration -- Initialization}
+    Now we let the server initialize that directory:
 
-<pre>$ taskd init
+    \begin{lstlisting}
+$ taskd init
 You must specify the 'server' variable, for example:
 taskd config server localhost:53589
 
-Created /var/taskd</pre>
+Created /var/taskd\end{lstlisting}
 
-<a name="keys"></a>
-<h4>Keys & Certificates</h4>
-<p>
-  Now we create certificates and keys. The command below will
-  generate all the certs and keys for the server, but this uses
-  self-signed certificates, and this is not recommended for
-  production use. This is for personal use, and this may be
-  acceptable for you, but if not, you will need to purchase a
-  proper certificate and key, backed by a certificate authority.
-</p>
+\end{frame}
 
-<p>
-  The certificate and key generation scripts make assumptions
-  <b><em>that are guaranteed to be wrong for you</em></b>.
-  Specifically the
-  <code>generate.server</code> script has a hard-coded
-  <code>CN</code> entry that is not going to work.  You
-  <b><em>need</em></b> to edit the <code>vars</code> file.
-</p>
+\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (1)}
+    Now we create certificates and keys. The command below will generate all the certs and keys for the server, but this uses self-signed certificates, and this is not recommended for production use. This is for personal use, and this may be acceptable for you, but if not, you will need to purchase a proper certificate and key, backed by a certificate authority.
 
-<pre>...
+    The certificate and key generation scripts make assumptions \textbf{\emph{that are guaranteed to be wrong for you}}. Specifically the \verb+generate.server+ script has a hard-coded \verb+CN+ entry that is not going to work. You \textbf{\emph{need}} to edit the \verb+vars+ file.
+
+\begin{lstlisting}
 CN=localhost
-...</pre>
+...\end{lstlisting}
 
-<p>
-  You will need to modify this value to match your server.
-  It is this value against which Taskwarrior validates the server
-  name, so use a value similar to <code>ack.tasktools.org</code>,
-  which is what we use, but of course don't expect that to work for
-  you. If you do not change this value, the only option for the
-  client is to skip some or all certificate validation,
-  <b><em>which is a bad idea.</em></b>
-</p>
+    You will need to modify this value to match your server.
+\end{frame}
 
-<p>
-  Go to your <code>taskd</code> directory, which depends on
-  which installation method you chose. Here is is assumed that
-  you installed from the source tarball.
-</p>
+\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (2)}
+    The value of CN (Common Name) is important.
 
-<pre>$ cd ~/taskd-1.1.0/pki
+    It is this value against which Taskwarrior validates the servername, so use a value similar to \verb+ack.tasktools.org+, which is what we use, but of course don't expect that to work for you. If you do not change this value, the only option for the client is to skip some or all certificate validation, \textbf{\emph{which is a bad idea}}.
+
+    Go to your \verb+taskd+ directory, which depends on which installation method you chose. Here is is assumed that you installed from the source tarball.
+
+    \begin{lstlisting}
+$ cd ~/taskd-1.1.0/pki
 $ ./generate
 ...
-$
+
 $ cp client.cert.pem $TASKDDATA
 $ cp client.key.pem  $TASKDDATA
 $ cp server.cert.pem $TASKDDATA
 $ cp server.key.pem  $TASKDDATA
 $ cp server.crl.pem  $TASKDDATA
-$ cp ca.cert.pem     $TASKDDATA
-$
+$ cp ca.cert.pem     $TASKDDATA\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (3)}
+
+    \begin{lstlisting}
 $ taskd config --force client.cert $TASKDDATA/client.cert.pem
 $ taskd config --force client.key $TASKDDATA/client.key.pem
 $ taskd config --force server.cert $TASKDDATA/server.cert.pem
 $ taskd config --force server.key $TASKDDATA/server.key.pem
 $ taskd config --force server.crl $TASKDDATA/server.crl.pem
-$ taskd config --force ca.cert $TASKDDATA/ca.cert.pem</pre>
+$ taskd config --force ca.cert $TASKDDATA/ca.cert.pem\end{lstlisting}
 
-<p>
-  There are three classes of key/cert here. There is the CA
-  (Certificate Authority) cert, which has cert signing capabilities
-  and is used to sign and verify the other certs.
+    There are three classes of key/cert here. There is the CA (Certificate Authority) cert, which has cert signing capabilities and is used to sign and verify the other certs.
 
-  There are the server key/certs, which are used to authenticate the
-  server and encrypt.
+    There are the server key/certs, which are used to authenticate the server and encrypt.
 
-  Finally there are client key/certs, which are not what you might
-  expect. These are for API access, and not for your Taskwarrior
-  client. Those are created later.
-</p>
+    Finally there are client key/certs, which are not what you might  expect. These are for API access, and not for your Taskwarrior client. Those are created later.
+\end{frame}
 
-<a name="other"></a>
-<h4>Configuration</h4>
-<p>
-  Now we configure some basic details for the server.  The chosen
-  port is 53589. Note that we allow Taskwarrior clients
-  specifically.
-</p>
+\begin{frame}[fragile]\frametitle{Server Configuration -- Other Configuration}
+    Now we configure some basic details for the server.  The chosen port is 53589. Note that we allow Taskwarrior clients specifically.
 
-<pre>$ cd $TASKDDATA/..
+    \begin{lstlisting}
+$ cd $TASKDDATA/..
 $ taskd config --force log $PWD/taskd.log
 $ taskd config --force pid.file $PWD/taskd.pid
-$ taskd config --force server localhost:53589</pre>
+$ taskd config --force server localhost:53589\end{lstlisting}
 
-<p>
-  Note that we have chosen <code>localhost:53589</code>, but this
-  choice has consequences. The name <code>localhost</code> is not
-  network visible, which limits the server to only serving clients
-  on the same machine. Use your full machine name for proper network
-  addressability.
-</p>
+    Note that we have chosen \verb+localhost:53589+, but this choice has consequences. The name \verb+localhost+ is not network visible, which limits the server to only serving clients on the same machine. Use your full machine name for proper network addressability.
 
-<p>
-  You can look at all the configuration settings:
-</p>
+    You can look at all the configuration settings:
 
-<pre>$ taskd config</pre>
+    \begin{lstlisting}
+$ taskd config\end{lstlisting}
 
-<p>
-  You can view all the supported settings with:
-</p>
+    You can view all the supported settings with:
 
-<pre>$ man taskdrc</pre>
-</div>
-
-<br />
-<br />
+    \begin{lstlisting}
+$ man taskdrc\end{lstlisting}
+\end{frame}
 
 %%%
 
-<a name="control"></a>
-<h3><span class="label label-success">3</span> Server Start/Stop</h3>
-<p>
-  You can now to launch the server:
-</p>
+\begin{frame}[fragile]\frametitle{Server -- Control}
+    You can now to launch the server:
 
-<pre>$ taskdctl start</pre>
+    \begin{lstlisting}
+$ taskdctl start\end{lstlisting}
 
-<p>
-  This command launched the server as a daemon process. This command
-  requires the <code>TASKDDATA</code> variable.  Your server is now
-  running, and ready for syncing.
+    This command launched the server as a daemon process. This command requires the \verb+TASKDDATA+ variable.  Your server is now running, and ready for syncing.
 
-  Note that to stop the server, you use:
-</p>
+    Note that to stop the server, you use:
 
-<pre>$ taskdctl stop</pre>
+    \begin{lstlisting}
+$ taskdctl stop\end{lstlisting}
 
-<p>
-  Check that your server is running by looking in the <code>taskd.log</code>
-  file, or running this:
-</p>
+    Check that your server is running by looking in the \verb+taskd.log+ file, or running this:
 
-<pre>$ ps -leaf | grep taskd</pre>
+    \begin{lstlisting}
+$ ps -leaf | grep taskd\end{lstlisting}
+\end{frame}
 
-<a name="interactive"></a>
-<h4>Interactive or Non-Daemon Server</h4>
-<p>
-  A daemon server is typically how you would want to run Taskserver,
-  but there may be times when you need to run the server attached to
-  a terminal.  These two commands are identical:
-</p>
+\begin{frame}[fragile]\frametitle{Server -- Interactive or Non-Daemon Server}
+    A daemon server is typically how you would want to run Taskserver, but there may be times when you need to run the server attached to a terminal.  These two commands are identical:
 
-<pre>$ taskdctl start
-$ taskd server --data $TASKDDATA --daemon</pre>
+    \begin{lstlisting}
+$ taskdctl start
+$ taskd server --data $TASKDDATA --daemon\end{lstlisting}
 
-<p>
-  By omitting the <code>--daemon</code> option, the server remains
-  attached to the terminal.  Then to stop the server you can enter
-  <code>Ctrl-C</code>.
-</p>
+    By omitting the \verb+--daemon+ option, the server remains attached to the terminal.  Then to stop the server you can enter \verb+Ctrl-C+.
 
-<p>
-  The interactive mode is really only useful for debugging, in
-  conjunction with TLS debug mode, like this:
-</p>
+    The interactive mode is really only useful for debugging, in conjunction with TLS debug mode, like this:
 
-<pre>$ taskd config debug.tls 3
+    \begin{lstlisting}
+$ taskd config debug.tls 3
 $ taskd server --data $TASKDDATA
-...</pre>
+...\end{lstlisting}
 
-<p>
-  With a <code>debug.tls</code> setting that is non-zero, you see
-  lots of security-related diagnostic output.
-</p>
+    With a \verb+debug.tls+ setting that is non-zero, you see lots of security-related diagnostic output.
+\end{frame}
 
-<a name="systemd"></a>
-<h4>Configure Taskserver to run with a systemd-unit-file</h4>
+\begin{frame}[fragile]\frametitle{Server -- systemd unit file}
+    You can start Taskserver using a systemd-unitfile like the following (please add the contents of \verb+$TASKDDATA+ not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (\verb+$TASKDUSER+ and \verb+$TASKDGROUP+).
 
-<p>
-You can start Taskserver using a systemd-unitfile like the following (please add the contents of <code>$TASKDDATA</code> not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (<code>$TASKDUSER</code> and <code>$TASKDGROUP</code>).
-</p>
-
-<pre>[Unit]
+    \begin{lstlisting}
+[Unit]
 Description=Secure server providing multi-user, multi-client access to Taskwarrior data
 Requires=network.target
 After=network.target
@@ -844,723 +714,357 @@ InaccessibleDirectories=/home /root /boot /opt /mnt /media
 ReadOnlyDirectories=/etc /usr
 
 [Install]
-WantedBy=multi-user.target</pre>
+WantedBy=multi-user.target\end{lstlisting}
+\end{frame}
 
-<p>
-Afterwards prepare systemd to recognise the file.
-</p>
+\begin{frame}[fragile]\frametitle{Server -- Control with systemd}
+    Afterwards prepare systemd to recognise the file.
 
-<pre>$ cp taskd.service /etc/systemd/system
+    \begin{lstlisting}
+$ cp taskd.service /etc/systemd/system
 $ systemctl daemon-reload
 $ systemctl start taskd.service
-$ systemctl status taskd.service</pre>
+$ systemctl status taskd.service\end{lstlisting}
 
-In case everything is running fine, enable the script to start Taskserver on every boot.
+    In case everything is running fine, enable the script to start Taskserver on every boot.
 
-<pre>$ systemctl enable taskd.service</pre>
-
-</div>
-
-<br />
-<br />
-
+    \begin{lstlisting}
+$ systemctl enable taskd.service\end{lstlisting}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Client Setup}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<a name="add"></a>
-<h3><span class="label label-success">4</span> Add User to Server</h3>
-<p>
-  A user account must be created, along with a key, cert and ID,
-  before syncing may occur.
-</p>
+\begin{frame}[fragile]\frametitle{Add User/Organization to Server}
 
-<a name="org"></a>
-<h4>Create Organization</h4>
-<p>
-  Before creating a user account, you may need to create an
-  organization. An organization consists of a group of zero or more
-  users. You can get away with just one organization, and in this
-  example, we will create just one, named 'Public'.
-</p>
+    A user account must be created, along with a key, cert and ID, before syncing may occur.
 
-<p>
-  You can create as many organizations as you wish (even one per
-  user), and the purpose is simply to group users together.
-  Future features will utilize this.
-</p>
+    Before creating a user account, you may need to create an organization. An organization consists of a group of zero or more users. You can get away with just one organization, and in this example, we will create just one, named 'Public'.
 
-<pre>$ taskd add org Public
-Created organization 'Public'</pre>
+    You can create as many organizations as you wish (even one per user), and the purpose is simply to group users together. Future features will utilize this.
 
-<p>
-  Now the organization 'Public' exists, we can add users to that
-  organization.
-</p>
+    \begin{lstlisting}
+$ taskd add org Public
+Created organization 'Public'\end{lstlisting}
 
-<a name="user"></a>
-<h4>Create User</h4>
-<p>
-  Now we add a new user, named 'First Last' as an example.  You can
-  use any name you wish, and if it contains spaces, quote the name
-  as shown.
-</p>
+  Now the organization 'Public' exists, we can add users to that organization.
+\end{frame}
 
-<pre>$ taskd add user 'Public' 'First Last'
+\begin{frame}[fragile]\frametitle{Create User}
+    Now we add a new user, named 'First Last' as an example.  You can use any name you wish, and if it contains spaces, quote the name as shown.
+
+    \begin{lstlisting}
+$ taskd add user 'Public' 'First Last'
 New user key: cf31f287-ee9e-43a8-843e-e8bbd5de4294
-Created user 'First Last' for organization 'Public'</pre>
+Created user 'First Last' for organization 'Public'\end{lstlisting}
 
-<p>
-  Note that you will get a different 'New user key' than is shown
-  here, and you will need to retain it, to be used later for client
-  configuration.  Note that the key is just a unique id, because
-  your name alone is not necessarily unique.
-</p>
+    Note that you will get a different 'New user key' than is shown here, and you will need to retain it, to be used later for client configuration.  Note that the key is just a unique id, because your name alone is not necessarily unique.
+\end{frame}
 
-<a name="cert"></a>
-<h4>Create Cert/Key</h4>
-<p>
-  Go to your <code>taskd</code> directory, which depends on
-  which installation method you chose. Here it is assumed that
-  you installed from the source tarball.
-</p>
+\begin{frame}[fragile]\frametitle{Create Certificate and Key}
 
-<pre>$ cd ~/taskd-1.1.0/pki
+    Go to your \verb+taskd+ directory, which depends on which installation method you chose. Here it is assumed that you installed from the source tarball.
+
+    \begin{lstlisting}
+$ cd ~/taskd-1.1.0/pki
 $ ./generate.client first_last
-...</pre>
+...\end{lstlisting}
 
-<p>
-  This will generate a new key and cert, named
-  <code>first_last.cert.pem</code>
-  and
-  <code>first_last.key.pem</code>.
-  It is not important that 'first_last' was used here, just that it
-  is something unique, and valid for use in a file name. It has no
-  bearing on security.
-</p>
+    This will generate a new key and cert, named \verb+first_last.cert.pem+ and \verb+first_last.key.pem+. It is not important that 'first\_last' was used here, just that it is something unique, and valid for use in a file name. It has no bearing on security.
+\end{frame}
 
-<a name="client"></a>
-<h4>Client</h4>
-<p>
-  You have now created a new user account on the server, created a
-  new client cert and key, and have details that need to be
-  transferred to the user, to set up a sync client.  The details
-  needed are:
+\begin{frame}[fragile]\frametitle{Client Configuration}\label{clientconfiguration}
+    You have now created a new user account on the server, created a new client cert and key, and have details that need to be transferred to the user, to set up a sync client.  The details needed are:
 
-  <ul>
-    <li>
-      <code>ca.cert.pem</code> is the certificate authority, and
-      the only way to validate self-signed certs such as the ones
-      we have created here.
-    </li>
-    <li>
-      <code>first_last.cert.pem</code> is the client certificate.
-    </li>
-    <li>
-      <code>first_last.key.pem</code> is the client key.
-    </li>
-    <li>
-      The new user key (yours will be different):
-      <code>cf31f287-ee9e-43a8-843e-e8bbd5de4294</code>
-    </li>
-    <li>
-      The organization, <code>Public</code>.
-    </li>
-    <li>
-      The full and proper user name, <code>First Last</code>.
-    </li>
-    <li>
-      The server address and port, <code>host.domain:53589</code>.
-      In the
-      <a href="/docs/taskserver/configure.html">server configuration</a>
-      we used <code>localhost</code> as an example. Whatever you
-      actually used there, should be used here.
-    </li>
-  </ul>
-</p>
-</div>
+    \begin{itemize}
+        \item \verb+ca.cert.pem+ is the certificate authority, and the only way to validate self-signed certs such as the ones we have created here.
+        \item \verb+first_last.cert.pem+ is the client certificate.
+        \item \verb+first_last.key.pem+ is the client key.
+        \item The new user key (yours will be different): \verb+cf31f287-ee9e-43a8-843e-e8bbd5de4294+
+        \item The organization, \verb+Public+.
+        \item The full and proper user name, \verb+First Last+.
+        \item The server address and port, \verb+host.domain:53589+. In the \hyperlink{serverconfiguration}{server configuration} we used \verb+localhost+ as an example. Whatever you actually used there, should be used here.
+  \end{itemize}
+\end{frame}
 
-<br />
-<br />
+\begin{frame}[fragile]\frametitle{Configure Taskwarrior -- Certificates}
 
-%%%
+    If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client. You should have the files and information mentioned on the \hyperlink{clientconfiguration}{last slide}.
 
-<a name="config"></a>
-<h3><span class="label label-success">4</span> Configure Taskwarrior</h3>
-<p>
-  If you have configured Taskserver and created a user account (or
-  better yet, someone created an account for you) then you now have
-  details needed in the configuration of your Taskwarrior client.
-  You should have these files and this information:
+    Now we feed this information to Taskwarrior.
 
-  <ul>
-    <li>
-      CA <code>ca.cert.pem</code>
-    </li>
-    <li>
-      Client certificate: <code>first_last.cert.pem</code>
-    </li>
-    <li>
-      Client key: <code>first_last.key.pem</code>
-    </li>
-    <li>
-      User key (yours will be different): <code>cf31f287-ee9e-43a8-843e-e8bbd5de4294</code>
-    </li>
-    <li>
-      Organization: <code>Public</code>
-    </li>
-    <li>
-      Account name: <code>First Last</code>
-    </li>
-    <li>
-      Server:port <code>host.domain:53589</code>.
-      In the
-      <a href="/docs/taskserver/configure.html">server configuration</a>
-      we used <code>localhost</code> as an example. Whatever you
-      actually used there, should be used here.
-    </li>
-  </ul>
+    Copy the Cert, Key and CA to your ~/.task directory.  The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.  Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
 
-  Now we feed this information to Taskwarrior.
-</p>
-
-<p>
-  Copy the Cert, Key and CA to your ~/.task directory.  The reason
-  we are copying the CA cert is because this is a self-signed cert,
-  and we need the CA to validate against.  Alternately we could
-  force Taskwarrior to trust all certs, but that is not recommended.
-</p>
-
-<pre>$ cp first_last.cert.pem ~/.task
+    \begin{lstlisting}
+$ cp first_last.cert.pem ~/.task
 $ cp first_last.key.pem  ~/.task
-$ cp ca.cert.pem         ~/.task</pre>
+$ cp ca.cert.pem        ~/.task\end{lstlisting}
 
-<p>
-  Now we need to make Taskwarrior aware of these certs:
-</p>
+    Now we need to make Taskwarrior aware of these certs:
 
-<pre>$ task config taskd.certificate -- ~/.task/first_last.cert.pem
+    \begin{lstlisting}
+$ task config taskd.certificate  -- ~/.task/first_last.cert.pem
 $ task config taskd.key         -- ~/.task/first_last.key.pem
-$ task config taskd.ca          -- ~/.task/ca.cert.pem</pre>
+$ task config taskd.ca          -- ~/.task/ca.cert.pem\end{lstlisting}
+\end{frame}
 
-<p>
-  Now set the server info:
-</p>
+\begin{frame}[fragile]\frametitle{Configure Taskwarrior -- Certificates}
+    Now set the server info:
+    \begin{lstlisting}
+$ task config taskd.server      -- host.domain:53589\end{lstlisting}
 
-<pre>$ task config taskd.server      -- host.domain:53589</pre>
+    Finally we provide the credentials, which combine the organization, account name and user key:
 
-<p>
-  Finally we provide the credentials, which combine the
-  organization, account name and user key:
-</p>
+    \begin{lstlisting}
+$ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294\end{lstlisting}
+\end{frame}
 
-<pre>$ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8bbd5de4294</pre>
+\begin{frame}[fragile]\frametitle{Taskwarrior -- Trust Level}
+    \begin{alertblock}{Trust}
+        It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
 
-<div class="callout callout-danger">
-  <h4>Trust</h4>
-  <p>
-    It is possible to configure Taskwarrior's trust level, which
-    determines how the server certificate is treated.
-  </p>
+        For Taskwarrior 2.3.0 you can specify \verb+taskd.trust=yes+ in order to skip certificate validation. \textbf{\emph{This is a bad idea.}} The default is \verb+taskd.trust=no+, which does not trust the server certificate, which is more secure.
 
-  <p>
-    For Taskwarrior <span class="label label-success">2.3.0</span>
-    you can specify <code>taskd.trust=yes</code> in order to skip
-    certificate validation.
-    <b><em>This is a bad idea.</em></b>
-    The default is <code>taskd.trust=no</code>, which does not trust
-    the server certificate, which is more secure.
-  </p>
+        For Taskwarrior 2.4.0 you must specify \verb+taskd.trust=ignore hostname+ in order to skip certificate hostname validation. \textbf{\emph{This is a bad idea}}. You can also specify \verb+taskd.trust=allow all+ to perform no validation. \textbf{\emph{This is a worse idea}}. The default value is \verb+taskd.trust=strict+ which performs the most stringent verification, and is more secure.
+    \end{alertblock}
 
-  <p>
-    For Taskwarrior <span class="label label-success">2.4.0</span>
-    you must specify <code>taskd.trust=ignore hostname</code> in
-    order to skip certificate hostname validation.
-    <b><em>This is a bad idea.</em></b>
-    You can also specify <code>taskd.trust=allow all</code> to
-    perform no validation.
-    <b><em>This is a worse idea.</em></b>
-    The default value is <code>taskd.trust=strict</code> which
-    performs the most stringent verification, and is more secure.
-  </p>
-</div>
-
-<p>
-  Your Taskwarrior is now ready to sync.
-</p>
-</div>
-
-<br />
-<br />
+    Your Taskwarrior is now ready to sync.
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sync}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<a name="sync"></a>
-<h3><span class="label label-success">5</span> Syncing Taskwarrior</h3>
-<p>
-  You are now ready to sync your Taskwarrior client. You will do this
-  differently depending on whether this is the first sync per device,
-  or one of the many subsequent syncs.
-</p>
+\begin{frame}[fragile]\frametitle{First Time Sync}
 
-<a name="first"></a>
-<h4>First Time Sync</h4>
-<p>
-  The first time you sync is special - the client sends all your
-  pending tasks to the server.  This is something you should only
-  do once.  Run this:
-</p>
+    You are now ready to sync your Taskwarrior client. You will do this differently depending on whether this is the first sync per device, or one of the many subsequent syncs.
 
-<pre>$ task sync init
+    The first time you sync is special -- the client sends all your pending tasks to the server.  This is something you should only do once.  Run this:
+
+    \begin{lstlisting}
+$ task sync init
 Please confirm that you wish to upload all your pending tasks to the Task Server (yes/no) yes
 Syncing with host.domain:53589
 
-Sync successful.  2 changes uploaded.</pre>
+Sync successful.  2 changes uploaded.\end{lstlisting}
 
-<p>
-  You should get an indication that tasks were uploaded, in this
-  case 2 of them.
-</p>
+    You should get an indication that tasks were uploaded, in this case 2 of them.
+\end{frame}
 
-<a name="general"></a>
-<h4>General Sync</h4>
-<p>
-  After the first time sync, you switch and just use this command:
-</p>
+\begin{frame}[fragile]\frametitle{General Sync}
+    After the first time sync, you switch and just use this command:
 
-<pre>$ task sync
+    \begin{lstlisting}
+$ task sync
 Syncing with host.domain:53589
 
-Sync successful.  No changes.</pre>
+Sync successful.  No changes.\end{lstlisting}
 
-<p>
-  This will give you feedback about what happened. Please note
-  that it is perfectly safe to run this command as often as you
-  wish. Syncing is safe and does not consume great system
-  resources.
-</p>
+    This will give you feedback about what happened. Please note that it is perfectly safe to run this command as often as you wish. Syncing is safe and does not consume great system resources.
 
-<p>
-  Note that if your client is a mobile device, a sync command may
-  consume some of your data usage. Act accordingly.
-</p>
+    Note that if your client is a mobile device, a sync command may consume some of your data usage. Act accordingly.
 
-<p>
-  But it does require network connectivity, and if there is no
-  connectivity you will be notified.  It is not a problem if a sync
-  fails because of this, because the next sync that works will
-  catch up with all the changes, and do the right merging.
-</p>
+    But it does require network connectivity, and if there is no connectivity you will be notified.  It is not a problem if a sync fails because of this, because the next sync that works will catch up with all the changes, and do the right merging. \emph{Taskwarrior and Taskserver were designed to work together, and tolerate intermittent connectivity}.
+\end{frame}
 
-<p>
- Taskwarrior and Taskserver were designed to work together, and
- tolerate intermittent connectivity.
-</p>
+\begin{frame}[fragile]\frametitle{Sync Reminder}
+    After you modify data locally, Taskwarrior will start notifying you that you need to sync, after commands, like this:
 
-<a name="reminder"></a>
-<h4>Sync Reminder</h4>
-<p>
-  After you modify data locally, Taskwarrior will start notifying
-  you that you need to sync, after commands, like this:
-</p>
-
-<pre>$ task project:foo list
+    \begin{lstlisting}
+$ task project:foo list
 No matches.
-There are local changes.  Sync required.</pre>
+There are local changes.  Sync required.\end{lstlisting}
 
-<p>
-  This is just a reminder to sync. Respond with a sync, and the
-  reminder goes away:
-</p>
+    This is just a reminder to sync. Respond with a sync, and the reminder goes away:
 
-<pre>$ task sync
+    \begin{lstlisting}
+$ task sync
 Syncing with <server>:<port>
 
-Sync successful.  1 changes uploaded.</pre>
+Sync successful.  1 changes uploaded.\end{lstlisting}
 
-<p>
-  If you do not respond with a sync, then local changes accumulate
-  unseen by other clients. When you do eventually sync, the data
-  will be properly propagated, so it is a question of whether you
-  <em>need</em> current data on the server. It is perfectly fine
-  to allow <em>weeks</em> to go by without a sync.
-</p>
-</div>
+    If you do not respond with a sync, then local changes accumulate unseen by other clients. When you do eventually sync, the data will be properly propagated, so it is a question of whether you \emph{need} current data on the server. It is perfectly fine to allow \emph{weeks<} to go by without a sync.
+\end{frame}
 
-<br />
-<br />
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Troubleshooting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Troubleshooting
-
-<h3>Troubleshooting Sync</h3>
-<p>
+\begin{frame}[fragile]\frametitle{Troubleshooting Sync}
   Here is a list of problems you may encounter, with the most common
   ones listed first.
 
-  The single most common problem has been that the
-  <a href="/docs/taskserver/setup.html">Taskserver Setup Instructions</a>
-  were not properly followed.  Please review the steps you took.
-</p>
+  The single most common problem has been that the Taskserver Setup Instructions (this guide) were not properly followed.  Please review the steps you took.
 
-<p>
-  It is always a good idea to make sure that you are using the latest
-  release of Taskwarrior and Taskserver, not just because bugs are
-  fixed that may help you, but also because the solutions below are
-  geared toward the current releases.
-</p>
+  It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
 
-<p>
-  If you upgrade from an older release of Taskserver, you will need
-  to follow the
-  <a href="/docs/taskserver/upgrade.html">upgrade instructions</a>.
-</p>
+  If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
+\end{frame}
 
-<a name="problems"></a>
-<h4>Problems</h4>
-<table class="table table-striped">
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        You tried <code>task sync</code> but Taskwarrior showed you a task list instead
-      </dt>
-      <dd>
-        You have a version of Taskwarrior older than <code>2.3.0</code>,
-        which means there was no <code>sync</code> command, and
-        you are seeing a list filtered by the search term 'sync'.
-        Upgrading is the only solution.
-      </dd>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        You tried <code>task sync</code> and saw 'Taskwarrior was built without GnuTLS support.  Sync is not available.'
-      </dt>
-      <dd>
-        <p>
-          You are using version <code>2.3.0</code> or later, but
-          the Taskwarrior binary was compiled without
-          <a href="http://www.gnutls.org">GnuTLS</a> support.
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (1)}
+    \textbf{You tried \texttt{task sync} but Taskwarrior showed you a task list instead}
 
-        <p>
-          If you installed Taskwarrior using your OS's package
-          manager, you may be suffering from an out of date package.
-          Prod your OS's package maintainer for an update.
-        </p>
+    You have a version of Taskwarrior older than \verb+2.3.0+, which means there was no \verb+sync+ command, and you are seeing a list filtered by the search term 'sync'. Upgrading is the only solution.
+\end{frame}
 
-        <p>
-          Recent releases make GnuTLS support opt-out instead of
-          opt-in, so upgrading to the latest version may help.
-          Otherwise, you will need to build Taskwarrior from the
-          <a href="/download/task-latest.tar.gz">latest source tarball</a>,
-          following the instructions in the <code>INSTALL</code> file.
-          If you are a developer, do that. If you are not, then
-          installing a development environment is probably not
-          something you want to do, in which case contact your
-          OS's package maintainer.
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (2)}
+    \textbf{You tried \texttt{task sync} and saw 'Taskwarrior was built without GnuTLS support.  Sync is not available.'}
 
-        <p>
-          Verify that your Taskwarrior was built with GnuTLS support
-          by running <code>task diagnostics</code>:
+    You are using version \verb+2.3.0+ or later, but the Taskwarrior binary was compiled without \href{http://www.gnutls.org}{GnuTLS} support.
 
-          <pre>$ task diagnostics | grep libgnutls
-libgnutls: 3.3.18</pre>
-        </p>
-      </dd>
-    </td>
-  </tr>
+    If you installed Taskwarrior using your OS's package manager, you may be suffering from an out of date package. Prod your OS's package maintainer for an update.
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        nodename nor servname provided, or not known
-      </dt>
-      <dd>
-        <p>
-          Despite the terrible wording, this means the Taskwarrior
-          setting
-          <code>taskd.server=&lt;host&gt;:&lt;port&gt;</code>
-          refers to a host name that cannot be seen by Taskwarrior.
-        </p>
-        <p>
-          Is it spelled correctly?
-          Is the domain correct?
-          Is there a valid DNS resolution for the name?
-          Is there a firewall between Taskwarrior and Taskserver that
-          is not letting through <code>&lt;port&gt;</code> traffic?
-        </p>
-      </dd>
-    </td>
-  </tr>
+    Recent releases make GnuTLS support opt-out instead of opt-in, so upgrading to the latest version may help. Otherwise, you will need to build Taskwarrior from the \href{http://taskwarrior.org/download/task-latest.tar.gz}{latest source tarball}</a>, following the instructions in the \verb+INSTALL+ file. If you are a developer, do that. If you are not, then installing a development environment is probably not something you want to do, in which case contact your OS's package maintainer.
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        Could not connect to &lt;host&gt; &lt;port&gt;
-      </dt>
-      <dd>
-        Taskserver may not be running on <code>&lt;host&gt;</code>.
-        Check with <code>ps -leaf | grep taskd</code>.
-      </đd>
-    </td>
-  </tr>
+    \emph{Continued on next page}.
+\end{frame}
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        Unable to use port 53589?
-      </dt>
-      <dd>
-        <p>
-          By default, port <code>53589</code> is used, but whichever
-          you chose must be open on the server.
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (2) -- continued}
+    Verify that your Taskwarrior was built with GnuTLS support by running \verb+task diagnostics+:
 
-        <p>
-          If you are unable to open firewall ports, you can use an SSH
-          Tunnel to route port <code>53589</code> traffic over port
-          <code>22</code>:
+    \begin{lstlisting}
+$ task diagnostics | grep libgnutls
+libgnutls: 3.3.18\end{lstlisting}
+\end{frame}
 
-          <pre>$ ssh -L localport:dsthost:dstport user@example.com</pre>
-        </p>
-      </đd>
-    </td>
-  </tr>
+\begin{frame}[fragile]\frametitle{Problems (3)}
+    \textbf{nodename nor servname provided, or not known}
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        Certificate fails validation, Handshake failed
-      </dt>
-      <dd>
-        <p>
-          There are many reasons that the TLS handshake can fail.
-        </p>
+    Despite the terrible wording, this means the Taskwarrior setting \verb+taskd.server=<host>:<port>+ refers to a host name that cannot be seen by Taskwarrior.
 
-        <p>
-          When you generated certificates, you modified a <code>vars</code>
-          file, in particular the <code>CN=&lt;name&gt;</code>
-          setting. That name must match the output of
-          <code>$ hostname -f</code>
-          on the server for the certificate to validate.
-        </p>
+    \begin{itemize}
+        \item Is it spelled correctly?
+        \item Is the domain correct?
+        \item Is there a valid DNS resolution for the name?
+        \item Is there a firewall between Taskwarrior and Taskserver that is not letting through \verb+<port>+ traffic?
+    \end{itemize}
+\end{frame}
 
-        <p>
-          Additionally, that name must also be used in the
-          <code>taskd.server=&lt;host&gt;:&lt;port&gt;</code>
-          setting for Taskwarrior. Otherwise you'll need
-          <code>taskd.trust=ignore hostname</code>.
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (4)}
+    \textbf{Could not connect to <host> <port>}
 
-        <p>
-          If you are using a self-signed certificate, did you specify
-          it using the <code>taskd.ca</code> setting?
-        </p>
+    Taskserver may not be running on \verb+<host>+.
 
-        <p>
-          Setting <code>taskd.ciphers</code> can force the use of
-          different ciphers. Use <code>gnutls-cli --list</code> to see
-          a list of installed ciphers, and confirm that there is overlap
-          between client and server. There needs to be a cipher that
-          is available to both, otherwise they cannot communicate.
-        </p>
-      </đd>
-    </td>
-  </tr>
+    Check with \verb+ps -leaf | grep taskd+.
+\end{frame}
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        Is your certificate still valid?
-      </dt>
-      <dd>
-        <p>
-          Certificates have expiration dates, and if you followed our
-          instructions, you created a certificate that is valid for
-          one year.  Check your certificate with this command:
-          <pre>$ certtool -i --infile ~/.task/&lt;YOUR NAME&gt;.cert.pem</pre>
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (5)}
+    \textbf{Unable to use port 53589?}
 
-        <p>
-          If your certificate has expired, you need a new one.  You
-          may also need to regenerate expired server certificates.
-        </p>
+    By default, port \verb+53589+ is used, but whichever you chose must be open on the server.
 
-        <p>
-          Note that creating certificates that never expire is a bad
-          idea. Certificates may be compromised. A certificate that is
-          considered secure today, may not be considered secure in
-          a year. Is the key length you chose something that will
-          remain suitable in the future? Will the algorithms you
-          chose remain secure? For these reasons, choose an
-          expiration date that lets you reevaluate your choices in
-          the relatively near future.
-        </p>
-      </đd>
-    </td>
-  </tr>
+    If you are unable to open firewall ports, you can use an SSH Tunnel to route port \verb+53589+ traffic over port \verb+22+:
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        Is your GnuTLS library up to date?
-      </dt>
-      <dd>
-        <p>
-          As a
-          <a href="http://gnutls.org/security.html">security product</a>,
-          it is imperative that you keep your GnuTLS up to date.
-        </p>
+    \begin{lstlisting}
+$ ssh -L localport:dsthost:dstport user@example.com\end{lstlisting}
+\end{frame}
 
-        <p>
-          As with many security products, GnuTLS is maintained by a
-          responsible and quick-responding team that takes security
-          very seriously.  Benefit from their diligence by keeping
-          your GnuTLS up to date.
-        </p>
+\begin{frame}[fragile]\frametitle{Problems (6)}
+    \textbf{Certificate fails validation, Handshake failed}
 
-        <p>
-          We have received reports of issues with older GnuTLS releases.
-          Specifically, version 2.12.20 has problems validating
-          certificates under certain conditions. Newer releases have
-          addressed memory leaks that were able to take down
-          Taskserver.
-        </p>
-      </đd>
-    </td>
-  </tr>
+    There are many reasons that the TLS handshake can fail.
 
-  <tr>
-    <td>
-      <dt>
-        <span class="glyphicon glyphicon-question-sign"></span>
-        ERROR: Could not find common ancestor for ...<br />
-        Client sync key not found.
-      </dt>
-      <dd>
-        <p>
-          You skipped the important step of running:
-          <pre>$ task sync init</pre>
+    When you generated certificates, you modified a \verb+vars+ file, in particular the \verb+CN=<name>+ setting. That name must match the output of  \verb+$ hostname -f+ on the server for the certificate to validate.
 
-          This performs an initial upload of your pending tasks, and
-          sets up a local sync key, which identifies the last sync
-          transaction.
-        </p>
-      </đd>
-    </td>
-  </tr>
-</table>
+    Additionally, that name must also be used in the \verb+taskd.server=<host>:<port>+ setting for Taskwarrior. Otherwise you'll need \verb+taskd.trust=ignore hostname+.
 
-<a name="debug"></a>
-<h4>Debugging</h4>
-<p>
-  You may wish to try and debug the problem yourself. You will
-  probably not. But if you do, here is how.
-</p>
+    If you are using a self-signed certificate, did you specify it using the \verb+taskd.ca+ setting?
 
-<p>
-  Both Taskwarrior and Taskserver have a <code>diagnostics</code>
-  command, the purpose of which is to show you relevant
-  troubleshooting details. Additionally it will indicate problems
-  directly, for example, it will tell you if your cert/key files
-  are not readable. The output from <code>diagnostics</code> is
-  intended to be included in bug reports, and doing so saves you
-  a lot of time, because it's the first thing we'll ask for.
-</p>
+    Setting \verb+taskd.ciphers+ can force the use of different ciphers. Use \verb+gnutls-cli --list+ to see a list of installed ciphers, and confirm that there is overlap between client and server. There needs to be a cipher that is available to both, otherwise they cannot communicate.
+\end{frame}
 
-<pre>$ task diagnostics
+\begin{frame}[fragile]\frametitle{Problems (7)}
+    \textbf{Is your certificate still valid?}
+
+    Certificates have expiration dates, and if you followed our instructions, you created a certificate that is valid for one year.  Check your certificate with this command:
+
+    \begin{lstlisting}
+$ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
+
+    If your certificate has expired, you need a new one.  You may also need to regenerate expired server certificates.
+
+    Note that creating certificates that never expire is a bad idea. Certificates may be compromised. A certificate that is considered secure today, may not be considered secure in a year. Is the key length you chose something that will remain suitable in the future? Will the algorithms you          chose remain secure? For these reasons, choose an expiration date that lets you reevaluate your choices in the relatively near future.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Problems (8)}
+    \textbf{Is your GnuTLS library up to date?}
+
+    As a \href{http://gnutls.org/security.html}{security product}, it is imperative that you keep your GnuTLS up to date.
+
+    As with many security products, GnuTLS is maintained by a responsible and quick-responding team that takes security very seriously.  Benefit from their diligence by keeping your GnuTLS up to date.
+
+    We have received reports of issues with older GnuTLS releases. Specifically, version 2.12.20 has problems validating certificates under certain conditions. Newer releases have addressed memory leaks that were able to take down Taskserver.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Problems (9)}
+    \textbf{ERROR: Could not find common ancestor for ...\\
+Client sync key not found.}
+
+    You skipped the important step of running:
+    \begin{lstlisting}
+$ task sync init\end{lstlisting}
+
+    This performs an initial upload of your pending tasks, and sets up a local sync key, which identifies the last sync transaction.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Debugging -- Diagnostics}
+      You may wish to try and debug the problem yourself. You will probably not. But if you do, here is how.
+
+      Both Taskwarrior and Taskserver have a \verb+diagnostics+ command, the purpose of which is to show you relevant troubleshooting details. Additionally it will indicate problems directly, for example, it will tell you if your cert/key files are not readable. The output from \verb+diagnostics+ is intended to be included in bug reports, and doing so saves you a lot of time, because it's the first thing we'll ask for.
+
+      \begin{lstlisting}
+$ task diagnostics
 ...
 $ taskd diagnostics
-...</pre>
+...\end{lstlisting}
 
-<p>
-  Read the output of the <code>diagnostics</code> commands carefully,
-  there may be several types of problems mentioned, which need to be
-  addressed before going further.
-</p>
+    Read the output of the \verb+diagnostics+ commands carefully, there may be several types of problems mentioned, which need to be addressed before going further.
+\end{frame}
 
-<p>
-  The next step would be to run the server in debug mode. First
-  shutdown your Taskserver, then launch it interactively:
-</p>
+\begin{frame}[fragile]\frametitle{Debug Mode}
+    The next step would be to run the server in debug mode. First shutdown your Taskserver, then launch it interactively:
 
-<pre>$ taskdctl stop
+    \begin{lstlisting}
+$ taskdctl stop
 ...
 $ taskd server
-...</pre>
+...\end{lstlisting}
 
-<p>
-  You can hit <code>Ctrl-C</code> to stop this server. For highly
-  verbose output, try this:
-</p>
+    You can hit \verb+Ctrl-C+ to stop this server. For highly verbose output, try this:
+    \begin{lstlisting}
+$ taskd server --debug --debug.tls=2
+...\end{lstlisting}
 
-<pre>$ taskd server --debug --debug.tls=2
-...</pre>
+    Similarly, Taskwarrior has a verbose debug mode, and debug TLS mode:
+    \begin{lstlisting}
+$ task rc.debug=1 rc.debug.tls=2 sync
+...\end{lstlisting}
+\end{frame}
 
-<p>
-  Similarly, Taskwarrior has a verbose debug mode, and debug TLS
-  mode:
-</p>
+\begin{frame}[fragile]\frametitle{Getting Help}
+    As a last resort, ask for help. But please make sure you have carefully reviewed your setup, and gone through the checks above before asking. No one wants to lead you through the steps above to discover that you didn't.
 
-<pre>$ task rc.debug=1 rc.debug.tls=2 sync
-...</pre>
+    We'll ask you to provide the \verb+diagnostics+ output for both Taskwarrior and Taskserver, then we're going to go through the steps above, because this is our checklist also.
 
-<a name="help"></a>
-<h4>Getting Help</h4>
-<p>
-  As a last resort, ask for help. But please make sure you have
-  carefully reviewed your setup, and gone through the checks above
-  before asking. No one wants to lead you through the steps above
-  to discover that you didn't.
-</p>
+    Impress us and mention the codeword 'Weasel', to prove that you at least read this page all the way to the end.
+\end{frame}
 
-<p>
-  We'll ask you to provide the <code>diagnostics</code> output
-  for both Taskwarrior and Taskserver, then we're going to go
-  through the steps above, because this is our checklist also.
-</p>
+\begin{frame}[fragile]\frametitle{Getting Help}
+    There are several ways of getting help:
 
-<p>
-  Impress us and mention the codeword 'Weasel', to prove that you
-  at least read this page all the way to the end.
-</p>
+    \begin{itemize}
+        \item Submit your details to our \href{https://answers.tasktools.org}{Q \& A site}, then wait patiently for the community to respond.
+        \item Email us at \href{mailto:support@taskwarrior.org}{support@taskwarrior.org}, then wait patiently for a volunteer to respond.
+        \item Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
+        \item Even though Twitter is no means of support, you can get in touch with \href{https://twitter.com/taskwarrior}{@taskwarrior}.
+        \item We have a \href{https://groups.google.com/forum/\#!forum/taskwarrior-user}{User Mailinglist} which you can join anytime to discuss about Taskwarrior and techniques.
+        \item The \href{https://groups.google.com/forum/\#!forum/taskwarrior-dev}{Developer Mailinglist} is focussing on a more technical oriented audience.
+    \end{itemize}
 
-<p>
-  There are several ways of getting help:
+\end{frame}
 
-  <ul>
-    <li>
-      Submit your details to our
-      <a href="https://answers.tasktools.org">Q &amp; A site</a>,
-      then wait patiently for the community to respond.
-    </li>
-    <li>
-      Email us at
-      <a href="mailto:support@taskwarrior.org">support@taskwarrior.org</a>,
-      then wait patiently for a volunteer to respond.
-    </li>
-    <li>
-      Join us IRC in the #taskwarrior channel on Freenode.net, and
-      get a quick response from the community, where, as you have
-      anticipated, we will walk you through the checklist above.
-    </li>
-  </ul>
-</p>
-
-%%%
-\fi
+% \iffalse
+% \fi
 
 \end{document}
