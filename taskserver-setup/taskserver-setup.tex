@@ -146,7 +146,7 @@
     \vfill
     This guide leads you through all the necessary steps to setup your own Taskserver to sync your Taskwarrior-tasks.
 
-    Please follow the steps carefully and note all things you do differently.
+    Please follow the steps \textbf{carefully} and \textbf{note} all things you do differently.
     \vfill
 \end{frame}
 
@@ -221,7 +221,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
     \begin{itemize}
         \item \verb+GnuTLS+ (ideally version 3.2 or newer)
         \item \verb+libuuid+
-        \item \verb+CMake+ (2.8 or newer)
+        \item \verb+CMake+ (2.8 or newer, check with)
         \item \verb+make+
         \item A C++ Compiler (GCC 4.7 or Clang 3.0 or newer)
     \end{itemize}
@@ -230,7 +230,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
     You don't necessarily need the latest version of all components, but it is a good idea if you can.  GnuTLS is a security component, and as such, it is very important that it is current.
 
-    \textbf{Using GnuTLS version 2.12.x is neither adequately secure, nor production quality.}
+    \textbf{Using GnuTLS version 2.12.x is neither adequately secure, nor production quality. Please check the \hyperlink{gnutlsproblem}{GnuTLS-Problem} for details.}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Dependencies (OS)}
@@ -242,7 +242,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
         \item \hyperlink{fedora}{Fedora}
         \item \hyperlink{opensuse}{openSUSE}
         \item \hyperlink{ubuntu}{Ubuntu}
-        \item \hyperlink{windows}{Windows with Cygwin}
+        \item \hyperlink{windows}{Windows with Cygwin} (unsupported but working)
         \item \hyperlink{macosx}{Mac OS X}
     \end{itemize}
 
@@ -592,6 +592,8 @@ CN=localhost
 ...\end{lstlisting}
 
     You will need to modify this value to match your server.
+
+    Most probably the result of \verb+hostname -f+ is exactly what you need ("yourserver.example.com").
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (2)}
@@ -772,6 +774,10 @@ $ ./generate.client first_last
 ...\end{lstlisting}
 
     This will generate a new key and cert, named \verb+first_last.cert.pem+ and \verb+first_last.key.pem+. It is not important that 'first\_last' was used here, just that it is something unique, and valid for use in a file name. It has no bearing on security.
+
+    \begin{alertblock}{Let's encrypt}
+        Certificates coming from Let's encrypt have \textbf{not} been successfully used by anyone. A working scenario would be highly appreciated.
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Client Configuration}\label{clientconfiguration}
@@ -840,7 +846,7 @@ $ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8b
 
     You are now ready to sync your Taskwarrior client. You will do this differently depending on whether this is the first sync per device, or one of the many subsequent syncs.
 
-    The first time you sync is special -- the client sends all your pending tasks to the server.  This is something you should only do once.  Run this:
+    The first time you sync is special -- the client sends all your tasks to the server.  This is something you should only do once.  Run this:
 
     \begin{lstlisting}
 $ task sync init
@@ -850,6 +856,10 @@ Syncing with host.domain:53589
 Sync successful.  2 changes uploaded.\end{lstlisting}
 
     You should get an indication that tasks were uploaded, in this case 2 of them.
+
+    \begin{alertblock}{Taskwarrior before Version 2.5.1}
+        Please note that older Taskwarrior versions only sync the \textbf{pending} tasks and not all tasks.
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{General Sync}
@@ -915,7 +925,7 @@ Sync successful.  1 changes uploaded.\end{lstlisting}
 
     If you installed Taskwarrior using your OS's package manager, you may be suffering from an out of date package. Prod your OS's package maintainer for an update.
 
-    Recent releases make GnuTLS support opt-out instead of opt-in, so upgrading to the latest version may help. Otherwise, you will need to build Taskwarrior from the \href{http://taskwarrior.org/download/task-latest.tar.gz}{latest source tarball}</a>, following the instructions in the \verb+INSTALL+ file. If you are a developer, do that. If you are not, then installing a development environment is probably not something you want to do, in which case contact your OS's package maintainer.
+    Recent releases make GnuTLS support opt-out instead of opt-in, so upgrading to the latest version may help. Otherwise, you will need to build Taskwarrior from the \href{http://taskwarrior.org/download/task-latest.tar.gz}{latest source tarball}, following the instructions in the \verb+INSTALL+ file. If you are a developer, do that. If you are not, then installing a development environment is probably not something you want to do, in which case contact your OS's package maintainer.
 
     \emph{Continued on next page}.
 \end{frame}
@@ -987,7 +997,7 @@ $ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
     Note that creating certificates that never expire is a bad idea. Certificates may be compromised. A certificate that is considered secure today, may not be considered secure in a year. Is the key length you chose something that will remain suitable in the future? Will the algorithms you          chose remain secure? For these reasons, choose an expiration date that lets you reevaluate your choices in the relatively near future.
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Problems (8)}
+\begin{frame}[fragile]\frametitle{Problems (8)}\label{gnutlsproblem}
     \textbf{Is your GnuTLS library up to date?}
 
     As a \href{http://gnutls.org/security.html}{security product}, it is imperative that you keep your GnuTLS up to date.
@@ -995,6 +1005,23 @@ $ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
     As with many security products, GnuTLS is maintained by a responsible and quick-responding team that takes security very seriously.  Benefit from their diligence by keeping your GnuTLS up to date.
 
     We have received reports of issues with older GnuTLS releases. Specifically, version 2.12.20 has problems validating certificates under certain conditions. Newer releases have addressed memory leaks that were able to take down Taskserver.
+
+    Please keep in mind that you have to recompile Taskserver completely to benefit from the new version.
+
+    \emph{Continued on next page}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Problems (8) -- continued}
+    Upgrading GnuTLS does nothing to upgrade taskd -- it has to be rebuilt from scratch, which means:
+
+    \begin{lstlisting}
+$ cd taskd.git
+$ rm CMakeCache.txt
+$ cmake -DCMAKE_BUILD_TYPE=release .
+$ make
+$ sudo make install\end{lstlisting}
+
+    This can then be verified using \verb+taskd diagnostics+.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Problems (9)}
@@ -1005,7 +1032,11 @@ Client sync key not found.}
     \begin{lstlisting}
 $ task sync init\end{lstlisting}
 
-    This performs an initial upload of your pending tasks, and sets up a local sync key, which identifies the last sync transaction.
+    This performs an initial upload of your tasks, and sets up a local sync key, which identifies the last sync transaction.
+
+    \begin{alertblock}{Taskwarrior before Version 2.5.1}
+        Please note that older Taskwarrior versions only sync the \textbf{pending} tasks and not all tasks.
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Debugging -- Diagnostics}
@@ -1046,8 +1077,6 @@ $ task rc.debug=1 rc.debug.tls=2 sync
     As a last resort, ask for help. But please make sure you have carefully reviewed your setup, and gone through the checks above before asking. No one wants to lead you through the steps above to discover that you didn't.
 
     We'll ask you to provide the \verb+diagnostics+ output for both Taskwarrior and Taskserver, then we're going to go through the steps above, because this is our checklist also.
-
-    Impress us and mention the codeword 'Weasel', to prove that you at least read this page all the way to the end.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Getting Help}
