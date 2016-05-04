@@ -1,0 +1,340 @@
+\documentclass[t,handout]{beamer}
+\usepackage[default]{sourcesanspro}
+% \usepackage[default]{sourcecodepro}
+% \usepackage[default]{sourceserifpro}
+\usepackage{sourcecodepro}
+\usepackage[utf8]{inputenc}
+\usepackage[ngermanb]{babel}
+\usepackage{listings}
+\lstset{ %
+  basicstyle=\ttfamily\color{black}\tiny,
+  columns=fullflexible,
+  breaklines=true,
+  frame=single,
+  keepspaces=true
+}
+
+\usepackage{hyperref}
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, pagecolor=darkblue, urlcolor=darkblue}
+
+\title{Taskwarrior -- Troubleshooting Taskserver}
+\subtitle{Your guide to success}
+\author[Deimeke, Dirk]{Dirk Deimeke}
+\institute[Taskwarrior Academy]{Taskwarrior Academy}
+\date{May 2016}
+\titlegraphic{\includegraphics[width=3cm,height=3cm]{tw-xxl}}
+\subject{Taskserver}
+\keywords{taskserver, task, management, commandline, getting things done}
+
+\setbeamercovered{transparent}
+
+\pgfdeclareimage[width=5mm]{tw-logo}{tw-xl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% LaTeX-Template for Taskwarrior by Dominik Wagenführ
+% http://www.deesaster.org/
+%
+% Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA 4.0)
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{navigation symbols}{}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usefonttheme{structurebold}
+
+\newlength{\boxwidth}
+\setlength{\boxwidth}{121px}
+\setbeamertemplate{headline}{%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette tertiary}%
+\insertauthor\ (\insertinstitute)%
+\end{beamercolorbox}%
+\vskip-9px\hskip\boxwidth
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette secondary}%
+\inserttitle%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,right]{palette primary}%
+\insertdate\hskip15px\insertframenumber\,/\,\inserttotalframenumber\hspace*{8px}
+\end{beamercolorbox}%
+}
+\setbeamertemplate{footline}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{basecolor}{gray}{0.2}
+\definecolor{mittelgrau}{gray}{0.4}
+\definecolor{hellgrau}{gray}{0.93}
+\definecolor{gelb}{rgb}{1.0,1.0,0.75}
+
+% infolines color
+\setbeamercolor{palette primary}{fg=white,bg=mittelgrau}
+\setbeamercolor{palette secondary}{fg=white,bg=basecolor}
+\setbeamercolor{palette tertiary}{fg=white,bg=black}
+
+% frame and title color
+\setbeamercolor{frametitle}{fg=white,bg=basecolor}
+\setbeamercolor{titlelike}{fg=white,bg=basecolor}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+% TOC color
+\setbeamercolor{section in toc}{fg=basecolor}
+
+% text color
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+% item color
+\setbeamercolor{item}{fg=basecolor}
+\setbeamercolor{itemize item}{fg=black}
+
+% block color
+\setbeamercolor{block title}{fg=black,bg=gelb}
+\setbeamercolor{block body}{fg=black,bg=gelb}
+
+% block  color
+\setbeamercolor{block title alerted}{fg=black,bg=gelb}
+\setbeamercolor{block body alerted}{fg=black,bg=gelb}
+
+% block example color
+\setbeamercolor{block title example}{fg=black,bg=gelb}
+\setbeamercolor{block body example}{fg=black,bg=gelb}
+
+\setbeamertemplate{frametitle}{%
+\vskip-1px%
+\begin{beamercolorbox}[wd=363px,ht=20px,dp=12px]{frametitle}
+\usebeamerfont{frametitle}%
+\usebeamercolor{frametitle}%
+\vspace*{-5px}\hspace*{10px}\includegraphics[width=24px,height=24px]{tw-xl.png}\\
+\vspace*{-20px}\hspace*{40px}\insertframetitle%
+\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Stop
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame} % Titel
+	\titlepage
+\end{frame}
+
+% \logo{\pgfuseimage{tw-logo}}
+
+%\begin{frame}\frametitle{Content}
+%	\tableofcontents
+%\end{frame}
+
+\parskip1ex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Troubleshooting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Troubleshooting Sync}
+  Here is a list of problems you may encounter, with the most common
+  ones listed first.
+
+  The single most common problem has been that the Taskserver Setup Instructions (this guide) were not properly followed.  Please review the steps you took.
+
+  It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
+
+  If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{task sync show task list}
+    \textbf{You tried \texttt{task sync} but Taskwarrior showed you a task list instead}
+
+    You have a version of Taskwarrior older than \verb+2.3.0+, which means there was no \verb+sync+ command, and you are seeing a list filtered by the search term 'sync'. Upgrading is the only solution.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Taskwarrior without GnuTLS}
+    \textbf{You tried \texttt{task sync} and saw 'Taskwarrior was built without GnuTLS support.  Sync is not available.'}
+
+    You are using version \verb+2.3.0+ or later, but the Taskwarrior binary was compiled without \href{http://www.gnutls.org}{GnuTLS} support.
+
+    If you installed Taskwarrior using your OS's package manager, you may be suffering from an out of date package. Prod your OS's package maintainer for an update.
+
+    Recent releases make GnuTLS support opt-out instead of opt-in, so upgrading to the latest version may help. Otherwise, you will need to build Taskwarrior from the \href{http://taskwarrior.org/download/task-latest.tar.gz}{latest source tarball}, following the instructions in the \verb+INSTALL+ file. If you are a developer, do that. If you are not, then installing a development environment is probably not something you want to do, in which case contact your OS's package maintainer.
+
+    \emph{Continued on next page}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Taskwarrior without GnuTLS -- continued}
+    Verify that your Taskwarrior was built with GnuTLS support by running \verb+task diagnostics+:
+
+    \begin{lstlisting}
+$ task diagnostics | grep libgnutls
+libgnutls: 3.3.18\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{nodename nor servname provided}
+    \textbf{nodename nor servname provided, or not known}
+
+    Despite the terrible wording, this means the Taskwarrior setting \verb+taskd.server=<host>:<port>+ refers to a host name that cannot be seen by Taskwarrior.
+
+    \begin{itemize}
+        \item Is it spelled correctly?
+        \item Is the domain correct?
+        \item Is there a valid DNS resolution for the name?
+        \item Is there a firewall between Taskwarrior and Taskserver that is not letting through \verb+<port>+ traffic?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Could not connect}
+    \textbf{Could not connect to <host> <port>}
+
+    Taskserver may not be running on \verb+<host>+.
+
+    Check with \verb+ps -leaf | grep taskd+.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Unable to use port}
+    \textbf{Unable to use port 53589?}
+
+    By default, port \verb+53589+ is used, but whichever you chose must be open on the server.
+
+    If you are unable to open firewall ports, you can use an SSH Tunnel to route port \verb+53589+ traffic over port \verb+22+:
+
+    \begin{lstlisting}
+$ ssh -L localport:dsthost:dstport user@example.com\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Handshake failed}
+    \textbf{Certificate fails validation, Handshake failed}
+
+    There are many reasons that the TLS handshake can fail.
+
+    When you generated certificates, you modified a \verb+vars+ file, in particular the \verb+CN=<name>+ setting. That name must match the output of  \verb+$ hostname -f+ on the server for the certificate to validate.
+
+    Additionally, that name must also be used in the \verb+taskd.server=<host>:<port>+ setting for Taskwarrior. Otherwise you'll need \verb+taskd.trust=ignore hostname+.
+
+    If you are using a self-signed certificate, did you specify it using the \verb+taskd.ca+ setting?
+
+    Setting \verb+taskd.ciphers+ can force the use of different ciphers. Use \verb+gnutls-cli --list+ to see a list of installed ciphers, and confirm that there is overlap between client and server. There needs to be a cipher that is available to both, otherwise they cannot communicate.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Certificate still valid}
+    \textbf{Is your certificate still valid?}
+
+    Certificates have expiration dates, and if you followed our instructions, you created a certificate that is valid for one year.  Check your certificate with this command:
+
+    \begin{lstlisting}
+$ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
+
+    If your certificate has expired, you need a new one.  You may also need to regenerate expired server certificates.
+
+    Note that creating certificates that never expire is a bad idea. Certificates may be compromised. A certificate that is considered secure today, may not be considered secure in a year. Is the key length you chose something that will remain suitable in the future? Will the algorithms you          chose remain secure? For these reasons, choose an expiration date that lets you reevaluate your choices in the relatively near future.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{GnuTLS outdated?}\label{gnutlsproblem}
+    \textbf{Is your GnuTLS library up to date?}
+
+    As a \href{http://gnutls.org/security.html}{security product}, it is imperative that you keep your GnuTLS up to date.
+
+    As with many security products, GnuTLS is maintained by a responsible and quick-responding team that takes security very seriously.  Benefit from their diligence by keeping your GnuTLS up to date.
+
+    We have received reports of issues with older GnuTLS releases. Specifically, version 2.12.20 has problems validating certificates under certain conditions. Newer releases have addressed memory leaks that were able to take down Taskserver.
+
+    Please keep in mind that you have to recompile Taskserver completely to benefit from the new version.
+
+    \emph{Continued on next page}.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{GnuTLS outdated? -- continued}
+    Upgrading GnuTLS does nothing to upgrade taskd -- it has to be rebuilt from scratch, which means:
+
+    \begin{lstlisting}
+$ cd taskd.git
+$ rm CMakeCache.txt
+$ cmake -DCMAKE_BUILD_TYPE=release .
+$ make
+$ sudo make install\end{lstlisting}
+
+    This can then be verified using \verb+taskd diagnostics+.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Ancestor not found}
+    \textbf{ERROR: Could not find common ancestor for ...\\
+Client sync key not found.}
+
+    You skipped the important step of running:
+    \begin{lstlisting}
+$ task sync init\end{lstlisting}
+
+    This performs an initial upload of your tasks, and sets up a local sync key, which identifies the last sync transaction.
+
+    \begin{alertblock}{Taskwarrior before Version 2.5.1}
+        Please note that older Taskwarrior versions only sync the \textbf{pending} tasks and not all tasks.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Debugging -- Diagnostics}
+      You may wish to try and debug the problem yourself. You will probably not. But if you do, here is how.
+
+      Both Taskwarrior and Taskserver have a \verb+diagnostics+ command, the purpose of which is to show you relevant troubleshooting details. Additionally it will indicate problems directly, for example, it will tell you if your cert/key files are not readable. The output from \verb+diagnostics+ is intended to be included in bug reports, and doing so saves you a lot of time, because it's the first thing we'll ask for.
+
+      \begin{lstlisting}
+$ task diagnostics
+...
+$ taskd diagnostics
+...\end{lstlisting}
+
+    Read the output of the \verb+diagnostics+ commands carefully, there may be several types of problems mentioned, which need to be addressed before going further.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Debug Mode}
+    The next step would be to run the server in debug mode. First shutdown your Taskserver, then launch it interactively:
+
+    \begin{lstlisting}
+$ taskdctl stop
+...
+$ taskd server
+...\end{lstlisting}
+
+    You can hit \verb+Ctrl-C+ to stop this server. For highly verbose output, try this:
+    \begin{lstlisting}
+$ taskd server --debug --debug.tls=2
+...\end{lstlisting}
+
+    Similarly, Taskwarrior has a verbose debug mode, and debug TLS mode:
+    \begin{lstlisting}
+$ task rc.debug=1 rc.debug.tls=2 sync
+...\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Getting Help}
+    As a last resort, ask for help. But please make sure you have carefully reviewed your setup, and gone through the checks above before asking. No one wants to lead you through the steps above to discover that you didn't.
+
+    We'll ask you to provide the \verb+diagnostics+ output for both Taskwarrior and Taskserver, then we're going to go through the steps above, because this is our checklist also.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Getting Help}
+    There are several ways of getting help:
+
+    \begin{itemize}
+        \item Submit your details to our \href{https://answers.tasktools.org}{Q \& A site}, then wait patiently for the community to respond.
+        \item Email us at \href{mailto:support@taskwarrior.org}{support@taskwarrior.org}, then wait patiently for a volunteer to respond.
+        \item Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
+        \item Even though Twitter is no means of support, you can get in touch with \href{https://twitter.com/taskwarrior}{@taskwarrior}.
+        \item We have a \href{https://groups.google.com/forum/\#!forum/taskwarrior-user}{User Mailinglist} which you can join anytime to discuss about Taskwarrior and techniques.
+        \item The \href{https://groups.google.com/forum/\#!forum/taskwarrior-dev}{Developer Mailinglist} is focussing on a more technical oriented audience.
+    \end{itemize}
+
+\end{frame}
+
+% \iffalse
+% \fi
+
+\end{document}
