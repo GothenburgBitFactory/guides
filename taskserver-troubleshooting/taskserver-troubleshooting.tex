@@ -138,22 +138,18 @@
 
 \parskip1ex
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Troubleshooting}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}[fragile]\frametitle{Troubleshooting Sync}
   Here is a list of problems you may encounter, with the most common
   ones listed first.
 
-  The single most common problem has been that the Taskserver Setup Instructions (this guide) were not properly followed.  Please review the steps you took.
+  The single most common problem has been that the Taskserver Setup Instructions were not properly followed.  Please review the steps you took.
 
   It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
 
   If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{task sync show task list}
+\begin{frame}[fragile]\frametitle{'task sync' showed task list}
     \textbf{You tried \texttt{task sync} but Taskwarrior showed you a task list instead}
 
     You have a version of Taskwarrior older than \verb+2.3.0+, which means there was no \verb+sync+ command, and you are seeing a list filtered by the search term 'sync'. Upgrading is the only solution.
