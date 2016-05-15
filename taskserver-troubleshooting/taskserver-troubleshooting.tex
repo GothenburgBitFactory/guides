@@ -353,86 +353,204 @@ $ task rc.debug=1 rc.debug.tls=2 sync
 
 \subsubsection{Server}
 
-\begin{frame}[fragile]\frametitle{IP Address}\label{S1}
+\begin{frame}[fragile]\frametitle{Server: IP Address}\label{S1}
     \vfill
+    Show the IP addresses (and network interfaces) on the system.
     \begin{lstlisting}
-ifconfig -a
-ip addr list\end{lstlisting}
+$ ifconfig -a
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+        ether 52:54:a2:01:25:9d  txqueuelen 1000  (Ethernet)
+        RX packets 42091  bytes 46300226 (44.1 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 17689  bytes 2606921 (2.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-    Show the ip addresses (and network interfaces) on the system.
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 120  bytes 43540 (42.5 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 120  bytes 43540 (42.5 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+$ ip addr list
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:a2:01:25:9d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0
+       valid_lft forever preferred_lft forever\end{lstlisting}
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Ports}\label{S2}
+\begin{frame}[fragile]\frametitle{Server: Ports}\label{S2}
     \vfill
+    Shows which process listen on the port, shows the user and -- more important -- the IP address / interface the server runs on.
     \begin{lstlisting}
-lsof -i TCP:53589 -s TCP:LISTEN # as taskserver user or with sudo
-netstat -tln | grep 53589\end{lstlisting}
+$ lsof -i TCP:53589 -s TCP:LISTEN # as taskserver user or with sudo
+COMMAND  PID       USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+taskd   1167 taskserver    4u  IPv4  16682      0t0  TCP taskd.example.net:53589 (LISTEN)
 
-    Shows which process listen on the port, shows the user and - more
-    important - the ip address / interface the server runs on.
+$ netstat -tl | grep 53589
+tcp        0      0 taskd.example.net:53589 0.0.0.0:*               LISTEN\end{lstlisting}
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Certificate}\label{S3}
+\begin{frame}[fragile]\frametitle{Server: Certificate}\label{S3}
     \vfill
+    Shows the hostname from \hyperlink{C1}{Client: General Reachability} after CN=
     \begin{lstlisting}
-openssl x509 -noout -in server.cert.pem -subject
-certtool -i --infile=server.cert.pem | grep Subject:\end{lstlisting}
+$ openssl x509 -noout -in server.cert.pem -subject
+subject= /CN=taskd.example.net/O=My own IT
 
-    Shows the hostname from (C1) after CN=
+$ certtool -i --infile=server.cert.pem | grep Subject:
+        Subject: CN=taskd.example.net,O=My own IT\end{lstlisting}
+
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{taskd diagnostics}\label{S4}
+\begin{frame}[fragile]\frametitle{Server: taskd diagnostics}\label{S4}
     \vfill
+    Shows server diagnostic data.
     \begin{lstlisting}
-taskd diagnostics --data /path/to/taskddata\end{lstlisting}
+$ taskd diagnostics --data /path/to/taskserver/data/
 
-    Shows server daignostic data.
+taskd 1.2.0
+    Platform: Linux
+    Hostname: taskd.example.net
+
+Compiler
+...
+
+Build Features
+...
+
+Configuration
+   TASKDDATA: /path/to/taskserver/data
+        root: /path/to/taskserver/data/, readable, writable
+      config: /path/to/taskserver/data//config, readable, writable546 bytes
+          CA: /path/to/taskserver/data/ca.cert.pem, readable, 2017 bytes
+ Certificate: /path/to/taskserver/data/server.cert.pem, readable, 2004 bytes
+         Key: /path/to/taskserver/data/server.key.pem, readable, 10996 bytes
+         CRL: /path/to/taskserver/data/server.crl.pem, readable, 1080 bytes
+         Log: /path/to/taskserver/data/taskd.log (found)
+    PID File: /path/to/taskserver/data/taskd.pid (missing)
+      Server: taskd.example.net:53589
+ Max Request: 1048576 bytes
+     Ciphers:
+       Trust: strict\end{lstlisting}
+
     \vfill
 \end{frame}
 
 \subsubsection{Client}
 
-\begin{frame}[fragile]\frametitle{General Reachability}\label{C1}
+\begin{frame}[fragile]\frametitle{Client: General Reachability}\label{C1}
     \vfill
-    \begin{lstlisting}
-ping hostname
-nmap -sP hostname\end{lstlisting}
-
     Show if the hostname is reachable (if ping is not blocked).
+
+    \begin{lstlisting}
+$ ping taskd.example.net
+PING taskd.example.net (192.168.1.100) 56(84) bytes of data.
+64 bytes from taskd.example.net (192.168.1.100): icmp_seq=1 ttl=64 time=0.118 ms
+64 bytes from taskd.example.net (192.168.1.100): icmp_seq=2 ttl=64 time=0.066 ms
+64 bytes from taskd.example.net (192.168.1.100): icmp_seq=3 ttl=64 time=0.064 ms
+64 bytes from taskd.example.net (192.168.1.100): icmp_seq=4 ttl=64 time=0.065 ms
+^C
+--- taskd.example.net ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3000ms
+rtt min/avg/max/mdev = 0.064/0.078/0.118/0.023 ms
+
+$ nmap -sP taskd.example.net
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2016-05-15 11:24 CEST
+Nmap scan report for taskd.example.net (192.168.1.100)
+Host is up (0.00012s latency).
+Nmap done: 1 IP address (1 host up) scanned in 0.01 seconds\end{lstlisting}
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Port Reachability}\label{C2}
+\begin{frame}[fragile]\frametitle{Client: Port Reachability}\label{C2}
     \vfill
-    \begin{lstlisting}
-telnet hostname 53589
-nmap -p 53589 hostname
-openssl s_client -host hostname -port 53589\end{lstlisting}
-
     Shows if the port is reachable by client (or locally).
+
+    \begin{lstlisting}
+$ telnet taskd.example.net 53589
+Trying 192.168.1.100...
+Connected to taskd.example.net.
+Escape character is '^]'.
+^CConnection closed by foreign host.
+
+$ sudo nmap -p 53589 taskd.example.net
+
+Starting Nmap 7.12 ( https://nmap.org ) at 2016-05-15 11:28 CEST
+Nmap scan report for taskd.example.net (192.168.1.100)
+Host is up (0.036s latency).
+PORT      STATE SERVICE
+53589/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.18 seconds
+
+$ openssl s_client -host taskd.example.net -port 53589
+CONNECTED(00000003)
+...\end{lstlisting}
+
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Hostname resolution}\label{C3}
+\begin{frame}[fragile]\frametitle{Client: Hostname resolution}\label{C3}
     \vfill
+    Shows the ip address of hostname. Should match one of the IP addresses found in \hyperlink{C1}{Server: IP Address} and the server should be bound to that address \hyperlink{S2}{Server: Ports}.
     \begin{lstlisting}
-host hostname
-nslookup hostname # checks only nameservers\end{lstlisting}
+$ host taskd.example.net
+taskd.example.net has address 192.168.1.100
 
-    Shows the ip address of hostname. Should match one of the IP addresses
-    found in (S1), and the server should be bound to that address (S2).
+$ nslookup taskd.example.net # checks only nameservers
+Server:         192.168.178.1
+Address:        192.168.178.1#53
+
+Non-authoritative answer:
+Name:   taskd.example.net
+Address: 192.168.1.100\end{lstlisting}
     \vfill
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{task diagnostics}\label{C4}
+\begin{frame}[fragile]\frametitle{Client: task diagnostics}\label{C4}
     \vfill
-    \begin{lstlisting}
-task diagnostics\end{lstlisting}
+        Shows client diagnostic data.
 
-    Shows client diagnostic data.
+    \begin{lstlisting}
+task diagnostics
+
+task 2.6.0
+  Platform: Linux
+...
+Compiler
+...
+Build Features
+...
+Configuration
+      File: /home/user/.taskrc (found), 2428 bytes, mode 100664
+      Data: /home/user/.task (found), dir, mode 40775
+   Locking: Enabled
+        GC: Enabled
+   $EDITOR: vim
+    Server: taskd.example.net:53589
+        CA: ~/.task/ca.cert.pem, readable, 3741 bytes
+     Trust: strict
+Certificate: ~/.task/Dirk_Deimeke.cert.pem, readable, 3724 bytes
+       Key: ~/.task/Dirk_Deimeke.key.pem, readable, 25364 bytes
+   Ciphers: NORMAL
+     Creds: My own IT/Dirk Deimeke/************************************
+
+Hooks
+...
+
+Tests
+...\end{lstlisting}
     \vfill
 \end{frame}
 
