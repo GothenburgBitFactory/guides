@@ -1,0 +1,323 @@
+\documentclass[t,handout]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[ngermanb]{babel}
+\usepackage{listings}
+\lstset{ %
+  basicstyle=\tiny,
+  breaklines=true,
+  frame=single
+}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, pagecolor=darkblue, urlcolor=darkblue}
+
+\title{Taskwarrior -- What's next?}
+\subtitle{Introduction to Taskwarrior}
+\author[Deimeke, Dirk]{Dirk Deimeke}
+\institute[Taskwarrior academy]{Taskwarrior academy}
+\date{FrOSCon 2016}
+\titlegraphic{\includegraphics[width=3cm,height=3cm]{tw-xxl}}
+\subject{Taskwarrior}
+\keywords{taskwarrior, task, management, commandline, getting things done}
+
+\setbeamercovered{transparent}
+
+\pgfdeclareimage[width=5mm]{tw-logo}{tw-xl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% LaTeX-Template for Taskwarrior by Dominik Wagenführ
+% http://www.deesaster.org/
+%
+% Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA 4.0)
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{navigation symbols}{}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usefonttheme{structurebold}
+
+\newlength{\boxwidth}
+\setlength{\boxwidth}{121px}
+\setbeamertemplate{headline}{%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette tertiary}%
+\insertauthor\ (\insertinstitute)%
+\end{beamercolorbox}%
+\vskip-9px\hskip\boxwidth
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette secondary}%
+\inserttitle%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,right]{palette primary}%
+\insertdate\hskip15px\insertframenumber\,/\,\inserttotalframenumber\hspace*{8px}
+\end{beamercolorbox}%
+}
+\setbeamertemplate{footline}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{basecolor}{gray}{0.2}
+\definecolor{mittelgrau}{gray}{0.4}
+\definecolor{hellgrau}{gray}{0.93}
+\definecolor{gelb}{rgb}{1.0,1.0,0.75}
+
+% infolines color
+\setbeamercolor{palette primary}{fg=white,bg=mittelgrau}
+\setbeamercolor{palette secondary}{fg=white,bg=basecolor}
+\setbeamercolor{palette tertiary}{fg=white,bg=black}
+
+% frame and title color
+\setbeamercolor{frametitle}{fg=white,bg=basecolor}
+\setbeamercolor{titlelike}{fg=white,bg=basecolor}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+% TOC color
+\setbeamercolor{section in toc}{fg=basecolor}
+
+% text color
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+% item color
+\setbeamercolor{item}{fg=basecolor}
+\setbeamercolor{itemize item}{fg=black}
+
+% block color
+\setbeamercolor{block title}{fg=black,bg=gelb}
+\setbeamercolor{block body}{fg=black,bg=gelb}
+
+% block alert color
+\setbeamercolor{block title alerted}{fg=black,bg=gelb}
+\setbeamercolor{block body alerted}{fg=black,bg=gelb}
+
+% block example color
+\setbeamercolor{block title example}{fg=black,bg=gelb}
+\setbeamercolor{block body example}{fg=black,bg=gelb}
+
+\setbeamertemplate{frametitle}{%
+\vskip-1px%
+\begin{beamercolorbox}[wd=363px,ht=20px,dp=12px]{frametitle}
+\usebeamerfont{frametitle}%
+\usebeamercolor{frametitle}%
+\vspace*{-5px}\hspace*{10px}\includegraphics[width=24px,height=24px]{tw-xl.png}\\
+\vspace*{-20px}\hspace*{40px}\insertframetitle%
+\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Stop
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame} % Titel
+	\titlepage
+\end{frame}
+
+% \logo{\pgfuseimage{tw-logo}}
+
+\begin{frame}\frametitle{Content}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parskip1ex
+
+\begin{frame}[fragile]\frametitle{Dirk Deimeke (that's me)}
+    \begin{itemize}
+        \item Born 1968 in Wanne-Eickel
+        \item Linux since 1996
+        \item Emigrated 2008 to Switzerland
+        \item Taskwarrior Team since 2010
+    \end{itemize}
+
+    Entry point for more \url{https://d5e.org/}
+\end{frame}
+
+\begin{frame}\frametitle{Project founder: Paul Beckingham}
+    \pause
+    \begin{itemize}
+        \item I started out using Gina Trapani's todo.sh, which was great, but I soon wanted features that would have been difficult to implement in a shell script, so I wrote my own. \pause
+        \item It stemmed from the fact that a todo program needs to be simple to use, and unobtrusive, otherwise it's a hassle. But it can't be too simple. \pause
+        \item If you go to the trouble of capturing this information, it seems wasteful not to leverage it. So it has a lot of features, but tries to remain simple to use. \pause
+        \item There are many different methodologies people use for managing their work, and Taskwarrior tries to walk a line through the middle of all that, with features for all the different approaches. \pause
+        \item Taskwarrior is intended to scale with the user, from very simple straightforward usage up to quite sophisticated task management.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Reasons for Taskwarrior}
+Taskwarrior
+\begin{itemize}
+	\item is easy to learn.
+	\item grows along with the work.
+	\item is unbelievably powerful.
+	\item is very fast.
+	\item is easily extensible.
+	\item is platform independent:
+	\begin{itemize}
+		\item Most flavours of Unix and Linux, including Mac OS X
+		\item Windows with Cygwin
+		\item Android with Termux (native App exists as well, not maintained by Taskwarrior team)
+	\end{itemize}
+	\item is actively developed.
+	\item can be influenced by users (feature requests).
+	\item has excellent and very friendly support.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{History -- Some milestones}
+    \begin{description}
+        \item[2006-11-29] Version 0.0.1, Project began as enhancement to todo.txt.
+        \item[2008-06-03] Version 1.0.0 released
+        \item[2012-03-17] Version 2.0.0 released
+        \item[2014-01-15] Version 2.3.0, Task Server support
+        \item[2015-10-21] Version 2.5.0, Improved command line parser
+        \item[2016-02-24] Version 2.5.1 is a bug fix, code cleanup, performance release only -- no features.
+        \item[?]          Version 2.6.0 will overhaul recurrence and add more flavors of recurring tasks.
+    \end{description}
+
+    \url{http://taskwarrior.org/docs/history.html}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation}
+%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Installation from source}
+%\begin{frame}\frametitle{5 steps to install from source}
+%
+%Recommended way!
+
+%All you need to compile is \texttt{gcc}, \texttt{cmake} and \texttt{make}, plus \texttt{libuuid} and \texttt{libgnutls}
+% \pause
+
+%\begin{enumerate}
+%\item \href{http://taskwarrior.org/download}{Download} of recent version
+%\item \texttt{tar xzf task-2.0.0.beta4.tar.gz}
+%\item \texttt{cmake .} (not \texttt{./configure}!) or \newline
+%      \texttt{cmake -DCMAKE_INSTALL_PREFIX=/home/user/task}
+%\item \texttt{make}
+%\item \texttt{sudo make install}
+%\end{enumerate}
+%\end{frame}
+%\frametitle{Installation with package management}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simple ToDo-Lists}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{A simple example}
+%\frametitle{Commands so far}
+%\frametitle{That's it!}
+
+%%%%%%%%%%%%%%%%%
+\section{General}
+%%%%%%%%%%%%%%%%%
+
+%\frametitle{Just kidding ...}
+%\frametitle{task {\tt<}filter{\tt>} command {\tt<}mods{\tt>}}
+%\frametitle{Scripts}
+%\frametitle{Most important commands}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Working with dates}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Dateformats -- from 'man taskrc'}
+%\frametitle{Set dateformat}
+%\frametitle{Set weekstart}
+%\frametitle{Special dates}
+%\frametitle{Due and wait}
+%\frametitle{Recurrence}
+%\frametitle{Recurrence modifiers}
+%\frametitle{Until and entry}
+%\frametitle{Starting and stopping}
+%\frametitle{Holiday}
+%\frametitle{Add holiday}
+%\frametitle{Calendar config with holiday}
+%\frametitle{Calendar with holiday}
+%\frametitle{Calendar with due tasks}
+%\frametitle{Timesheet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Getting sorted}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Project and subproject}
+%\frametitle{Projects}
+%\frametitle{Tags}
+%\frametitle{Annotations}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Dependencies}
+%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Dependency}
+
+%%%%%%%%%%%%%%%%%
+\section{Reports}
+%%%%%%%%%%%%%%%%%
+
+%\frametitle{Predefined reports (from task reports)}
+%\frametitle{burndown.daily}
+%\frametitle{ghistory, history}
+%\frametitle{ls, minimal, summary}
+%\frametitle{Report definitions}
+%\frametitle{Set default command}
+
+%%%%%%%%%%%%%%%%%%%
+\section{Filtering}
+%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Filtering in general}
+%\frametitle{Searches}
+%\frametitle{Attribute modifiers}
+%\frametitle{Combining}
+%\frametitle{Or ...}
+%\frametitle{Search configuration}
+%\frametitle{Filter in reports}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Miscellanous}
+%%%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{This is by far not all}
+
+%%%%%%%%%%%%%%%%%%%%
+\section{That's all}
+%%%%%%%%%%%%%%%%%%%%
+
+%\frametitle{Questions?}
+%\frametitle{Support}
+%\frametitle{Thanks for your patience!}
+
+\end{document}
+
+% \begin{frame}[fragile]\frametitle{Title}
+% \begin{lstlisting}
+% \end{lstlisting}
+% \end{frame}
+%
+% \begin{frame}\frametitle{title}
+% \begin{center}
+% \includegraphics[width=10cm,height=7.5cm]{name.png}
+% \end{center}
+% \end{frame}
+%
+% \begin{frame}\frametitle{title}
+% \begin{itemize}
+% \item \textbf{task {\tt<}filter{\tt>} modify}
+% \end{itemize}
+% \end{frame}
