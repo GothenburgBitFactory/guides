@@ -168,8 +168,9 @@ Taskwarrior
 	\item is platform independent:
 	\begin{itemize}
 		\item Most flavours of Unix and Linux, including Mac OS X
-		\item Windows with Cygwin
-		\item Android with Termux (native App exists as well, not maintained by Taskwarrior team)
+        \item Windows with Cygwin (unsupported, but working)
+		\item Android with Termux
+        \item Third-Party Apps (Android-Client, GUI based on NodeJS)
 	\end{itemize}
 	\item is actively developed.
 	\item can be influenced by users (feature requests).
@@ -195,14 +196,27 @@ Taskwarrior
 \section{Installation}
 %%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Installation from source}
-%\begin{frame}\frametitle{5 steps to install from source}
-%
-%Recommended way!
+\begin{frame}[fragile]\frametitle{Installation from source}
 
-%All you need to compile is \texttt{gcc}, \texttt{cmake} and \texttt{make}, plus \texttt{libuuid} and \texttt{libgnutls}
+    \begin{alertblock}{Attention!}
+    Since some packagers (Ubuntu as example) implement their thinking of the place where files have to be without changing the templates, an installation from source is the recommended way.
+    \end{alertblock}
+    \pause
+
+    All you need to compile is
+    \begin{itemize}
+        \item \verb+GnuTLS+ (ideally version 3.2 or newer)
+        \item \verb+libuuid+
+        \item \verb+CMake+ (2.8 or newer)
+        \item \verb+make+
+        \item A C++ Compiler (\verb+GCC 4.7+ or \verb+Clang 3.0+ or newer)
+    \end{itemize}
+
+\end{frame}
+
 % \pause
 
+%\begin{frame}\frametitle{5 steps to install from source}
 %\begin{enumerate}
 %\item \href{http://taskwarrior.org/download}{Download} of recent version
 %\item \texttt{tar xzf task-2.0.0.beta4.tar.gz}
