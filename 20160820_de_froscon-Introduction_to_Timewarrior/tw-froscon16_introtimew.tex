@@ -1,0 +1,188 @@
+\documentclass[t,handout]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[ngermanb]{babel}
+\usepackage{listings}
+\lstset{ %
+  basicstyle=\tiny,
+  breaklines=true,
+  frame=single
+}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=darkblue, menucolor=darkblue, pagecolor=darkblue, urlcolor=darkblue}
+
+\title{Taskwarrior -- Where did my time go?}
+\subtitle{Introduction to Timewarrior}
+\author[Deimeke, Dirk]{Dirk Deimeke}
+\institute[Taskwarrior academy]{Taskwarrior academy}
+\date{FrOSCon 2016}
+\titlegraphic{\includegraphics[width=3cm,height=3cm]{tw-xxl}}
+\subject{Taskwarrior}
+\keywords{taskwarrior, task, management, commandline, getting things done}
+
+\setbeamercovered{transparent}
+
+\pgfdeclareimage[width=5mm]{tw-logo}{tw-xl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% LaTeX-Template for Taskwarrior by Dominik Wagenführ
+% http://www.deesaster.org/
+%
+% Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA 4.0)
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{navigation symbols}{}
+
+\useinnertheme{default}
+\useoutertheme{infolines}
+\usefonttheme{structurebold}
+
+\newlength{\boxwidth}
+\setlength{\boxwidth}{121px}
+\setbeamertemplate{headline}{%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette tertiary}%
+\insertauthor\ (\insertinstitute)%
+\end{beamercolorbox}%
+\vskip-9px\hskip\boxwidth
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,center]{palette secondary}%
+\inserttitle%
+\end{beamercolorbox}%
+\begin{beamercolorbox}[dp=3px,ht=6px,wd=\boxwidth,right]{palette primary}%
+\insertdate\hskip15px\insertframenumber\,/\,\inserttotalframenumber\hspace*{8px}
+\end{beamercolorbox}%
+}
+\setbeamertemplate{footline}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{basecolor}{gray}{0.2}
+\definecolor{mittelgrau}{gray}{0.4}
+\definecolor{hellgrau}{gray}{0.93}
+\definecolor{gelb}{rgb}{1.0,1.0,0.75}
+
+% infolines color
+\setbeamercolor{palette primary}{fg=white,bg=mittelgrau}
+\setbeamercolor{palette secondary}{fg=white,bg=basecolor}
+\setbeamercolor{palette tertiary}{fg=white,bg=black}
+
+% frame and title color
+\setbeamercolor{frametitle}{fg=white,bg=basecolor}
+\setbeamercolor{titlelike}{fg=white,bg=basecolor}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+% TOC color
+\setbeamercolor{section in toc}{fg=basecolor}
+
+% text color
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+% item color
+\setbeamercolor{item}{fg=basecolor}
+\setbeamercolor{itemize item}{fg=black}
+
+% block color
+\setbeamercolor{block title}{fg=black,bg=gelb}
+\setbeamercolor{block body}{fg=black,bg=gelb}
+
+% block alert color
+\setbeamercolor{block title alerted}{fg=black,bg=gelb}
+\setbeamercolor{block body alerted}{fg=black,bg=gelb}
+
+% block example color
+\setbeamercolor{block title example}{fg=black,bg=gelb}
+\setbeamercolor{block body example}{fg=black,bg=gelb}
+
+\setbeamertemplate{frametitle}{%
+\vskip-1px%
+\begin{beamercolorbox}[wd=363px,ht=20px,dp=12px]{frametitle}
+\usebeamerfont{frametitle}%
+\usebeamercolor{frametitle}%
+\vspace*{-5px}\hspace*{10px}\includegraphics[width=24px,height=24px]{tw-xl.png}\\
+\vspace*{-20px}\hspace*{40px}\insertframetitle%
+\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors - Stop
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame} % Titel
+	\titlepage
+\end{frame}
+
+% \logo{\pgfuseimage{tw-logo}}
+
+\begin{frame}\frametitle{Content}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parskip1ex
+
+\begin{frame}[fragile]\frametitle{Dirk Deimeke (that's me)}
+    \begin{itemize}
+        \item Born 1968 in Wanne-Eickel
+        \item Linux since 1996
+        \item Emigrated 2008 to Switzerland
+        \item Taskwarrior Team since 2010
+    \end{itemize}
+
+    Entry point for more \url{https://d5e.org/}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Installation from source}
+
+    \begin{alertblock}{Attention!}
+    Since some packagers (Ubuntu as example) implement their thinking of the place where files have to be without changing the templates, an installation from source is the recommended way.
+    \end{alertblock}
+    \pause
+
+    All you need to compile is
+    \begin{itemize}
+        \item \verb+GnuTLS+ (ideally version 3.2 or newer)
+        \item \verb+libuuid+
+        \item \verb+CMake+ (2.8 or newer)
+        \item \verb+make+
+        \item A C++ Compiler (\verb+GCC 4.7+ or \verb+Clang 3.3+ or newer)
+    \end{itemize}
+
+\end{frame}
+
+\end{document}
+
+% \begin{frame}[fragile]\frametitle{Title}
+% \begin{lstlisting}
+% \end{lstlisting}
+% \end{frame}
+%
+% \begin{frame}\frametitle{title}
+% \begin{center}
+% \includegraphics[width=10cm,height=7.5cm]{name.png}
+% \end{center}
+% \end{frame}
+%
+% \begin{frame}\frametitle{title}
+% \begin{itemize}
+% \item \textbf{task {\tt<}filter{\tt>} modify}
+% \end{itemize}
+% \end{frame}
