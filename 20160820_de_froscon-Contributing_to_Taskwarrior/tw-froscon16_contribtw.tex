@@ -146,9 +146,557 @@
     Entry point for more \url{https://d5e.org/}
 \end{frame}
 
-%%%%%%%%%%%%%%
-\section{Why?}
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Want to contribute?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Help is neeeded}
+    \vfill
+    Help is needed in all areas of Taskwarrior development -- design, coding, translating, testing, support and marketing. Applicants must be friendly.
+
+    Perhaps you are looking to help, but don't know where to start. You can of course \href{mailto:taskwarrior-dev@googlegroups.com}{email us} but take a look at this list. Perhaps you have skills we are looking for, this slides show ways you may be able to help.
+    \vfill
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Topics (1)}
+    \begin{itemize}
+        \item Use Taskwarrior, become familiar with it, and make suggestions. We get great feedback from both new users and veteran users. New users have a fresh approach that we can no longer achieve, while veteran users develop clever and crafty ways to use the product.
+        \item Report bugs and odd behavior when you see it. We don't necessarily know it's broken, unless you tell us.
+        \item Suggest enhancements. We get lots of these, and it's great. Some really good ideas have been suggested and implemented. Sure, some are out of scope, or plain crazy, but the stream of suggestions is fascinating to think about.
+        \item Participate in the \href{https://bug.tasktools.org}{bug tracking} and the \href{https://answers.tasktools.org}{Q \& A} site, to help others and maybe learn something yourself.
+        \item Help \href{https://taskwarrior.org/docs/triage.html}{triage} the issues list.
+        \item Join the IRC channel \#taskwarrior on freenode.net and help answer some questions.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Topics (2)}
+    \begin{itemize}
+        \item Join either the \href{https://groups.google.com/forum/#!forum/taskwarrior-dev}{developer-mailinglist} or \href{https://groups.google.com/forum/#!forum/taskwarrior-user}{user-mailinglist} (or both) and participate.
+        \item Proofread the documentation and man pages.
+        \item Improve the documentation.
+        \item Improve the man pages.
+        \item Help improve the tutorials. Make your own tutorial.
+        \item Confirm a bug. Nothing gets fixed without confirmation.
+        \item Refine a bug. Provide relevant details, elaborate on the behavior.
+        \item Fix a bug. Send a patch. You'll need C++ skills for this.
+        \item Write a unit test. Improve an existing unit test.
+        \item Spread the word. Help others become more effective at managing tasks. Share your methodology, to inspire others.
+        \item Encouragement. Tell us what works for you, and what doesn't. It's all good.
+        \item Donate! Help offset costs.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Your skill is needed!}
+    \vfill
+    \begin{alertblock}{We need you!}
+        Please remember that we need contributions from all skillsets, however small. \textbf{Every contribution helps.}
+    \end{alertblock}
+    \vfill
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How to become an Open Source Contributor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+How to become an Open Source Contributor
+========================================
+
+Welcome, potential new Open Source contributor! This is a guide
+to show you exactly how to make a contribution, and will lead you
+through the entire process.
+
+There are many people who wish to start contributing, but don't
+know how or where to start.
+
+If this might be the case, then please read on, this guide is for
+you. Because we want you to join in the fun with Open Source - it
+can be fun and rewarding, improve your skills, or just give you a
+way to contribute back to a project.
+
+Where else can you combine the thrill of typing in a darkened
+room with the kindhearted love of an internet forum?  Just kidding!
+
+The goal of this document is to give you the ability to make your
+first contribution, and encourage you to make a second, by showing
+you how simple it is. Perhaps confidence and a little familiarity
+with the process are all you need to get started.
+
+We're going to pick the smallest contribution of all - a typo fix.
+While this may be a very small improvement, it is nevertheless a
+wanted improvement, and will be welcomed.
+
+Fixes such as this happen many times a day. Similar work on new
+features, new documents, rewriting help, refactoring code, fixing
+bugs and improving performance all combine to make a project grow
+and improve.
+
+Making a bigger change also is certainly an option, but the focus
+here is on going through the procedure, which is somewhat
+independent from the nature of the change.
+
+The steps are numbered, and it all fits on this one page. Get all
+the way to the end, and you will be an open source contributor.
+
+Development Environment Setup
+-----------------------------
+
+In order to build and test software, you need a development
+environment. That's just a term that means you need certain tools
+installed before proceeding. Here are the tools that Taskwarrior
+needs:
+
+- Compiler: GCC 4.7 or newer, or Clang 3.4 or newer.
+- Libraries: GnuTLS, and libuuid
+- Tools: Git, CMake, make, Python
+
+The procedure for installing this software is OS-dependent, but
+here are the commands you would use on Debian:
+
+$ sudo apt-get install gcc
+$ sudo apt-get install libgnutls28-dev
+$ sudo apt-get install uuid-dev
+$ sudo apt-get install git
+$ sudo apt-get install cmake
+$ sudo apt-get install make
+
+Get the Code
+------------
+
+Now you have the tools, next you need the code.
+This involves cloning the repository using git and looking at the
+development branch:
+
+$ git clone https://git.tasktools.org/scm/tm/task.git task.git
+Cloning into 'task.git'...
+remote: Counting objects: 55345, done.
+remote: Compressing objects: 100% (12655/12655), done.
+remote: Total 55345 (delta 44868), reused 52340 (delta 42437)
+Receiving objects: 100% (55345/55345), 25.04 MiB | 7.80 MiB/s, done.
+Resolving deltas: 100% (44868/44868), done.
+Checking connectivity... done.
+
+The URL for the repository was obtained from looking around on
+\href{https://git.tasktools.org}{https://git.tasktools.org}
+where several repositories are public, including the one for this
+web site.
+
+Now you just need to get onto the right branch, where the
+development is happening. There are several branches, but fortunately
+it is easy to find the right one - it is the one with the highest
+number. Do this:
+
+$ cd task.git
+$ git branch -a
+* master
+  remotes/origin/2.5.1
+  remotes/origin/2.5.2
+  remotes/origin/2.6.0
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+$ git checkout 2.6.0
+Branch 2.6.0 set up to track remote branch 2.6.0 from origin.
+Switched to a new branch '2.6.0'
+
+By the time you run this, things may have changed, and there could
+be a higher number than <code>2.6.0</code>. If that is the case,
+then use the higher version number instead.
+
+Here's a thought - if this page does not show the latest branch
+names, then, you know, you could fix that.
+
+Fix Something
+-------------
+
+Now that you have the code, find something to fix. This may be the
+hardest step, but knowing how many typos there are in the source
+code and docs, it shouldn't take long to find one. Try looking in
+the files in these directories:
+
+- <code>task.git/doc/man</code>
+- <code>task.git/scripts</code>
+- <code>task.git/src</code>
+- <code>task.git/test</code>
+
+It also doesn't need to be a typo, it can instead be a poorly-worded
+sentence, or one that could be more clear. You'll find something,
+whether it is jargon, mixed tenses, mistakes, or just plain wrong.
+
+Then fix it, using a text editor. Try to make the smallest possible
+change to achieve what you want, because smaller changeѕ are easier
+to verify and approve, and no reviewer wants to receive a large
+change to approve.
+
+Run the Test Suite
+------------------
+
+Taskwarrior has an extensive test suite to prove that things are
+still working as expected. You'll need to build the program and
+run this test suite in order to prove to yourself that your fix is
+good. It may seem like building the program is overkill, if you
+only make a small change, but no, it is not. The test suite is
+there to save you from submitting a bad change, and to save
+Taskwarrior from any mistakes you make.
+
+First you have to build the program.  Do this:
+
+$ cd task.git
+$ cmake .
+-- The C compiler identification is ...
+-- The CXX compiler identification is ...
+-- Check for working C compiler: ...
+
+...
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/task.git
+
+
+$ make
+Scanning dependencies of target columns
+Scanning dependencies of target task
+Scanning dependencies of target commands
+[  2%] Building CXX object src/columns/CMakeFiles/columns.dir/ColDepends.cpp.o
+[  2%] Building CXX object src/columns/CMakeFiles/columns.dir/Column.cpp.o
+[  2%] Building CXX object src/CMakeFiles/task.dir/CLI2.cpp.o
+
+...
+
+[100%] Linking CXX executable task
+[100%] Linking CXX executable lex
+[100%] Linking CXX executable calc
+[100%] Built target lex_executable
+[100%] Built target task_executable
+[100%] Built target calc_executable
+
+If the above commands worked, there will be a binary, which you can find:
+
+$ ls -l src/task
+-rwxr-xr-x  1 user  group    Mar 25 18:43 src/task
+
+The next step is to build the test suite. Do this:
+
+$ cd test
+$ make
+[ 14%] Built target task
+[ 25%] Built target columns
+[ 45%] Built target commands
+Scanning dependencies of target variant_subtract.t
+Scanning dependencies of target variant_partial.t
+Scanning dependencies of target variant_or.t
+
+...
+
+[ 98%] Built target i18n.t
+[100%] Linking CXX executable view.t
+[100%] Built target view.t
+
+Now run the test suite, which can take anywhere from 10 - 500
+seconds, depending on your hardware and OS:
+
+$ ./run_all
+Passed:                          8300
+Failed:                             0
+Unexpected successes:               0
+Skipped:                            3
+Expected failures:                  5
+Runtime:                        32.50 seconds
+
+We are looking for zero failed tests, as shown.  This means all is well.
+
+Commit the Change
+-----------------
+
+Now you've made a change, built and tested the code. The next step
+is to commit the change locally. This example assumes you fixed a
+typo in the man page. Check to see which file you changed, stage
+that file, then commit it:
+
+$ cd task.git
+$ git status
+On branch 2.6.0
+Your branch is up-to-date with 'origin/2.6.0'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   doc/man/task.1.in
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git add doc/man/task.1.in
+$ git commit -m 'Docs: corrected typo in the main man page'
+[2.6.0 ddbb07e] Docs: corrected typo in the main man page
+ 1 file changed, 1 insertion(+)
+
+Notice how the commit message looks like this:
+<code>Category: Brief description</code>, which is how the commit
+messages should look.
+
+Make a Patch
+------------
+
+Once the commit is made, making a patch is simple:
+
+git format-patch HEAD^
+0001-Docs-corrected-typo-in-the-main-man-page.patch
+
+Submit the Patch
+
+Finally you just need to email that patch file to
+<code>taskwarrior-dev@googlegroups.com</code>.  You will need
+to attach it to an email, and not just paste it in, because the
+mail client will probably mess with the contents, wrapping lines
+etc, which can make it unusable.
+
+What happens next is that a developer will take your patch and
+study it, to ascertain whether it really does fix something that
+is broken. If there is a problem, you'll hear back with some
+gentle, constructive criticism. If the problem is small, it might
+just get fixed. Then your patch is applied, tested, and if all
+looks well, pushed to the public repository, and included in the
+the next release. Your name will go into the AUTHORS file, and
+you will be thanked.
+
+Congratulations! Welcome to the wonderful world of open source
+involvement. Now do it again...
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coding Style}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+Coding Style
+------------
+
+The coding style used for the Taskwarrior, Taskserver, and other codebases is deliberately kept simple and a little vague. This is because there are many languages involved (C++, C, Python, Perl, sh, bash, HTML, troff and more), and specіfying those would be a major effort that detracts from the main focus which is improving the software.
+
+Instead, the general guideline is simply this:
+
+    Make all changes and additions such that they blend in perfectly with the surrounding code, so it looks like only one person worked on the source, and that person is rigidly consistent.
+
+To be a little more explicit, the common elements across the languages are:
+
+- Indent code using two spaces, no tabs
+- With Python, follow \href{https://www.python.org/dev/peps/pep-0008/}{PEP8} as much as possible
+- Surround operators and expression terms with a space
+- No cuddled braces
+- Stick to 80 columns where possible, although exceptions are fine
+- Class names are capitalized, variable names are not
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What Have We Learned From This Open Source Project?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+What Have We Learned From This Open Source Project?
+---------------------------------------------------
+
+Here is the collected wisdom that we have gained from running the Taskwarrior project for nine years. It has been rewarding, enjoyable, and sometimes frustrating. We learned a lot about users and Open Source expectations.
+
+Advice To Open Source Project Contributors
+------------------------------------------
+
+Start an open source project if you want to learn all you can about software design, development, planning, testing, documenting, and delivery; enjoy technical challenges, administrative challenges, compromise, and will be satisfied hoping that someone out there is benefitting from your work.
+
+Do not start an open source project if you need praise, warmth and love from your fellow human beings.
+
+If you could draw a boundary between that which is already supported, and that which is not, you would find that all the activity, discussion and drama occurs at that boundary.
+
+Feature requests only nibble at the periphery. Bold changes originate elsewhere.
+
+People will get excited about something a project doesn't yet support. Deliver it, and they will get excited about the next thing.
+
+If a feature works well, you’ll never hear about it again.
+
+There is a fine line between "richly-featured" and "bloated". There may not be a line at all.
+
+If you demo two features, and talk about twenty more, users still only know about the two. Visual demonstrations have far greater impact.
+
+Every change will ruin someone’s day. They will be sure to tell you about it.
+
+The same change will improve someone's day. You will not hear of this.
+
+People will disguise feature requests as bugs, which means either they consider difference of opinion a defect, or believe that calling it a flaw will force implementation, but hopefully they just forgot to set the issue type to 'enhancement'.
+
+Some people find it very difficult to articulate what they want. It's worth being patient and finding out what they need.
+
+What you keep out of a project is just as important as what you allow in to a project.
+
+Many new users will submit feature requests, just to show that they are knowledgeable and clever. They don't really want that feature, it's a form of positive feedback.
+
+Beware of suggestions from users who have used your software for only a day or so. Be equally aware of suggestions from users who have used your software for a long, long time.
+
+People will threaten to not use open source software because it lacks a feature, thereby mistaking themselves for paying customers.
+
+Many believe that if a change is small, it deserves to be in the project, regardless of whether it makes sense for it to be there.
+
+Users will go to the effort of seeking you out online, to directly ask you a question that is answered two clicks from the front page of a website.
+
+A looping, animated GIF will be watched over and over, scrutinized and understood. A paragraph of text will be ignored.
+
+Man pages are too densely crammed with information, and too lengthy, for most modern humans to ingest.
+
+<em>"What have you tried so far?"</em> is the best question to identify time wasters.
+
+People will pick a fight with you about all your incidental choices. Your issue tracker, your branching strategy, your version numbers, the text editor you use, and so on.
+
+You can choose the most permissive software license, and people will still argue with you about your choice.
+
+SEO consultants are not very good at searching the web, and learning that you operate an open source, non-profit project. It says a lot.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Obnoxious Questions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+FOQ
+===
+
+We get many loaded, heavily biased questions, so here are some answers for our most Frequently Obnoxious Questions, grouped by theme.
+
+WARNING: Some of this in tongue-in-cheek.  Most is not.
+
+Misplaced Concerns About Our Infrastructure
+-------------------------------------------
+
+Q: Why don't you just use Github?
+
+    We have many repositories, many of them private, and all controlled by user keys.
+
+    We do things with git hooks that Github does not permit.
+
+    The Github issue tracker is ... weak.
+
+    We do use Github to mirror the Taskwarrior repository at https://github.com/taskwarrior/task}.
+
+    Why is our infrastructure important to you?
+
+Q: Why is the website in HTML and not something like Markdown? Markdown would encourage more contributions.
+
+    There have been seven website patches from the community in the last three years. None of those were new pages.
+
+    Why is our infrastructure important to you?
+
+Q: Why all the Atlassian stuff like Jira, Stash, Confluence, Bamboo?
+
+    Jira is great. Atlassian is very generous with open source licences.
+    You think the Github issue tracker is the way to go?
+    We don't.
+    Why is our infrastructure important to you?
+
+Q: I don't like that you use a custom CI solution, instead of Travis. Why?
+
+    We simultaneously test every commit, of every project, on seven platforms.
+    Show us how Travis is better.
+    Why is our infrastructure important to you?
+
+Q: Would you guys consider moving off Google groups to a real mailing list?
+
+    Sure if there was a good reason.
+
+Why Didn't You Implement My Favorite Feature?
+---------------------------------------------
+
+Q: Why aren't you providing a syncing Android solution?
+
+    We are not Android developers. Go ask one.
+
+Q: Why doesn't Taskwarrior integrate with Google?
+
+    Yes, this question actually keeps coming up, although we still don't know what it means.
+
+    Taskwarrior supports JSON import/export, which is easy to programmatically
+
+Q: Why doesn't Taskwarrior use gettext for L10N?
+
+    I t should, but the work was never done. If you can show us that it doesn't have a startup performance impact, we'll gladly merge your patch that completely converts Taskwarrior to gettext, eliminates all the src/l10n/*.h files, and passes all tests.
+
+Q: Why doesn't Taskwarrior sync with CALDAV/Trello/...?
+
+    Because no one wrote a JSON-to-whatever converter for it. Write one.
+
+Q: Why won't you spend your free time implementing my favorite feature?
+
+    If you're not paying us, you need to convince us that your feature is so great, that it's worth giving up our free time to work on.
+
+    This is open source. Scratch thine own itch.
+
+Misplaced Blame
+---------------
+
+Q: The <Operating System> package is out of date, why have you not refreshed it yet?
+
+    We write software. We don't make packages. Talk to your package maintainer.
+
+Your Own Shortcomings
+---------------------
+
+Q: Why is Taskwarrior written in C++ and not something hackable?
+
+    C++ is ideal for this kind of application, where portability and performance of certain operations is important. It's just not written in the language you know.
+
+Q: Why is my hook script so slow?
+
+    It is most likely your choice of language and modules that make it slow. Run Taskwarrior with "rc.debug.hooks=2" to see timing information.
+
+Polite Theft
+------------
+
+Q: Can I use the Taskwarrior logo for my project?
+
+    No.
+
+My Idea Is Wonderful
+--------------------
+
+Q: Why won't you support my syntactic sugar idea?
+
+    Many suggestions for enhancements are just keystroke aliases for existing functionality, that can be achieved using shell functions and aliases.
+
+    Show us your proof of concept using the above techniques. We'll show you that you have already solved your problem.
+
+Q: Why don't you implement <thing>? It wouldn't be difficult.
+
+    The difficulty of a request is irrelevant. It is instead a question of whether the idea improves the ability to manage tasks, while maintaining consistency with other features.
+
+    Show us a convincing use case instead.
+
+Q: Why don't we make the "%"" key mean <this thing>?
+
+    We're not trying to make Taskwarrior more cryptic. We're trying to provide a simpler and more consistent interface.
+
+Treatable
+---------
+
+Q: When will Taskwarrior merge with hledger?
+
+    It will not. Yes, this keeps getting asked.
+
+Design Choices
+--------------
+
+Q: Why doesn't Taskwarrior do time tracking?
+
+    Taskwarrior manages tasks. Anything else is out of scope. It's a design choice.
+
+    Taskwarrior is all about faithfully capturing and representing data. If your time tracking needs fit this restriction, please use one of several available time-tracking hooks for Taskwarrior. They faithfully track time.
+
+    But properly tracking time is difficult, and we believe requires a dedicated application, which knows your schedule, holidays, vacation, and lunch breaks. It needs to tolerate forgetting to start the clock, flexibly generate timesheets and observe your time tracking policies. Timewarrior will do this. Taskwarrior will not.
+
+Q: Why can't I generate new tasks in my <code>on-modify</code> hook script?
+
+    Recursion. Complexity.
+
+Q: Why doesn't Taskwarrior just use DropBox or Git for syncing?
+
+    Neither DropBox not Git merges tasks, you just think they do. Taskserver syncs and merges tasks.
+
+\fi
 
 \end{document}
 
