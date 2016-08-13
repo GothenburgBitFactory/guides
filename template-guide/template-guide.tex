@@ -1,11 +1,17 @@
 \documentclass[t,handout]{beamer}
+\usepackage[default]{sourcesanspro}
+% \usepackage[default]{sourcecodepro}
+% \usepackage[default]{sourceserifpro}
 \usepackage[utf8]{inputenc}
-\usepackage[ngermanb]{babel}
+\usepackage[english]{babel}
 \usepackage{listings}
-\lstset{ % 
-  basicstyle=\tiny,
+\lstset{ %
+  basicstyle=\ttfamily\color{black}\tiny,
   breaklines=true,
-  frame=single
+  columns=fullflexible,
+  frame=single,
+  keepspaces=true,
+  tabsize=2
 }
 
 \definecolor{darkblue}{rgb}{0,0,.5}
@@ -130,7 +136,7 @@
 %\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The pieces} 
+\section{The pieces}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \parskip1ex
@@ -145,13 +151,13 @@
 % \begin{lstlisting}
 % \end{lstlisting}
 % \end{frame}
-% 
+%
 % \begin{frame}\frametitle{title}
 % \begin{center}
 % \includegraphics[width=10cm,height=7.5cm]{name.png}
 % \end{center}
 % \end{frame}
-% 
+%
 % \begin{frame}\frametitle{title}
 % \begin{itemize}
 % \item \textbf{task {\tt<}filter{\tt>} modify}
