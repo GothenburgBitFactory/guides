@@ -1,11 +1,17 @@
 \documentclass[t,handout]{beamer}
+\usepackage[default]{sourcesanspro}
+% \usepackage[default]{sourcecodepro}
+% \usepackage[default]{sourceserifpro}
 \usepackage[utf8]{inputenc}
-\usepackage[ngermanb]{babel}
+\usepackage[english]{babel}
 \usepackage{listings}
 \lstset{ %
-  basicstyle=\tiny,
+  basicstyle=\ttfamily\color{black}\tiny,
   breaklines=true,
-  frame=single
+  columns=fullflexible,
+  frame=single,
+  keepspaces=true,
+  tabsize=2
 }
 
 \definecolor{darkblue}{rgb}{0,0,.5}
