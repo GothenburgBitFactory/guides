@@ -175,7 +175,8 @@ Taskwarrior
 	\item is platform independent:
 	\begin{itemize}
 		\item Most flavours of Unix and Linux, including Mac OS X
-        \item Windows with Cygwin (unsupported, but working)
+        \item Windows 10 Linux Subsystem \\
+            Other Windows versions with Cygwin (unsupported, but working)
 		\item Android with Termux
         \item Third-Party Apps (Android-Client, GUI based on NodeJS, \ldots)
 	\end{itemize}
@@ -366,8 +367,8 @@ task <ID> done\end{lstlisting}
     \begin{itemize}
         \item Is the basic usage of all task related \textbf{write} commands.
         \item Write commands can operate on one task or a group of tasks or even on all tasks.
-        \item Every command maybe \textbf{abbreviated} up to the minimum that is necessary to identify a single command.
-        \item Filters can be anything from nothing to simple IDs further to regular expressions or Boolean constructs.
+        \item Every command may be \textbf{abbreviated} up to the minimum that is necessary to identify a single command.
+        \item Filters can be anything from nothing to simple IDs to regular expressions or Boolean constructs.
         \item Modifications can be either a change of description, a change of dates or anything else that changes a task.
         \item In our simple example we already used the write commands \textbf{add}, \textbf{done}, \textbf{start} and \textbf{stop}.
     \end{itemize}
@@ -405,7 +406,7 @@ cp -r /usr/local/share/doc/task/scripts/vim ~/.vim\end{lstlisting}
         Reverts the most recent change to a task. \pause
         \item \textbf{task help} \\
         Gives an overview of implemented commands and custom reports. \pause
-        \item \textbf{man task (taskrc, task-faq, task-synch)} \\
+        \item \textbf{man task (taskrc, task-faq, task-sync)} \\
         Show the (almighty) man-page(s). Unlike the man-pages of many other
         programs they are extremely helpful and full of information and examples.
         Try them!
@@ -452,6 +453,10 @@ a  D  b  Y  H:N:S would do and output as "Mon 24 Jan 2011 11:19:42"\end{lstlisti
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Set dateformat}
+    \begin{alertblock}{Defined dateformats}
+        The dateformat you define, will be used in \textbf{addition} to all the standard supported ISO-8601 formats.        
+    \end{alertblock}
+
     \vfill
     \begin{lstlisting}
 task show dateformat
