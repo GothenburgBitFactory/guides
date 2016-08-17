@@ -1,4 +1,5 @@
 \documentclass[t,handout]{beamer}
+% \documentclass[t]{beamer}
 \usepackage[default]{sourcesanspro}
 % \usepackage[default]{sourcecodepro}
 % \usepackage[default]{sourceserifpro}
@@ -131,7 +132,7 @@
 
 % \logo{\pgfuseimage{tw-logo}}
 
-\begin{frame}\frametitle{Content}
+\begin{frame}[fragile]\frametitle{Content}
 	\tableofcontents
 \end{frame}
 
@@ -152,7 +153,7 @@
     Entry point for more \url{https://d5e.org/}
 \end{frame}
 
-\begin{frame}\frametitle{Project founder: Paul Beckingham}
+\begin{frame}[fragile]\frametitle{Project founder: Paul Beckingham}
     \pause
     \begin{itemize}
         \item I started out using Gina Trapani's todo.sh, which was great, but I soon wanted features that would have been difficult to implement in a shell script, so I wrote my own. \pause
@@ -176,7 +177,7 @@ Taskwarrior
 		\item Most flavours of Unix and Linux, including Mac OS X
         \item Windows with Cygwin (unsupported, but working)
 		\item Android with Termux
-        \item Third-Party Apps (Android-Client, GUI based on NodeJS)
+        \item Third-Party Apps (Android-Client, GUI based on NodeJS, \ldots)
 	\end{itemize}
 	\item is actively developed.
 	\item can be influenced by users (feature requests).
@@ -186,16 +187,32 @@ Taskwarrior
 
 \begin{frame}[fragile]\frametitle{History -- Some milestones}
     \begin{description}
-        \item[2006-11-29] Version 0.0.1, Project began as enhancement to todo.txt.
-        \item[2008-06-03] Version 1.0.0 released
-        \item[2012-03-17] Version 2.0.0 released
-        \item[2014-01-15] Version 2.3.0, Task Server support
-        \item[2015-10-21] Version 2.5.0, Improved command line parser
-        \item[2016-02-24] Version 2.5.1 is a bug fix, code cleanup, performance release only -- no features.
-        \item[?]          Version 2.6.0 will overhaul recurrence and add more flavors of recurring tasks.
+        \item[2006-11-29, v0.0.1]  \hfill \\
+            Project began as enhancement to todo.txt.
+        \item[2008-06-03, v1.0.0]
+        \item[2012-03-17, v2.0.0]
+        \item[2014-01-15, v2.3.0]  \hfill \\
+            Task Server support
+        \item[2015-10-21, v2.5.0]  \hfill \\
+            Improved command line parser
+        \item[2016-02-24, v2.5.1]  \hfill \\
+            bug fix, code cleanup, performance release -- no features.
+        \item[near future, v2.6.0] \hfill \\
+            overhaul recurrence and add more flavors of recurring tasks.
     \end{description}
 
     \url{http://taskwarrior.org/docs/history.html}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{This workshop \ldots}
+    \vfill
+
+    \begin{alertblock}{This workshop hopefully is a \textit{real workshop}.}
+        It will live from you doing things and asking, \\
+        it is not about me talking all of the time.
+    \end{alertblock}
+
+    {\tiny Nevertheless I will show you every command.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -205,7 +222,7 @@ Taskwarrior
 \begin{frame}[fragile]\frametitle{Installation from source}
 
     \begin{alertblock}{Attention!}
-    Since some packagers (Ubuntu as example) implement their thinking of the place where files have to be without changing the templates, an installation from source is the recommended way.
+        Since some packagers (Debian and Ubuntu as examples) implement their thinking of the place where files have to be without changing the templates, an installation from source is the recommended way.
     \end{alertblock}
     \pause
 
@@ -215,129 +232,747 @@ Taskwarrior
         \item \verb+libuuid+
         \item \verb+CMake+ (2.8 or newer)
         \item \verb+make+
-        \item A C++ Compiler (\verb+GCC 4.7+ or \verb+Clang 3.3+ or newer)
+        \item C++ Compiler (\verb+GCC 4.7+ or \verb+Clang 3.3+ or newer)
     \end{itemize}
+
+    Some OSes (Darwin, FreeBSD \ldots) include \verb+libuuid+ functionality in libc.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Install dependencies}
+    Install the necessary packages with your package manager.
+
+    \begin{description}
+        \item[CentOS, Fedora, openSUSE] \hfill \\
+            gnutls-devel libuuid-devel cmake clang or gcc-c++
+        \item[Debian, Ubuntu] \hfill \\
+            libgnutls28-dev uuid-dev cmake clang or g++
+        \item[Mac OS X] \hfill \\
+            Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
+
+            With \href{http://brew.sh/}{Homebrew} install the necessary packages:
+
+            \verb=brew install cmake git gnutls=
+    \end{description}
 
 \end{frame}
 
-% \pause
+\begin{frame}[fragile]\frametitle{Get the source}
+    Either
 
-%\begin{frame}\frametitle{5 steps to install from source}
-%\begin{enumerate}
-%\item \href{http://taskwarrior.org/download}{Download} of recent version
-%\item \texttt{tar xzf task-2.0.0.beta4.tar.gz}
-%\item \texttt{cmake .} (not \texttt{./configure}!) or \newline
-%      \texttt{cmake -DCMAKE_INSTALL_PREFIX=/home/user/task}
-%\item \texttt{make}
-%\item \texttt{sudo make install}
-%\end{enumerate}
-%\end{frame}
-%\frametitle{Installation with package management}
+    \begin{lstlisting}
+curl -LO http://taskwarrior.org/download/task-2.5.1.tar.gz
+tar xzf task-2.5.1.tar.gz
+cd task-2.5.1\end{lstlisting} \pause
+
+    or
+
+    \begin{lstlisting}
+git clone --recursive https://git.tasktools.org/scm/tm/task.git task.git
+cd task.git
+
+# Updates
+git pull --recurse-submodules=yes
+git submodule update\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Compile it}
+    \vfill
+    Three easy steps \ldots hopefully! \pause
+    \begin{enumerate}
+        \item \verb=cmake .= (\textbf{not} \verb=./configure=!) or \\
+              \verb+cmake -DCMAKE_INSTALL_PREFIX=/home/user/task+ \pause
+        \item \verb=make= \pause
+        \item \verb=sudo make install=
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Test it}
+    \vfill %TODO
+    \begin{lstlisting}
+$ task diagnostics
+A configuration file could not be found in
+
+Would you like a sample /home/taskwarrior/.taskrc created, so Taskwarrior can proceed? (yes/no) yes
+
+task 2.6.0
+   Platform: Linux
+
+Compiler
+    Version: 4.8.5 20150623 (Red Hat 4.8.5-4)
+       Caps: +stdc +stdc_hosted +LP64 +c8 +i32 +l64 +vp64 +time_t64
+ Compliance: C++11
+
+Build Features
+      Built: May 17 2016 09:29:51
+     Commit: b47fc52
+      CMake: 2.8.11
+    libuuid: libuuid + uuid_unparse_lower
+  libgnutls: 3.3.8
+ Build type: release
+
+Configuration
+       File: /export/home/v000175/.taskrc (found), 1465 bytes, mode 100664
+       Data: /export/home/v000175/.task (found), dir, mode 40755
+    Locking: Enabled
+         GC: Enabled
+    $EDITOR: vim\end{lstlisting}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simple ToDo-Lists}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{A simple example}
-%\frametitle{Commands so far}
-%\frametitle{That's it!}
+\begin{frame}[fragile]\frametitle{A simple example}
+    \vfill
+    \begin{lstlisting}
+task add
+
+task list
+
+task <ID> start
+
+task list
+
+task <ID> stop
+
+task list
+
+task <ID> done\end{lstlisting}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%
 \section{General}
 %%%%%%%%%%%%%%%%%
 
-%\frametitle{Just kidding ...}
-%\frametitle{task {\tt<}filter{\tt>} command {\tt<}mods{\tt>}}
-%\frametitle{Scripts}
-%\frametitle{Most important commands}
+\begin{frame}[fragile]\frametitle{Nearly all commands work on a bunch of tasks}
+    \textbf{There is a lot more to explore.}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    Even the commands from the last section are more mighty than they seem. \pause
+
+    \begin{itemize}
+        \item task add {\tt<}mods{\tt>}
+        \item task {\tt<}filter{\tt>} list
+        \item task {\tt<}filter{\tt>} start {\tt<}mods{\tt>}
+        \item task {\tt<}filter{\tt>} stop {\tt<}mods{\tt>}
+        \item task {\tt<}filter{\tt>} done {\tt<}mods{\tt>}
+    \end{itemize} \pause
+
+    To get an overview, take a look at the \href{http://taskwarrior.org/download/task-2.5.1.ref.pdf}{cheat sheet} (pdf, 145kB) \\
+    (or come over and grab a printed copy).
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{task {\tt<}filter{\tt>} command {\tt<}mods{\tt>}}
+    \begin{itemize}
+        \item Is the basic usage of all task related \textbf{write} commands.
+        \item Write commands can operate on one task or a group of tasks or even on all tasks.
+        \item Every command maybe \textbf{abbreviated} up to the minimum that is necessary to identify a single command.
+        \item Filters can be anything from nothing to simple IDs further to regular expressions or Boolean constructs.
+        \item Modifications can be either a change of description, a change of dates or anything else that changes a task.
+        \item In our simple example we already used the write commands \textbf{add}, \textbf{done}, \textbf{start} and \textbf{stop}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Scripts}
+    \vfill
+    \begin{lstlisting}
+# Scripts shipped with Taskwarrior
+ls /usr/local/share/doc/task/scripts/*\end{lstlisting}
+
+\begin{lstlisting}
+# Commandline completion tabtabtabtabtabtab ;-)
+source /usr/local/share/doc/task/scripts/bash/task.sh
+
+# Make it persistent
+echo source /usr/local/share/doc/task/scripts/bash/task.sh >> .bashrc\end{lstlisting}
+
+\begin{lstlisting}
+# Syntaxhighlighting for vim
+[[ -d ~/.vim ]] || mkdir ~/.vim
+cp -r /usr/local/share/doc/task/scripts/vim ~/.vim\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Most important commands}
+    These are the most important commands, just because I use them most ;-)
+
+    \begin{itemize}
+        \item \textbf{task {\tt<}filter{\tt>} modify} \\
+        The name says it, it modifies tasks according to the filter used. \pause
+        \item \textbf{task {\tt<}filter{\tt>} edit} \\
+        This starts your favourite editor with the tasks you want to change. \\
+        (Remember the syntax highlighting for vim?) \pause
+        \item \textbf{task undo} \\
+        Reverts the most recent change to a task. \pause
+        \item \textbf{task help} \\
+        Gives an overview of implemented commands and custom reports. \pause
+        \item \textbf{man task (taskrc, task-faq, task-synch)} \\
+        Show the (almighty) man-page(s). Unlike the man-pages of many other
+        programs they are extremely helpful and full of information and examples.
+        Try them!
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Working with dates}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Dateformats -- from 'man taskrc'}
-%\frametitle{Set dateformat}
-%\frametitle{Set weekstart}
-%\frametitle{Special dates}
-%\frametitle{Due and wait}
-%\frametitle{Recurrence}
-%\frametitle{Recurrence modifiers}
-%\frametitle{Until and entry}
-%\frametitle{Starting and stopping}
-%\frametitle{Holiday}
-%\frametitle{Add holiday}
-%\frametitle{Calendar config with holiday}
-%\frametitle{Calendar with holiday}
-%\frametitle{Calendar with due tasks}
-%\frametitle{Timesheet}
+\begin{frame}[fragile]\frametitle{Dateformats -- from 'man taskrc'}
+    %TODO
+    \begin{lstlisting}
+m  minimal-digit month,   for example 1 or 12
+d  minimal-digit day,     for example 1 or 30
+y  two-digit year,        for example 09
+D  two-digit day,         for example 01 or 30
+M  two-digit month,       for example 01 or 12
+Y  four-digit year,       for example 2009
+a  short name of weekday, for example Mon or Wed
+A  long name of weekday,  for example Monday or Wednesday
+b  short name of month,   for example Jan or Aug
+B  long name of month,    for example January or August
+V  weeknumber,            for example 03 or 37
+H  two-digit hour,        for example 03 or 11
+N  two-digit minutes,     for example 05 or 42
+S  two-digit seconds,     for example 07 or 47
 
-%%%%%%%%%%%%%%%%%%%%%%%%
+The  string may also contain other characters to act as spacers,
+or formatting.  Examples for other values of dateformat:
+
+d/m/Y  would use for input and output 24/7/2009
+yMD    would use for input and output 090724
+M-D-Y  would use for input and output 07-24-2009
+
+Examples for other values of dateformat.report:
+
+a D b Y (V)  would do an output as "Fri 24 Jul 2009 (30)"
+A, B D, Y    would do an  output  as  "Friday,  July  24, 2009"
+vV a Y-M-D   would do an output as "v30 Fri 2009-07-24"
+yMD.HN       would do an output as "110124.2342"
+m/d/Y H:N    would do an output as "1/24/2011 10:42"
+a  D  b  Y  H:N:S would do and output as "Mon 24 Jan 2011 11:19:42"\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Set dateformat}
+    \vfill
+    \begin{lstlisting}
+task show dateformat
+
+task config dateformat YMD
+task config dateformat.annotation YMD
+task config dateformat.report YMD
+
+# my dateformat was YMD-HN
+
+task show dateformat
+
+grep dateformat ~/.taskrc\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Set weekstart}
+    \vfill
+    \begin{lstlisting}
+task show weekstart
+
+task config weekstart Monday
+
+task show | wc -l # nearly everything can be customized
+235\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Special dates (1)}
+    \begin{description}
+    \item[Relative wording] \hfill \\
+        task \ldots due:today \\
+        task \ldots due:yesterday \\
+        task \ldots due:tomorrow \\
+    \item[Day number with ordinal] \hfill \\
+        task \ldots due:23rd \\
+        task \ldots due:3wks \\
+        task \ldots due:1day \\
+        task \ldots due:9hrs \\
+    \item[At some point or later] (sets the wait date to 1/18/2038) \hfill \\
+        task \ldots wait:later \\
+        task \ldots wait:someday
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Special dates (2)}
+    \begin{description}
+        \item[Start / end of \ldots] (remember weekstart setting) \hfill \\
+            task \ldots due:sow \# week \\
+            task \ldots due:eow \\
+            task \ldots due:soww \# workweek \\
+            task \ldots due:eoww \\
+            task \ldots due:socw \# current week \\
+            task \ldots due:eocw \\
+            task \ldots due:som \# month \\
+            task \ldots due:eom \\
+            task \ldots due:soq \# quarter \\
+            task \ldots due:eoq \\
+            task \ldots due:soy \# year \\
+            task \ldots due:eoy \\
+        \item[Next occurring weekday] \hfill \\
+            task \ldots due:fri
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Due and wait}
+    \vfill
+    \begin{lstlisting}
+task add due:20161231 "Celebrate Sylvester"
+task add due:Sunday "Drive home"
+
+task list
+
+task 2 modify wait:20160823
+
+task list\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Recurrence}
+    \vfill
+    \begin{lstlisting}
+task waiting
+task 1 modify due:eom recur:monthly
+
+task list
+
+task recurring
+
+# task id changed from 1 (task modify) to 4
+# try task 1 edit\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Recurrence modifiers (1)}
+    \begin{description}
+        \item[hourly] \hfill \\
+            Every hour.
+        \item[daily, day, 1da, 2da, \ldots] \hfill \\
+            Every day or a number of days.
+        \item[weekdays] \hfill \\
+            Mondays, Tuesdays, Wednesdays, Thursdays, Fridays and skipping weekend days.
+        \item[weekly, 1wk, 2wks, \ldots] \hfill \\
+            Every week or a number of weeks.
+        \item[biweekly, fortnight] \hfill \\
+            Every two weeks.
+        \item[monthly] \hfill \\
+            Every month.
+        \item[quarterly, 1qtr, 2qtrs, \ldots] \hfill \\
+            Every three months, a quarter, or a number of quarters.
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Recurrence modifiers (2)}
+    \begin{description}
+        \item[semiannual] \hfill \\
+            Every six months.
+        \item[annual, yearly, 1yr, 2yrs, \ldots] \hfill \\
+            Every year or a number of years.
+        \item[biannual, biyearly, 2yr] \hfill \\
+            Every two years.
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Until and entry}
+    \vfill
+    \begin{lstlisting}
+    task add due:eom recur:monthly until:20161231 "Pay installment for credit"
+
+    task add "Prepare slides for workshop"
+    task 6 modify entry:yesterday
+
+    task list\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Holiday}
+    \begin{alertblock}{Attention!}
+        Holiday has nothing in common with the German words \textit{Ferien} or \textit{Urlaub} (this would be vacation). (Public) Holiday means \textit{Feiertag}.
+    \end{alertblock}
+
+    You can add holidays by either adding them via \verb=task config= on the commandline or by adding them directly to the \verb=~/.taskrc=-File or by including an external holiday definition.
+
+    On \href{http://holidata.net/}{holidata.net} you find a growing list of holiday dates, licensed CC-BY and offered by volunteers. Service was introduced by the Taskwarrior team, who is responsible for hosting and conversion to different formats.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Add holiday / Configure calendar}
+    \vfill
+    \begin{lstlisting}
+task config holiday.swissnationalday.name Swiss National Day
+task config holiday.swissnationalday.date 20170801
+
+# Holiday is not highlighted by default
+task cale 08 2017\end{lstlisting}
+
+    \begin{lstlisting}
+task show calendar
+task config calendar.holidays full
+
+task cale 08 2017\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Calendar with due tasks}
+    \vfill
+    \begin{lstlisting}
+task config calendar.holidays sparse
+task config calendar.details full
+
+task cale\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Getting sorted}
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Project and subproject}
-%\frametitle{Projects}
-%\frametitle{Tags}
-%\frametitle{Annotations}
+\begin{frame}[fragile]\frametitle{Project and subproject}
+    \vfill
+    \begin{lstlisting}
+task 3 modify pro:ubucon
+task 7 modify pro:ubucon.workshop
+task 4 modify pro:private
+task list
+\end{lstlisting}
+\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{Projects}
+    \vfill
+    \begin{lstlisting}
+task projects
+task pro:ubucon ls
+task 7 done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Tags}
+    \vfill
+    \begin{lstlisting}
+task 3 modify +banking
+task 4 modify +banking
+
+task list
+
+task 3 mod -banking +bern
+
+task +bern list
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Priorities}
+    \vfill
+    \begin{lstlisting}
+task long
+task 4 modify pri:H # can be either (H)igh, (M)edium or (L)ow
+task long
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Annotations}
+    \vfill
+    \begin{lstlisting}
+task 3 annotate "Do not forget your head"
+task 4 annotate "Use wifes account"
+task list
+task 4 denotate "Use wifes account"
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dependencies}
-%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Dependency}
+\begin{frame}[fragile]\frametitle{Dependency, part 1}
+    \vfill
+    \begin{lstlisting}
+task add "Send letter to Fritz"
+task add "Write letter"
+task 7 modify depends:8
+task blocked
+task unblocked
+\end{lstlisting}
+\end{frame}
 
-%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{Dependency, part 2}
+    \vfill
+    \begin{lstlisting}
+task 7 done
+task list
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Undo}
+    \vfill
+    \begin{lstlisting}
+task undo
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Dependency, part 3}
+    \vfill
+    \begin{lstlisting}
+task 7,8 done
+task blocked
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reports}
-%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Predefined reports (from task reports)}
-%\frametitle{burndown.daily}
-%\frametitle{ghistory, history}
-%\frametitle{ls, minimal, summary}
-%\frametitle{Report definitions}
-%\frametitle{Set default command}
+\begin{frame}[fragile]\frametitle{Predefined reports (from task reports), part 1}
+    These reports were already used.
 
-%%%%%%%%%%%%%%%%%%%
+    \begin{itemize}
+        \item \textbf{blocked}          Lists all blocked tasks matching the specified criteria
+        \item \textbf{list}             Lists all tasks matching the specified criteria
+        \item \textbf{long}             Lists all task, all data, matching the specified criteria
+        \item \textbf{projects}         Shows a list of all project names used, and how many tasks are in each
+        \item \textbf{recurring}        Lists recurring tasks matching the specified criteria
+        \item \textbf{unblocked}        Lists all unblocked tasks matching the specified criteria
+        \item \textbf{waiting}          Lists all waiting tasks matching the specified criteria
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Predefined reports (from task reports), part 2}
+    New ones:
+
+    \begin{itemize}
+        \item \textbf{active}           Lists active tasks matching the specified criteria
+        \item \textbf{all}              Lists all tasks matching the specified criteria, including parents of recurring tasks
+        \item \textbf{blocking}         Blocking tasks
+        \item \textbf{burndown.daily}   Shows a graphical burndown chart, by day
+        \item \textbf{burndown.monthly} Shows a graphical burndown chart, by month
+        \item \textbf{burndown.weekly}  Shows a graphical burndown chart, by week
+        \item \textbf{completed}        Lists completed tasks matching the specified criteria
+        \item \textbf{ghistory.annual}  Shows a graphical report of task history, by year
+        \item \textbf{ghistory.monthly} Shows a graphical report of task history, by month
+        \item \textbf{history.annual}   Shows a report of task history, by year
+        \item \textbf{history.monthly}  Shows a report of task history, by month
+        \item \textbf{information}      Shows all data and metadata for specified tasks
+        \item \textbf{ls}               Minimal listing of all tasks matching the specified criteria
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Predefined reports (from task reports), part 3}
+    And more:
+
+    \begin{itemize}
+        \item \textbf{minimal}          A really minimal listing
+        \item \textbf{newest}           Shows the newest tasks
+        \item \textbf{next}             Lists the most urgent tasks
+        \item \textbf{oldest}           Shows the oldest tasks
+        \item \textbf{overdue}          Lists overdue tasks matching the specified criteria
+        \item \textbf{ready}            Most urgent actionable tasks
+        \item \textbf{summary}          Shows a report of task status by burndown-dailyoject
+        \item \textbf{tags}             Shows a list of all tags used
+    \end{itemize}
+
+    26 reports in total (as told by \verb=task reports=)
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Test the reports}
+    \vfill
+    \begin{lstlisting}
+task burndown.daily
+
+task ghistory.annual
+task ghistory.monthly
+
+task history.monthly
+
+task ls
+task minimal
+task summary\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Report definitions}
+    \vfill
+    \begin{lstlisting}
+task show report.minimal
+task show report.list
+
+task show report # to see all definitions\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Dirks former task list}
+    \vfill
+    \begin{lstlisting}
+echo "
+report.ll.description=Dirks task list
+report.ll.columns=id,project,priority,due,due.countdown,tags,description
+report.ll.labels=ID,Project,Pri,Due,Countdown,Tags,Description
+report.ll.sort=due+,priority-,project+,description+
+report.ll.filter=status:pending
+" >> ~/.taskrc
+
+task ll\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Set default command}
+    \vfill
+    \begin{lstlisting}
+task show default
+
+task config default.command ll
+task\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Filtering}
-%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{Filtering in general}
-%\frametitle{Searches}
-%\frametitle{Attribute modifiers}
-%\frametitle{Combining}
-%\frametitle{Or ...}
-%\frametitle{Search configuration}
-%\frametitle{Filter in reports}
+\begin{frame}[fragile]\frametitle{Filtering in general}
+    You can filter for any modifier. If you don't use a modifier description is searched for the term, which may be a regular expression, on the command line. Filters may be combined.
 
-%%%%%%%%%%%%%%%%%%%%%%
+    The following attribute modifiers maybe applied as well. Names in brackets can be used alternatively.
+
+    So a filter can look like \verb=attribute.modifier:value=.
+
+    \begin{itemize}
+        \item before, after
+        \item none, any
+        \item is (equals), isnt (not)
+        \item has (contains), hasnt
+        \item startswith (left), endswith (right)
+        \item word, noword
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Searches}
+    \vfill
+    \begin{lstlisting}
+task
+
+task pay
+
+task /[Pp]ay/\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Attribute modifiers}
+    \vfill
+    \begin{lstlisting}
+task due.before:20160831
+
+task project.not:taskwarrior\end{lstlisting} \pause
+
+    \begin{lstlisting}
+task project:ubucon +banking
+task status:completed project:ubucon
+task status:completed project:ubucon completed
+
+task show report.ll.filter\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Or \ldots}
+    \vfill
+    \begin{lstlisting}
+task list
+
+task \( pro:taskwarrior or pro:private \) list
+# Brackets must be escaped for the shell
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Search configuration}
+    \vfill
+    \begin{lstlisting}
+task show search
+
+task show regex\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Filter in reports}
+    \vfill
+    \begin{lstlisting}
+task show filter\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Miscellanous}
-%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\frametitle{This is by far not all}
+\begin{frame}[fragile]\frametitle{Virtual Tags (1)}
+    \begin{itemize}
+        \item \textbf{ACTIVE}       Matches if the task is started
+        \item \textbf{ANNOTATED}    Matches if the task has annotations
+        \item \textbf{BLOCKED}      Matches if the task is blocked
+        \item \textbf{BLOCKING}     Matches if the task is blocking
+        \item \textbf{CHILD}        Matches if the task has a parent
+        \item \textbf{COMPLETED}    Matches if the task has completed status
+        \item \textbf{DELETED}      Matches if the task has deleted status
+        \item \textbf{DUE}          Matches if the task is due
+        \item \textbf{LATEST}       Matches if the task is the newest added task
+        \item \textbf{MONTH}        Matches if the task is due this month
+        \item \textbf{ORPHAN}       Matches if the task has any orphaned UDA values
+        \item \textbf{OVERDUE}      Matches if the task is overdue
+        \item \textbf{PARENT}       Matches if the task is a parent
+        \item \textbf{PENDING}      Matches if the task has pending status
+        \item \textbf{PRIORITY}     Matches if the task has a priority
+    \end{itemize}
+\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%
-\section{That's all}
-%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]\frametitle{Virtual Tags (1)}
+    \begin{itemize}
+        \item \textbf{PROJECT}      Matches if the task has a project
+        \item \textbf{READY}        Matches if the task is actionable
+        \item \textbf{SCHEDULED}    Matches if the task is scheduled
+        \item \textbf{TAGGED}       Matches if the task has tags
+        \item \textbf{TODAY}        Matches if the task is due today
+        \item \textbf{TOMORROW}     Matches if the task is due sometime tomorrow
+        \item \textbf{UDA}          Matches if the task has any UDA values
+        \item \textbf{UNBLOCKED}    Matches if the task is not blocked
+        \item \textbf{UNTIL}        Matches if the task expires
+        \item \textbf{WAITING}      Matches if the task is waiting
+        \item \textbf{WEEK}         Matches if the task is due this week
+        \item \textbf{YEAR}         Matches if the task is due this year
+        \item \textbf{YESTERDAY}    Matches if the task was due sometime yesterday
+    \end{itemize}
+\end{frame}
 
-%\frametitle{Questions?}
-%\frametitle{Support}
-%\frametitle{Thanks for your patience!}
+\begin{frame}[fragile]\frametitle{This is by far not all}
+    \begin{description}
+        \item[task log] \hfill \\
+            for logging a task after it is already done.
+        \item[task diag] \hfill \\
+            to help support for diagnostic purpose.
+        \item[UDA] \hfill \\
+            User defined attributes.
+        \item[\ldots] \hfill \\
+            and many more!
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Questions?}
+    \begin{center}
+        \includegraphics[width=6.4cm,height=7.5cm]{task_logo.png}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Getting Help}
+    \vfill
+    There are several ways of getting help:
+
+    \begin{itemize}
+        \item Submit your details to our \href{https://answers.tasktools.org}{Q \& A site}, then wait patiently for the community to respond.
+        \item Email us at \href{mailto:support@taskwarrior.org}{support@taskwarrior.org}, then wait patiently for a volunteer to respond.
+        \item Join us IRC in the \#taskwarrior channel on Freenode.net, and get a quick response from the community, where, as you have anticipated, we will walk you through the checklist above.
+        \item Even though Twitter is no means of support, you can get in touch with \href{https://twitter.com/taskwarrior}{@taskwarrior}.
+        \item We have a \href{https://groups.google.com/forum/\#!forum/taskwarrior-user}{User Mailinglist} which you can join anytime to discuss about Taskwarrior and techniques.
+        \item The \href{https://groups.google.com/forum/\#!forum/taskwarrior-dev}{Developer Mailinglist} is focussing on a more technical oriented audience.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Thanks for your patience!}
+    \vfill
+    \begin{center}
+        Dirk Deimeke, Taskwarrior-Team, 2016, \href{https://creativecommons.org/licenses/by/4.0/}{CC-BY}
+
+        \href{mailto:dirk@deimeke.net}{dirk@deimeke.net}
+
+        \href{https://d5e.org/}{d5e.org}
+    \end{center}
+\end{frame}
 
 \end{document}
-
-% \begin{frame}[fragile]\frametitle{Title}
-% \begin{lstlisting}
-% \end{lstlisting}
-% \end{frame}
-%
-% \begin{frame}\frametitle{title}
-% \begin{center}
-% \includegraphics[width=10cm,height=7.5cm]{name.png}
-% \end{center}
-% \end{frame}
-%
-% \begin{frame}\frametitle{title}
-% \begin{itemize}
-% \item \textbf{task {\tt<}filter{\tt>} modify}
-% \end{itemize}
-% \end{frame}
