@@ -86,7 +86,7 @@
 \setbeamerfont{frametitle}{series=\bfseries}
 
 % TOC color
-\setbeamercolor{section in toc}{fg=basecolor}
+\setbeamercolor{ in toc}{fg=basecolor}
 
 % text color
 \setbeamercolor{normal text}{fg=black,bg=white}
@@ -142,6 +142,7 @@
 \parskip1ex
 
 \begin{frame}[fragile]\frametitle{Dirk Deimeke (that's me)}
+    \vfill
     \begin{itemize}
         \item Born 1968 in Wanne-Eickel
         \item Linux since 1996
@@ -369,7 +370,7 @@ $ git format-patch HEAD^
 
     \textbf{Congratulations}!
 
-    Welcome to the wonderful world of open source involvement. Now do it again...
+    Welcome to the wonderful world of open source involvement. Now do it again\ldots
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -388,6 +389,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Coding Style -- Detailed}
+    \vfill
     To be a little more explicit, the common elements across the languages are:
 
     \begin{itemize}
@@ -398,6 +400,135 @@ $ git format-patch HEAD^
         \item Stick to 80 columns where possible, although exceptions are fine
         \item Class names are capitalized, variable names are not
     \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bug reports and feature requests}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{How to report a bug}
+    Please report bugs and odd behavior when you see it. We don't necessarily know it's broken, unless you tell us. A good bug description improves response time and reduces the burden on the developers.
+
+    It helps if you first determine whether this is a known bug.  To do this, you will need to look at the current list of bugs here:
+
+    \href{https://bug.tasktools.org}{https://bug.tasktools.org}
+
+    If you don't see the bug listed, sign up for an account at the link above, and create a new issue.  Please include the following information, as it helps us categorize, prioritize and replicate the problem:
+
+    \begin{itemize}
+        \item Tell us \textit{exactly} what command you ran
+        \item Tell us what happened
+        \item Tell us what you expected to happen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{How to report a bug (2)}
+    \begin{itemize}
+        \item Tell us about your installation, by running the command \verb=task diagnostics= and including the output in the issue description. Notice that the \verb=diagnostics= command was added specifically for reporting issues, and it gives us information about your operating system, libraries, compiler and so on. If you feel some of the information is personal, then remove that line.
+        \item If you need to demonstrate a problem with a screenshot, you can hide your private data with the \verb=rc.obfuscate=1= configuration override:
+        \includegraphics[width=9cm]{obfuscate.png}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{How to request a feature}
+    \vfill
+    We encourage you to request features.
+
+    You can submit a feature request using our \href{https://bug.tasktools.org}{issue tracking system}. Simply create an account, create an issue, and set the type to either 'improvement' or 'feature', at your discretion. But there is a little more to it than that. After all, wouldn't you like to see your request implemented?
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{What Makes a Good Feature Request?}
+    Requesting a feature is easy, but you must remember that it doesn't mean it will get done. It may be a simple or vague request. It may be a complex request that needs some analysis, and we will want to discuss it first. Sometimes we even go so far as to write up an RFC before doing any work. Here are some tips for making a good feature request:
+
+    \begin{itemize}
+        \item Describe a compelling feature, and make us really \textit{want} it. What we find most convincing is a statement that illustrates what having the new feature would mean, or would enable. What new things could you do if you had this feature? How would you be more effective at managing tasks with this feature?
+        \item Describe how the feature might interact with existing features. We prefer it when a new feature is more than simply storing a new piece of data, for later retrieval -- we have UDAs ("User defined attributes") for that.
+        \item Describe any new reports that may be needed.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{What Makes a Good Feature Request? (2)}
+    \vfill
+    \begin{itemize}
+        \item Describe who might benefit from this feature.
+        \item Describe a feature that doesn't impose a cost on users that choose not to use it. We want the basic usage (add, list, done) to remain simple and effective.
+    \end{itemize}
+
+    One thing to bear in mind is that we have a long term goal of simplifying the way we manage tasks, simplifying Taskwarrior, and improving consistency.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Things to Avoid}
+    \begin{itemize}
+    \item If your suggestion affects basic usage (add, list, done) then it will not be implemented.
+    \item Don't bother inventing syntax, or coming up with an unused character on your keyboard. We would much rather you put your effort into thinking about the feature and the benefits. Syntax is our problem. Focus on making others wonder how they could possibly live without the feature.
+    \item Don't bother suggesting features that lead Taskwarrior away from its intended purpose -- managing tasks. We have no intention of adding time-tracking to the Taskwarrior core.
+    \item If you have a suggestion that can be implemented as a hook script, or add-on, please do that instead. If the result is compelling enough, we may want to migrate the functionality in-core, but it's not likely.
+    \item Don't tell us how easy something would be, or how quickly you could add it. Ease of implementation has nothing to do with whether an idea is good. Instead, convince everyone that the idea is great.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{A Good Example}
+    \vfill
+    I think dependencies would be a great feature, because it would help me organize tasks and know which ones I need to work on first. It would also tell me which ones I cannot work on now. Tasks that are depended upon could affect the 'next' report, because those tasks need to be done first. Ideally a task could depend on multiple other tasks. I would need to both add and remove a dependency. Dependencies are a commonly understood concept, and so would be useful to many users.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Another Good Example}
+    \vfill
+    I should be allowed to use 'status' field in a report. It doesn't make sense to withhold just this one field. For the sake of consistency, please add this as a reportable, sortable field.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{A Bad Example}
+    \vfill
+    Why can't we just make the @ character mean \ldots\ldots?  How hard can that be?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Job offerings}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{Yes, we are seeking}
+    \vfill
+    Just for the glory, we are searching people taking over responsibilities and support us for a longer period of time.
+
+    The only thing reserved is overall feature and architecture limitations.
+
+    If you think you fit in, contact us, please.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Chief Bug Hunter}
+    \vfill
+    You \textit{own} the bug databases for all projects. Manage the whole thing, reject the crazy, ask for more details, reproduce the problems, assign priorities and fix versions, tag the issues and so on.
+
+    \textbf{Bugs need more love.}
+
+    This is a major job opening we have.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Master of Testing}
+    \vfill
+    \textbf{Software Quality Engineer} -- automated testing. Create new Python tests to increase test coverage (currently around 88\%, although who knows), and improve release quality. Refactor old tests, add new ones, eliminate useless or redundant tests, speed up the tests. Create tests for newly-reported issues. Alert development to areas of weakness in the product, asymmetrical feature support, or newly occurring use cases.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Master of Picture and Sound}
+    \vfill
+    \textbf{Demo Manager}. We have used YouTube and Asciinema to great effect, because the products are somewhat visual, and everyone loves a live demo. But the demo scripts quickly get out of date, and new features are not shown.  Own the tutorials, organize them, publish them, show off the features.
+
+    Maybe, you establish a visual changelog.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Chief Nudger}
+    \vfill
+    \textbf{Technical community outreach}.  Own the relationships with package maintainers.  Nudge them to update.  Advise them not to package alpha/beta versions.  Correct their docs.  Identify distro gaps we need filled.  Identify distros that are problematic for us: Debian and old GnuTLS libs, Debian refusing our PDF, Cygwin packaging issues, toolchain availability.  Advise development.  Pull back distro patches where appropriate.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Documentation Hero}
+    \vfill
+    \textbf{Technical writer}. Our online docs and man pages need organization, more examples, fewer examples, clearer descriptions, re-ordering, more screenshots, fewer screenshots, spell-checking, grammar-checking.  We need a clear communicator with organization skills.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Head of Looking Nice Department}
+    \vfill
+    Website migration to static content generators. We need to evaluate, select and migrate to content generators using markdown text injected into our own templates.  Need new templates.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -421,6 +552,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Features}
+    \vfill
     If you could draw a boundary between that which is already supported, and that which is not, you would find that all the activity, discussion and drama occurs at that boundary.
 
     Feature requests only nibble at the periphery. Bold changes originate elsewhere.
@@ -435,6 +567,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Changes}
+    \vfill
     Every change will ruin someone’s day. They will be sure to tell you about it.
 
     The same change will improve someone's day. You will not hear of this.
@@ -443,6 +576,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Feature Requests}
+    \vfill
     People will disguise feature requests as bugs, which means either they consider difference of opinion a defect, or believe that calling it a flaw will force implementation, but hopefully they just forgot to set the issue type to \textit{enhancement}.
 
     \begin{alertblock}{Attention!}
@@ -455,6 +589,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{People}
+    \vfill
     Beware of suggestions from users who have used your software for only a day or so. Be equally aware of suggestions from users who have used your software for a long, long time.
 
     People will threaten to not use open source software because it lacks a feature, thereby mistaking themselves for paying customers.
@@ -467,6 +602,7 @@ $ git format-patch HEAD^
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Documentation}
+    \vfill
     A looping, animated GIF will be watched over and over, scrutinized and understood. A paragraph of text will likely be ignored.
 
     Man pages are too densely crammed with information, and too lengthy, for most modern humans to ingest.
@@ -495,7 +631,7 @@ $ git format-patch HEAD^
     \begin{itemize}
         \item We have many repositories, many of them private, and all controlled by user keys.
         \item We do things with git hooks that Github does not permit.
-        \item The Github issue tracker is ... weak.
+        \item The Github issue tracker is \ldots weak.
         \item We do use Github to mirror the Taskwarrior repository at \href{https://github.com/taskwarrior/task}{https://github.com/taskwarrior/task}.
     \end{itemize}
 
@@ -545,7 +681,7 @@ $ git format-patch HEAD^
         \item It should, but the work was never done. If you can show us that it doesn't have a startup performance impact, we'll gladly merge your patch that completely converts Taskwarrior to gettext, eliminates all the src/l10n/*.h files, and passes all tests.
     \end{itemize}
 
-    Why doesn't Taskwarrior sync with CALDAV/Trello/...?
+    Why doesn't Taskwarrior sync with CALDAV/Trello/\ldots?
     \begin{itemize}
         \item Because no one wrote a JSON-to-whatever converter for it. Write one.
     \end{itemize}
@@ -650,6 +786,7 @@ $ git format-patch HEAD^
 %%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Links}
+    \vfill
     Most of the topics mentioned got shortened and are stolen from the \href{http://taskwarrior.org}{website}. They are worth a visit.
 
     \begin{itemize}
@@ -657,7 +794,20 @@ $ git format-patch HEAD^
         \item \href{https://taskwarrior.org/docs/first_time.html}{How to become an Open Source Contributor}
         \item \href{https://taskwarrior.org/docs/advice.html}{What Have We Learned From This Open Source Project?}
         \item \href{https://taskwarrior.org/docs/coding_style.html}{Coding Style}
+        \item \href{http://taskwarrior.org/docs/bugs.html}{How to Report a Bug}
+        \item \href{http://taskwarrior.org/docs/features.html}{How to Request a Feature}
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Thanks for your patience!}
+    \vfill
+    \begin{center}
+        Dirk Deimeke, Taskwarrior-Team, 2016, \href{https://creativecommons.org/licenses/by/4.0/}{CC-BY}
+
+        \href{mailto:dirk@deimeke.net}{dirk@deimeke.net}
+
+        \href{https://d5e.org/}{d5e.org}
+    \end{center}
 \end{frame}
 
 \end{document}
