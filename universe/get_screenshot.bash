@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "${browshot_key}" ]]; then
-    echo 
+    echo
     echo "ERROR: Need to set the environment variable 'browshot_key'"
     echo
     exit 1
@@ -27,3 +27,4 @@ get_screenshot https://torp.tasktools.org/               torp-tasktools-org.png
 get_screenshot https://botbot.me/freenode/taskwarrior/   botbot-me-taskwarrior.png
 get_screenshot https://twitter.com/taskwarrior           twitter-taskwarrior.png
 get_screenshot http://taskwarrior.org/docs/timewarrior/index.html timewarrior.png
+get_screenshot http://taskwarrior.org/tools/             3rdparty.png
