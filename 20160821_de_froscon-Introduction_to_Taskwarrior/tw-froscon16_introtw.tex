@@ -312,8 +312,8 @@ Build Features
  Build type: release
 
 Configuration
-       File: /export/home/v000175/.taskrc (found), 1465 bytes, mode 100664
-       Data: /export/home/v000175/.task (found), dir, mode 40755
+       File: /home/dirk/.taskrc (found), 1465 bytes, mode 100664
+       Data: /home/dirk/.task (found), dir, mode 40755
     Locking: Enabled
          GC: Enabled
     $EDITOR: vim\end{lstlisting}
@@ -340,6 +340,37 @@ task <ID> stop
 task list
 
 task <ID> done\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choose a theme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{A simple example}
+    Uncomment the theme you want to use from \verb+~/.taskrc+
+    \begin{lstlisting}
+# Color theme (uncomment one to use)
+#include /usr/local/share/doc/task/rc/light-16.theme
+#include /usr/local/share/doc/task/rc/light-256.theme
+#include /usr/local/share/doc/task/rc/dark-16.theme
+#include /usr/local/share/doc/task/rc/dark-256.theme
+#include /usr/local/share/doc/task/rc/dark-red-256.theme
+#include /usr/local/share/doc/task/rc/dark-green-256.theme
+#include /usr/local/share/doc/task/rc/dark-blue-256.theme
+#include /usr/local/share/doc/task/rc/dark-violets-256.theme
+#include /usr/local/share/doc/task/rc/dark-yellow-green.theme
+#include /usr/local/share/doc/task/rc/dark-gray-256.theme
+#include /usr/local/share/doc/task/rc/dark-gray-blue-256.theme
+#include /usr/local/share/doc/task/rc/solarized-dark-256.theme
+include /usr/local/share/doc/task/rc/solarized-light-256.theme
+#include /usr/local/share/doc/task/rc/no-color.theme
+\end{lstlisting}
+
+    \begin{alertblock}{Packaged Taskwarrior}
+        Your package distributor might have different ideas where the theme files should be.
+
+        Check with \verb+find / -name no-color.theme -type f 2>/dev/null+
+    \end{alertblock}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%
@@ -531,6 +562,15 @@ task list
 task 2 modify wait:20160823
 
 task list\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Urgency and next}
+    \vfill
+    Based on your tasks attributes especially -- but not limited to -- the due date, Taskwarrior calculates an urgency value which will be used by some reports to sort the tasks.
+
+    You can increase urgency by adding the \verb=+next= tag.
+
+    This is a very complex topic and goes beyond the scope of this introductory workshop.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Recurrence}
