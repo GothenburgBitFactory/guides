@@ -1,4 +1,5 @@
-\documentclass[t,handout]{beamer}
+% \documentclass[t,handout]{beamer}
+\documentclass[t]{beamer}
 \usepackage[default]{sourcesanspro}
 % \usepackage[default]{sourcecodepro}
 % \usepackage[default]{sourceserifpro}
@@ -176,7 +177,7 @@
 $ cd ~/.task
 $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
-    Now move that file somewhere safe. All software contains bugs, so make regular backups.
+    Now move that file somewhere safe. All software contains bugs, so make regular backups.\pause
 
     \vfill
 	\begin{alertblock}{Attention!}
@@ -186,19 +187,23 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
 \begin{frame}[fragile]\frametitle{Preparation -- Choose A  Machine}
     \vfill
-	A suitable machine to run your Taskserver is one that is always available. If you have such a machine, or have access to a hosted machine, that is ideal.
-
-	If your machine is not continuously available, it can still be a suitable Taskserver because the sync mechanism doesn't require continuous access. When a client cannot sync, it simply accumulates local, unpropagated changes until it can sync.
+	A suitable machine to run your Taskserver is one that is always available. If you have such a machine, or have access to a hosted machine, that is ideal.\pause
+    \vfill
+	{\small If your machine is not continuously available, it can still be a suitable Taskserver because the sync mechanism doesn't require continuous access. When a client cannot sync, it simply accumulates local, unpropagated changes until it can sync.}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Preparation -- Choose A  Port}
 	\vfill
-	By default, Taskserver uses port 53589. You can choose any port you wish, provided it is unused. If you choose a port number that is under 1024, then Taskserver must run as root, which is not recommended.
+	By default, Taskserver uses port 53589. \pause
+
+    You can choose any port you wish, provided it is unused. If you choose a port number that is under 1024, then Taskserver must run as root, which is not recommended.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Preparation -- User/Group}
 	\vfill
-    Ideally you will create a new user and group solely to run the Taskserver. This helps you keep the data secure from other users on the machine, as well as controlling the privileges of Taskserver.
+    Ideally you will create a new user and group solely to run the Taskserver.
+
+    This helps you keep the data secure from other users on the machine, as well as controlling the privileges of Taskserver.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Preparation -- Firewall}
@@ -212,9 +217,28 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
 \begin{frame}[fragile]\frametitle{Installation}
     \vfill
-    Since some Packages from some operating systems do not adhere our file structure and do not document the differences to our documentation we highly recommend compiling the sourcecode for yourself.
+    Since some Packages from some operating systems do not adhere to our file structure and do not document the differences to our documentation we highly recommend compiling the sourcecode for yourself.
 
     Installing Taskserver from a tarball is a matter of downloading the tarball, extracting it, satisfying dependencies and building the server.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Installation -- Overview}
+    \vfill
+    The procedure for getting all up and running is as follows.
+    \begin{enumerate}
+        \item Get the source.
+        \item Compile the source.
+        \item Install the software.
+        \item Create certificates.
+        \item Configure Taskserver.
+        \item Start Taskserver (and make it permanent).
+        \item Create Organisation and User.
+        \item Create a certficate for the user.
+        \item Configure Taskwarrior.
+        \item Initial sync.
+        \item Sync anytime you want.
+        \item Repeat the previous step.
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Dependencies (general)}
@@ -255,7 +279,7 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Download}
-    The next step is to obtain the code. This means getting the Task Server 1.0.0 (or newer) source tarball.  You should check for the latest stable release here:
+    The next step is to obtain the code. This means getting the Task Server 1.1.0 (or newer) source tarball.  You should check for the latest stable release here:
 
     \href{http://taskwarrior.org/download/}{http://taskwarrior.org/download/}
 
@@ -270,7 +294,7 @@ $ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz\end{lstlisting}
     \vfill
     Installing Taskserver from git is a matter of cloning the git repository and building the server.
 
-    The same dependencies as for installation from tarball apply. We have detailed instructions for the following operating operating systems (click on the name to continue), afterwards come back to this slide or continue with cloning the repository:
+    The same dependencies as for installation from tarball apply.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Cloning the repository}
@@ -289,6 +313,7 @@ $ git clone https://git.tasktools.org/scm/tm/taskd.git taskd.git
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (1)}
+    \vfill
     The unstable development version is at no point guaranteed to work or even compile. The only time it does stabilize is right at the end of the development cycle, and in that case, you should wait until the release, so you are running a supported version.
 
     The stable version is always merged to the \verb+master+ branch, which is the default branch, so ordinarily nothing needs to be done. To build an unstable branch, first determine which branch by looking at the available branches:
@@ -305,6 +330,7 @@ $ git branch -a
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (2)}
+    \vfill
     The convention we use is that \verb+master+ represents the stable release.  The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
 
     Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this:
@@ -322,18 +348,19 @@ Switched to a new branch '1.2.0'\end{lstlisting}
     \begin{lstlisting}
 $ tar xzf taskd-latest.tar.gz
 $ cd taskd-latest
-$ cmake -DCMAKE_BUILD_TYPE=release .
+$ cmake -DCMAKE_BUILD_TYPE=release . # do you see the dot "."?
 ...
 $ make
 ...\end{lstlisting}
+
+    Hint: Check the number of cores in your system with \verb=lscpu= and use this number ("4" for my system) to export a variable to let \verb=make= use them: \verb+export MAKEFLAGS=-j 4+
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build Again}
     \vfill
-    If you ever want to build the software again, do some cleanup.
+    If you ever want to build the software again (for instance development releases), do some cleanup beforehand.
 
     \begin{lstlisting}
-$ cd taskd-latest
 $ make clean
 ...
 $ rm CMakeCache.txt
@@ -362,6 +389,7 @@ $ cd ..\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- make install}
+    \vfill
     Now install Taskserver.  This copies files into the right place, and installs man pages.
 
     \begin{lstlisting}
@@ -423,8 +451,8 @@ $ mkdir -p $TASKDDATA\end{lstlisting}
 	\end{alertblock}
 \end{frame}
 
-
 \begin{frame}[fragile]\frametitle{Server Configuration -- Initialization}
+    \vfill
     Now we let the server initialize that directory:
 
     \begin{lstlisting}
@@ -432,8 +460,11 @@ $ taskd init
 You must specify the 'server' variable, for example:
 taskd config server localhost:53589
 
-Created /var/taskd\end{lstlisting}
+Created /var/taskd\end{lstlisting}\pause
 
+    \begin{alertblock}{Servername}
+        The server will \textbf{never} be reachable from the outside if you bind it to localhost. Choose the IP address that will be used for synchronisation.
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (1)}
@@ -451,17 +482,20 @@ CN=localhost
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (2)}
-    The value of CN (Common Name) is important.
+    \vfill
+    The value of \textbf{CN (Common Name)} is important.
 
-    It is this value against which Taskwarrior validates the servername, so use a value similar to \verb+ack.tasktools.org+, which is what we use, but of course don't expect that to work for you. If you do not change this value, the only option for the client is to skip some or all certificate validation, \textbf{\emph{which is a bad idea}}.
+    It is this value against which Taskwarrior validates the \textbf{servername}, so use a value similar to \verb+ack.tasktools.org+, which is what we use, but of course don't expect that to work for you. If you do not change this value, the only option for the client is to skip some or all certificate validation, \textbf{\emph{which is a bad idea}}.
+\end{frame}
 
+\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (3)}
+    \vfill
     Go to your \verb+taskd+ directory, which depends on which installation method you chose. Here is is assumed that you installed from the source tarball.
 
     \begin{lstlisting}
 $ cd ~/taskd-1.1.0/pki
 $ ./generate
 ...
-
 $ cp client.cert.pem $TASKDDATA
 $ cp client.key.pem  $TASKDDATA
 $ cp server.cert.pem $TASKDDATA
@@ -470,15 +504,15 @@ $ cp server.crl.pem  $TASKDDATA
 $ cp ca.cert.pem     $TASKDDATA\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (3)}
-
+\begin{frame}[fragile]\frametitle{Server Configuration -- Keys \& Certificates (4)}
+    \vfill
     \begin{lstlisting}
-$ taskd config --force client.cert $TASKDDATA/client.cert.pem
-$ taskd config --force client.key $TASKDDATA/client.key.pem
+$ taskd config --force ca.cert     $TASKDDATA/ca.cert.pem
 $ taskd config --force server.cert $TASKDDATA/server.cert.pem
-$ taskd config --force server.key $TASKDDATA/server.key.pem
-$ taskd config --force server.crl $TASKDDATA/server.crl.pem
-$ taskd config --force ca.cert $TASKDDATA/ca.cert.pem\end{lstlisting}
+$ taskd config --force server.key  $TASKDDATA/server.key.pem
+$ taskd config --force server.crl  $TASKDDATA/server.crl.pem
+$ taskd config --force client.cert $TASKDDATA/client.cert.pem
+$ taskd config --force client.key  $TASKDDATA/client.key.pem\end{lstlisting}
 
     There are three classes of key/cert here. There is the CA (Certificate Authority) cert, which has cert signing capabilities and is used to sign and verify the other certs.
 
@@ -492,9 +526,9 @@ $ taskd config --force ca.cert $TASKDDATA/ca.cert.pem\end{lstlisting}
 
     \begin{lstlisting}
 $ cd $TASKDDATA/..
-$ taskd config --force log $PWD/taskd.log
+$ taskd config --force log      $PWD/taskd.log
 $ taskd config --force pid.file $PWD/taskd.pid
-$ taskd config --force server localhost:53589\end{lstlisting}
+$ taskd config --force server   localhost:53589\end{lstlisting}
 
     Note that we have chosen \verb+localhost:53589+, but this choice has consequences. The name \verb+localhost+ is not network visible, which limits the server to only serving clients on the same machine. Use your full machine name for proper network addressability.
 
@@ -512,6 +546,7 @@ $ man taskdrc\end{lstlisting}
 %%%
 
 \begin{frame}[fragile]\frametitle{Server -- Control}
+    \vfill
     You can now to launch the server:
 
     \begin{lstlisting}
@@ -550,6 +585,7 @@ $ taskd server --data $TASKDDATA
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server -- systemd unit file}
+    \vfill
     You can start Taskserver using a systemd-unitfile like the following (please add the contents of \verb+$TASKDDATA+ not the variable itself). Running the Taskserver as root is not recommended, please add an appropriate user and group to run the daemon with (\verb+$TASKDUSER+ and \verb+$TASKDGROUP+).
 
     \begin{lstlisting}
@@ -574,12 +610,13 @@ WantedBy=multi-user.target\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server -- Control with systemd}
+    \vfill
     Afterwards prepare systemd to recognise the file.
 
     \begin{lstlisting}
 $ cp taskd.service /etc/systemd/system
 $ systemctl daemon-reload
-$ systemctl start taskd.service
+$ systemctl start  taskd.service
 $ systemctl status taskd.service\end{lstlisting}
 
     In case everything is running fine, enable the script to start Taskserver on every boot.
@@ -608,6 +645,7 @@ Created organization 'Public'\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Create User}
+    \vfill
     Now we add a new user, named 'First Last' as an example.  You can use any name you wish, and if it contains spaces, quote the name as shown.
 
     \begin{lstlisting}
@@ -619,7 +657,6 @@ Created user 'First Last' for organization 'Public'\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Create Certificate and Key}
-
     Go to your \verb+taskd+ directory, which depends on which installation method you chose. Here it is assumed that you installed from the source tarball.
 
     \begin{lstlisting}
@@ -649,27 +686,27 @@ $ ./generate.client first_last
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Configure Taskwarrior -- Certificates}
-
     If you have configured Taskserver and created a user account (or better yet, someone created an account for you) then you now have details needed in the configuration of your Taskwarrior client. You should have the files and information mentioned on the last slide.
 
     Now we feed this information to Taskwarrior.
 
-    Copy the Cert, Key and CA to your ~/.task directory.  The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.  Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
+    Copy the Cert, Key and CA to your \verb+~/.task+ directory.  The reason we are copying the CA cert is because this is a self-signed cert, and we need the CA to validate against.  Alternately we could force Taskwarrior to trust all certs, but that is not recommended.
 
     \begin{lstlisting}
 $ cp first_last.cert.pem ~/.task
 $ cp first_last.key.pem  ~/.task
-$ cp ca.cert.pem        ~/.task\end{lstlisting}
+$ cp ca.cert.pem         ~/.task\end{lstlisting}
 
     Now we need to make Taskwarrior aware of these certs:
 
     \begin{lstlisting}
-$ task config taskd.certificate  -- ~/.task/first_last.cert.pem
+$ task config taskd.certificate -- ~/.task/first_last.cert.pem
 $ task config taskd.key         -- ~/.task/first_last.key.pem
 $ task config taskd.ca          -- ~/.task/ca.cert.pem\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Configure Taskwarrior -- Certificates}
+    \vfill
     Now set the server info:
     \begin{lstlisting}
 $ task config taskd.server      -- host.domain:53589\end{lstlisting}
@@ -681,12 +718,17 @@ $ task config taskd.credentials -- Public/First Last/cf31f287-ee9e-43a8-843e-e8b
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Taskwarrior -- Trust Level}
+    \vfill
     \begin{alertblock}{Trust}
         It is possible to configure Taskwarrior's trust level, which determines how the server certificate is treated.
 
-        For Taskwarrior 2.3.0 you can specify \verb+taskd.trust=yes+ in order to skip certificate validation. \textbf{\emph{This is a bad idea.}} The default is \verb+taskd.trust=no+, which does not trust the server certificate, which is more secure.
+        For Taskwarrior from 2.4.0:
 
-        For Taskwarrior 2.4.0 you must specify \verb+taskd.trust=ignore hostname+ in order to skip certificate hostname validation. \textbf{\emph{This is a bad idea}}. You can also specify \verb+taskd.trust=allow all+ to perform no validation. \textbf{\emph{This is a worse idea}}. The default value is \verb+taskd.trust=strict+ which performs the most stringent verification, and is more secure.
+         You have to specify \verb+taskd.trust=ignore hostname+ in order to skip certificate hostname validation. \textbf{\emph{This is a bad idea}}.
+
+         You can also specify \verb+taskd.trust=allow all+ to perform no validation. \textbf{\emph{This is a worse idea}}.
+
+         The default value is \verb+taskd.trust=strict+ which performs the most stringent verification, and is more secure.
     \end{alertblock}
 
     Your Taskwarrior is now ready to sync.
@@ -748,7 +790,18 @@ Syncing with <server>:<port>
 
 Sync successful.  1 changes uploaded.\end{lstlisting}
 
-    If you do not respond with a sync, then local changes accumulate unseen by other clients. When you do eventually sync, the data will be properly propagated, so it is a question of whether you \emph{need} current data on the server. It is perfectly fine to allow \emph{weeks<} to go by without a sync.
+    If you do not respond with a sync, then local changes accumulate unseen by other clients. When you do eventually sync, the data will be properly propagated, so it is a question of whether you \emph{need} current data on the server. It is perfectly fine to allow \emph{weeks} to go by without a sync.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Hint}
+    \vfill
+    Many shells allow you to run commands once you leave them.
+
+    \begin{lstlisting}
+$ cat ~/.bash_logout
+task sync\end{lstlisting}
+
+    I don't use zsh, but it should work there as well with \verb+$ZDOTDIR/.zlogout+ (as a zsh-user you might know the correct directory).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -756,14 +809,14 @@ Sync successful.  1 changes uploaded.\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Troubleshooting Sync}
-  Here is a list of problems you may encounter, with the most common
-  ones listed first.
+    \vfill
+    Here is a list of problems you may encounter, with the most common ones listed first.
 
-  The single most common problem has been that the Taskserver Setup Instructions (this guide) were not properly followed.  Please review the steps you took.
+    The single most common problem has been that the Taskserver Setup Instructions were not properly followed.  Please review the steps you took.
 
-  It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
+    It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
 
-  If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
+    If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Problems (1)}
