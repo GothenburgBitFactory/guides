@@ -26,5 +26,5 @@ get_screenshot http://flod.us/                           flod-us.png
 get_screenshot https://torp.tasktools.org/               torp-tasktools-org.png
 get_screenshot https://botbot.me/freenode/taskwarrior/   botbot-me-taskwarrior.png
 get_screenshot https://twitter.com/taskwarrior           twitter-taskwarrior.png
-get_screenshot http://taskwarrior.org/docs/timewarrior/index.html timewarrior.png
+get_screenshot http://timewarrior.net/                   timewarrior.png
 get_screenshot http://taskwarrior.org/tools/             3rdparty.png
