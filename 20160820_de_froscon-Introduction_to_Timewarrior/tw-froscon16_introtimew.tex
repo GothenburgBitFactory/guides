@@ -142,6 +142,7 @@
 \parskip1ex
 
 \begin{frame}[fragile]\frametitle{Dirk Deimeke (that's me)}
+    \vfill
     \begin{itemize}
         \item Born 1968 in Wanne-Eickel
         \item Linux since 1996
@@ -153,7 +154,9 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Today is the day!}
-    Timewarrior
+    \begin{center}
+        \href{http://timewarrior.net/}{\includegraphics[width=10cm,height=7.5cm]{timewarrior.png}}
+    \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -161,6 +164,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Prerequisites}
+    \vfill
     All you need to compile is
     \begin{itemize}
         \item \verb+CMake+ (2.8 or newer)
@@ -170,9 +174,25 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Get the source}
+    \vfill
+    \begin{lstlisting}
+$ curl -O https://taskwarrior.org/download/timew-1.0.0.tar.gz
+
+$ git clone --recursive https://ddeimeke@git.tasktools.org/scm/tm/timew.git timew.git
+
+$ # Later
+$ git pull --recurse-submodules=yes
+$ git submodule update\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation from source}
+    \vfill
+    \begin{lstlisting}
+$ cmake .
+
+$ make
+
+$ make install\end{lstlisting}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
