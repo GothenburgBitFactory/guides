@@ -1,5 +1,5 @@
-% \documentclass[t,handout]{beamer}
-\documentclass[t]{beamer}
+\documentclass[t,handout]{beamer}
+% \documentclass[t]{beamer}
 \usepackage[default]{sourcesanspro}
 % \usepackage[default]{sourcecodepro}
 % \usepackage[default]{sourceserifpro}
@@ -264,9 +264,9 @@ $ tar czf task-backup-$(date +'%Y%m%d').tar.gz *\end{lstlisting}
 
     \begin{description}
         \item[CentOS, Fedora, openSUSE] \hfill \\
-            gnutls-devel libuuid-devel cmake clang or gcc-c++
+            gnutls-devel libuuid-devel cmake gcc-c++ \# or clang
         \item[Debian, Ubuntu] \hfill \\
-            libgnutls28-dev uuid-dev cmake clang or g++
+            libgnutls28-dev uuid-dev cmake g++ \# or clang
         \item[Mac OS X] \hfill \\
             Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
 
@@ -657,7 +657,7 @@ Created user 'First Last' for organization 'Public'\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Create Certificate and Key}
-    Go to your \verb+taskd+ directory, which depends on which installation method you chose. Here it is assumed that you installed from the source tarball.
+    Go to your \verb+taskd+ source directory, which depends on which installation method you chose. Here it is assumed that you installed from the source tarball. Most probably you need \verb+gnutls-utils+ installed.
 
     \begin{lstlisting}
 $ cd ~/taskd-1.1.0/pki
