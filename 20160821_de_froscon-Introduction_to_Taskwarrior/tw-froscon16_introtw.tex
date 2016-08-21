@@ -707,7 +707,9 @@ task +bern list
     \vfill
     \begin{lstlisting}
 task long
+
 task 4 modify pri:H # can be either (H)igh, (M)edium or (L)ow
+
 task long
 \end{lstlisting}
 \end{frame}
@@ -716,8 +718,11 @@ task long
     \vfill
     \begin{lstlisting}
 task 3 annotate "Do not forget your head"
+
 task 4 annotate "Use wifes account"
+
 task list
+
 task 4 denotate "Use wifes account"
 \end{lstlisting}
 \end{frame}
@@ -730,9 +735,13 @@ task 4 denotate "Use wifes account"
     \vfill
     \begin{lstlisting}
 task add "Send letter to Fritz"
+
 task add "Write letter"
+
 task 7 modify depends:8
+
 task blocked
+
 task unblocked
 \end{lstlisting}
 \end{frame}
@@ -741,6 +750,7 @@ task unblocked
     \vfill
     \begin{lstlisting}
 task 7 done
+
 task list
 \end{lstlisting}
 \end{frame}
@@ -748,14 +758,14 @@ task list
 \begin{frame}[fragile]\frametitle{Undo}
     \vfill
     \begin{lstlisting}
-task undo
-\end{lstlisting}
+task undo\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Dependency, part 3}
     \vfill
     \begin{lstlisting}
 task 7,8 done
+
 task blocked
 \end{lstlisting}
 \end{frame}
@@ -826,7 +836,9 @@ task ghistory.monthly
 task history.monthly
 
 task ls
+
 task minimal
+
 task summary\end{lstlisting}
 \end{frame}
 
