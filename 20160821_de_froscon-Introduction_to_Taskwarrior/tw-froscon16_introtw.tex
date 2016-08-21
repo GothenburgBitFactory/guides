@@ -1,5 +1,5 @@
-% \documentclass[t,handout]{beamer}
-\documentclass[t]{beamer}
+\documentclass[t,handout]{beamer}
+% \documentclass[t]{beamer}
 \usepackage[default]{sourcesanspro}
 % \usepackage[default]{sourcecodepro}
 % \usepackage[default]{sourceserifpro}
@@ -245,9 +245,9 @@ Taskwarrior \pause
 
     \begin{description}
         \item[CentOS, Fedora, openSUSE] \hfill \\
-            gnutls-devel libuuid-devel cmake clang or gcc-c++
+            gnutls-devel libuuid-devel cmake gcc-c++ \# or clang
         \item[Debian, Ubuntu] \hfill \\
-            libgnutls28-dev uuid-dev cmake clang or g++
+            libgnutls28-dev uuid-dev cmake g++ \# or clang
         \item[Mac OS X] \hfill \\
             Install Xcode from Apple, via the AppStore, launch it, and select from some menu that you want the command line tools.
 
@@ -274,7 +274,7 @@ git clone --recursive https://git.tasktools.org/scm/tm/task.git task.git
 cd task.git
 
 # Updates
-git pull --recurse-submodules=yes
+git pull --all --recurse-submodules=yes
 git submodule update\end{lstlisting}
 \end{frame}
 
@@ -676,6 +676,7 @@ task cale\end{lstlisting}
 task 3 modify pro:froscon
 task 7 modify pro:froscon.workshop
 task 4 modify pro:private
+
 task list
 \end{lstlisting}
 \end{frame}
@@ -684,7 +685,9 @@ task list
     \vfill
     \begin{lstlisting}
 task projects
+
 task pro:froscon ls
+
 task 7 done
 \end{lstlisting}
 \end{frame}
