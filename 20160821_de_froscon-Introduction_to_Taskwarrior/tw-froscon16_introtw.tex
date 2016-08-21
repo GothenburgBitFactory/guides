@@ -1,5 +1,5 @@
-\documentclass[t,handout]{beamer}
-% \documentclass[t]{beamer}
+% \documentclass[t,handout]{beamer}
+\documentclass[t]{beamer}
 \usepackage[default]{sourcesanspro}
 % \usepackage[default]{sourcecodepro}
 % \usepackage[default]{sourceserifpro}
@@ -166,13 +166,13 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Reasons for Taskwarrior}
-Taskwarrior
+Taskwarrior \pause
 \begin{itemize}
-	\item is easy to learn.
-	\item grows along with the work.
-	\item is unbelievably powerful.
-	\item is very fast.
-	\item is easily extensible.
+	\item is easy to learn. \pause
+	\item grows along with the work. \pause
+	\item is unbelievably powerful. \pause
+	\item is very fast. \pause
+	\item is easily extensible. \pause
 	\item is platform independent:
 	\begin{itemize}
 		\item Most flavours of Unix and Linux, including Mac OS X
@@ -180,9 +180,9 @@ Taskwarrior
             Other Windows versions with Cygwin (unsupported, but working)
 		\item Android with Termux
         \item Third-Party Apps (Android-Client, GUI based on NodeJS, \ldots)
-	\end{itemize}
-	\item is actively developed.
-	\item can be influenced by users (feature requests).
+	\end{itemize} \pause
+	\item is actively developed. \pause
+	\item can be influenced by users (feature requests). \pause
 	\item has excellent and very friendly support.
 \end{itemize}
 \end{frame}
@@ -259,6 +259,7 @@ Taskwarrior
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Get the source}
+    \vfill
     Either
 
     \begin{lstlisting}
@@ -282,7 +283,7 @@ git submodule update\end{lstlisting}
     Three easy steps \ldots hopefully! \pause
     \begin{enumerate}
         \item \verb=cmake .= (\textbf{not} \verb=./configure=!) or \\
-              \verb+cmake -DCMAKE_INSTALL_PREFIX=/home/user/task+ \pause
+              \verb+cmake -DCMAKE_INSTALL_PREFIX=/home/user/task .+ \pause
         \item \verb=make= \pause
         \item \verb=sudo make install=
     \end{enumerate}
