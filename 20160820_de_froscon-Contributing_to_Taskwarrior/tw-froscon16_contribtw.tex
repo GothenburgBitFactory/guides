@@ -238,6 +238,7 @@ $ sudo apt-get install make\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Get the Code}
+    \vfill
     Now you have the tools, next you need the code. This involves cloning the repository using git and looking at the development branch:
     \begin{lstlisting}
 $ git clone https://git.tasktools.org/scm/tm/task.git task.git
@@ -308,6 +309,7 @@ Scanning dependencies of target columns
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Build and run the Test Suite}
+    \vfill
     \begin{lstlisting}
 $ cd test
 $ make
@@ -349,7 +351,9 @@ $ git commit -m 'Docs: corrected typo in the main man page'
 [2.6.0 ddbb07e] Docs: corrected typo in the main man page
  1 file changed, 1 insertion(+)\end{lstlisting}
 
-Notice how the commit message looks like this: \verb=Category: Brief description=, which is how the commit messages should look.
+Notice how the commit message looks like this: \\
+\verb=Category: Brief description= \\
+which is how the commit messages should look.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Make a Patch}
@@ -378,6 +382,7 @@ $ git format-patch HEAD^
 %%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Coding Style -- Golden Rule}
+    \vfill
     The coding style used for the Taskwarrior, Taskserver, and other codebases is deliberately kept simple and a little vague. This is because there are many languages involved (C++, C, Python, Perl, sh, bash, HTML, troff and more), and specifying those would be a major effort that detracts from the main focus which is improving the software.
 
     Instead, the general guideline is simply this:
@@ -486,7 +491,7 @@ $ git format-patch HEAD^
 \section{Job offerings}
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]\frametitle{Yes, we are seeking}
+\begin{frame}[fragile]\frametitle{Job offers -- Yes, we are seeking}
     \vfill
     Just for the glory, we are searching people taking over responsibilities and support us for a longer period of time.
 
@@ -641,7 +646,7 @@ $ git format-patch HEAD^
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Misplaced Concerns About Our Infrastructure}
+\begin{frame}[fragile]\frametitle{Misplaced Concerns About Our Infrastructure (2)}
     Why all the Atlassian stuff like Jira, Stash, Confluence, Bamboo?
     \begin{itemize}
         \item Jira is great. Atlassian is very generous with open source licences.
@@ -727,6 +732,7 @@ $ git format-patch HEAD^
 \fi
 
 \begin{frame}[fragile]\frametitle{My Idea Is Wonderful}
+    \vfill
     Why won't you support my syntactic sugar idea?
     \begin{itemize}
         \item Many suggestions for enhancements are just keystroke aliases for existing functionality, that can be achieved using shell functions and aliases.
@@ -768,6 +774,7 @@ $ git format-patch HEAD^
 \fi
 
 \begin{frame}[fragile]\frametitle{Design Choices}
+    \vfill
 \iffalse
     Why can't I generate new tasks in my \verb=on-modify= hook script?
     \begin{itemize}
@@ -777,7 +784,7 @@ $ git format-patch HEAD^
 
     Why doesn't Taskwarrior just use DropBox or Git for syncing?
     \begin{itemize}
-        \item Neither DropBox not Git merges tasks, you just think they do. Taskserver syncs and merges tasks.
+        \item Neither DropBox nor Git merges tasks, you just think they do. Taskserver syncs and merges tasks.
     \end{itemize}
 \end{frame}
 
