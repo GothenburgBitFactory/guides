@@ -154,8 +154,9 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Today is the day!}
+    \vfill
     \begin{center}
-        \href{http://timewarrior.net/}{\includegraphics[width=10cm,height=7.5cm]{timewarrior.png}}
+        \href{http://timewarrior.net/}{\includegraphics[height=7.5cm]{timewarrior.png}}
     \end{center}
 \end{frame}
 
@@ -178,7 +179,7 @@
     \begin{lstlisting}
 $ curl -O https://taskwarrior.org/download/timew-1.0.0.tar.gz
 
-$ git clone --recursive https://ddeimeke@git.tasktools.org/scm/tm/timew.git timew.git
+$ git clone --recursive https://git.tasktools.org/scm/tm/timew.git timew.git
 
 $ # Later
 $ git pull --recurse-submodules=yes
@@ -192,7 +193,7 @@ $ cmake .
 
 $ make
 
-$ make install\end{lstlisting}
+$ sudo make install\end{lstlisting}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -202,6 +203,7 @@ $ make install\end{lstlisting}
 \subsection{Setup}
 
 \begin{frame}[fragile]\frametitle{Setup}
+    \vfill
     As a new Timewarrior user, there is no configuration needed. Once you have installed the software, the first time you run it, a data/configuration directory is created for you if necessary, and if you allow this action.
 
     \includegraphics[width=12cm]{images/tutorial1.png}
@@ -210,6 +212,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Data directory}
+    \vfill
     \includegraphics[width=12cm]{images/tutorial2.png}
 
     By default a \verb=.timewarrior= directory is created in your home directory, and contains a sub-directory for data, and another for extensions. There is also an empty configuration file created.
@@ -220,6 +223,7 @@ $ make install\end{lstlisting}
 \subsection{Stopwatch}
 
 \begin{frame}[fragile]\frametitle{Stopwatch}
+    \vfill
     The most basic tracking can be done by using the stopwatch features. Just like a stopwatch, you start and stop a clock, and you can see the elapsed time. Start the clock when you begin work work, and stop it when you are done. First let's see if the clock is running:
 
     \includegraphics[width=12cm]{images/tutorial3.png}
@@ -230,6 +234,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Stopwatch (2)}
+    \vfill
     The clock is now running. In reality there is no clock and all that happened was that the start time was recorded, so don't be concerned about using system resources, as none are being used. Now when we check, we see a summary of the time recorded so far:
 
     \includegraphics[width=12cm]{images/tutorial5.png}
@@ -240,6 +245,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Stopwatch (3)}
+    \vfill
     The summary report shows time that was tracked today by default.
 
     There is a \verb=continue= command that re-starts the previous tracking, and is useful if you stopped the clock during lunch, or overnight.
@@ -250,12 +256,20 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Stopwatch (4)}
-    It is important to note that it is possible, and quite likely, that you will start the clock and leave it running by mistake. This is in fact one of the most annoying problems with any time tracking solution that relies on human interaction. While some tools will detect inactivity and stop the clock for you, Timewarrior does not. Instead it deals with this problem in two ways, first by making it easy to correct tracked time, and second by way of exclusions, which we will cover later.
+    \vfill
+    It is important to note that it is possible, and quite likely, that you will start the clock and leave it running by mistake.
+
+    This is in fact one of the most annoying problems with any time tracking solution that relies on human interaction.
+
+    While some tools will detect inactivity and stop the clock for you, Timewarrior does not.
+
+    Instead it deals with this problem in two ways, first by making it easy to correct tracked time, and second by way of exclusions, which we will cover later.
 \end{frame}
 
 \subsection{Tags}
 
 \begin{frame}[fragile]\frametitle{Tags}
+    \vfill
     The examples so far did not use tags. Tags are optional, but when you do make use of tags, you start tracking time spent on \textit{different} activities.
 
     \includegraphics[width=12cm]{images/tutorial8.png}
@@ -264,6 +278,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Tags (2)}
+    \vfill
     \includegraphics[width=12cm]{images/tutorial9.png}
 
     You can see that using tags is useful, but optional. Once you are using tags, you can use them to filter reports, such as the \verb=summary= report.
@@ -272,6 +287,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Tags (3)}
+    \vfill
     There is a \verb=tags= command, which will show you all the tags you have used.
 
     \includegraphics[width=12cm]{images/tutorial11.png}
@@ -286,6 +302,7 @@ $ make install\end{lstlisting}
 \subsection{Help}
 
 \begin{frame}[fragile]\frametitle{Help command}
+    \vfill
     Although we have just begun, it is important to mention the built-in help system. Let's look at the help for the \verb=continue= command.
 
     \includegraphics[width=12cm]{images/tutorial13.png}
@@ -294,6 +311,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Man page}
+    \vfill
     In addition to the built-in help, there is a man page which contains the same information plus a lot more.
 
     \includegraphics[width=12cm]{images/tutorial14.png}
@@ -302,6 +320,7 @@ $ make install\end{lstlisting}
 \subsection{Historical}
 
 \begin{frame}[fragile]\frametitle{Historical}
+    \vfill
     We have seen how to use the stopwatch feature, and combine it with tags. Additionally we can record time \textit{ex post facto}. So to track time I spent earlier in the day (but forgot to record), I use the \verb=track= command.
 
     \includegraphics[width=12cm]{images/tutorial15.png}
@@ -311,19 +330,22 @@ $ make install\end{lstlisting}
     This is the opposite of Taskwarrior, which always looks forward, because tasks are generally going to be completed in the future.
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Historical(2)}
+\begin{frame}[fragile]\frametitle{Historical (2)}
+    \vfill
     There are other ways to specify time in the past, for example:
 
     \includegraphics[width=12cm]{images/tutorial16.png}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Historical(3)}
+\begin{frame}[fragile]\frametitle{Historical (3)}
+    \vfill
     And there are many more, which can be seen in the help system.
 
     \includegraphics[width=12cm]{images/tutorial17.png}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Historical(4)}
+\begin{frame}[fragile]\frametitle{Historical (4)}
+    \vfill
     In addition to time, you can specify date and time, so one equivalent command would use an ISO datetime.
 
     \includegraphics[width=12cm]{images/tutorial18.png}
@@ -342,6 +364,7 @@ $ make install\end{lstlisting}
 \subsection{Hints}
 
 \begin{frame}[fragile]\frametitle{Hints}
+    \vfill
     Many commands support hints, which are words that start with a \verb=:= and are convenient representations to save time. Here is the \verb=:quiet= hint, being used to suppress all feedback:
 
     \includegraphics[width=12cm]{images/tutorial21.png}
@@ -354,6 +377,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Hints (2)}
+    \vfill
     The help system lists all the supported hints.
 
     \includegraphics[width=12cm]{images/tutorial23.png}
@@ -362,6 +386,7 @@ $ make install\end{lstlisting}
 \subsection{Charts and Reports}
 
 \begin{frame}[fragile]\frametitle{Charts}
+    \vfill
     Timewarrior has a built-in chart that can show blocks of time by day. This is a text-based chart so it is not high resolution and has no drill-down capabilities. (Incidentally such a chart would be possible using the extension API, but by default, Timewarrior just has simple charting).
 
     There are three charts, which are really just three variations of the same chart, all controlled by configuration. We'll take a look at these charts, but first we need some sample data to look at.  Let us first track a couple of days of data, to illustrate how the charts work.
@@ -370,6 +395,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Charts (2)}
+    \vfill
     We have tracked six separate intervals, and the summary report shows just that.
 
     \includegraphics[width=12cm]{images/tutorial25.png}
@@ -380,6 +406,7 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Charts (3)}
+    \vfill
     Like the \verb=summary= report, the \verb=day= report shows data for today by default. You can make it show multiple days like this:
 
     \includegraphics[width=12cm]{images/tutorial27.png}
@@ -390,12 +417,14 @@ $ make install\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Charts (4)}
+    \vfill
     There is also a \verb=month= report that looks the same, but is longer.
 
     Again, the only difference between these reports is configuration, and you can override any of this to customize these charts. See \verb=man timew= for full configuration details.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Reports}
+    \vfill
     We have seen the \verb=summary= and \verb=tags= reports, but there is another useful report that shows the untracked time in the day.
 
     \includegraphics[width=12cm]{images/tutorial29.png}
@@ -408,6 +437,7 @@ $ make install\end{lstlisting}
 \subsection{Configuration}
 
 \begin{frame}[fragile]\frametitle{Themes}
+    \vfill
     Timewarrior has color themes that are mostly used by the charts to color the different parts of the display. To use a color theme, add this line to your \verb=~/.timewarrior/timewarrior.cfg= file with a text editor:
 
     \begin{lstlisting}
@@ -422,6 +452,7 @@ import /usr/local/share/doc/timew/doc/themes/dark_green.theme\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Holidays}
+    \vfill
     Timewarrior can also make use of Holiday files. In the same way that a color theme was imported into the configuration file, a holiday file can also be used:
 
     \begin{lstlisting}
@@ -435,6 +466,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Exclusions}
+    \vfill
     Exclusions are a very powerful Timewarrior feature, and make automatic time tracking possible. An exclusion -- much like a holiday -- represents a block of time where you do not expect to work.
 
     The simplest exclusion is a day off work. Suppose you took a day off, on August 4th. You can define this day as an exclusion.
@@ -443,12 +475,14 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Exclusions (2)}
+    \vfill
     The date must be formatted in this precise way. Note the use of the \verb=:yes= hint to override confirmation. Now we see on the \verb=week= report that the day is marked as non-working.
 
     \includegraphics[width=12cm]{images/tutorial31.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Exclusions (3)}
+    \vfill
     Similarly, if you worked on a holiday, you can define that day as a work day, and therefore available for automatic tracking.
 
     \includegraphics[width=12cm]{images/tutorial32.png}
@@ -457,12 +491,14 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Exclusions (4)}
+    \vfill
     In addition to whole days working or not working, you can define exclusions for each day of the week to represent your work schedule. Suppose you work a regular weekly schedule, that starts at 8:30am, Monday to Friday, with weekends off. You take a 45-minute lunch break each day, and leave work at 5:30pm. On Fridays you leave early.
 
     \includegraphics[width=12cm]{images/tutorial33.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Exclusions (5)}
+    \vfill
     You can view this in the \verb=week= report, and here we will use the \verb=:blank= hint to remove all the tracked data from the report, leaving only the exclusions.
 
     \includegraphics[width=12cm]{images/tutorial34.png}
@@ -471,12 +507,14 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Automatic Tracking}
+    \vfill
     Once you have defined exclusions for your workweek, the tracked time will conform to the set boundaries. Suppose this is our work week:
 
     \includegraphics[width=12cm]{images/tutorial35.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Automatic Tracking (2)}
+    \vfill
     There is no tracked time, but there are 40:15:00 hours available to be tracked.  If we worked the whole week on our \textit{Research} project, we can track all that time with one command:
 
     \includegraphics[width=12cm]{images/tutorial36.png}
@@ -491,12 +529,14 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \section{Corrections}
 
 \begin{frame}[fragile]\frametitle{Corrections}
+    \vfill
     With or without the use of exclusions, there is always the need to make corrections to the tracked time. As mentioned earlier, it is quite likely that the clock would be left running by mistake, or that the tracking was started or stopped at the wrong time. We will create some incorrect time tracking, and then correct it.
 
     \includegraphics[width=12cm]{images/tutorial37.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (2)}
+    \vfill
     I actually started work at 8:30am, but forgot to start the clock at the beginning. I also did not take a break at 10am, I again forgot to start the clock. Then I was working on projectC since about 11am, but didn't record it properly.
 
     These are typical mistakes, and are easy to fix, as there are several commands for making adjustments like this.
@@ -507,12 +547,14 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (3)}
+    \vfill
     Notice how the intervals now have IDs: \verb=@3= for the oldest interval. Let's make some corrections:
 
     \includegraphics[width=12cm]{images/tutorial39.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (4)}
+    \vfill
     There is still a problem, interval \verb=@2= needs to occupy the slot between 10am and 11am. There is a \verb=:fill= hint that does this for us.
 
     \includegraphics[width=12cm]{images/tutorial40.png}
@@ -521,24 +563,28 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (5)}
+    \vfill
     Finally, I actually stopped for lunch at 12:30 for 45 minutes:
 
     \includegraphics[width=12cm]{images/tutorial41.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (6)}
+    \vfill
     Let's keep going, even though this example has already exceeded credibility, to demonstrate more. I need to change that \textit{projectB} interval to use \textit{projectB1} and \textit{projectB2} tags, and divide the time between the two. We will split the interval, the re-tag it.
 
     \includegraphics[width=12cm]{images/tutorial42a.png}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (7)}
+    \vfill
     \includegraphics[width=12cm]{images/tutorial42b.png}
 
     Notice how the \verb=split= command just divided \verb=@3= into two even-sized intervals. But we're still not done - I brought lunch to work and ate at my desk while working so let's eliminate that lunch break.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Corrections (8)}
+    \vfill
     \includegraphics[width=12cm]{images/tutorial43.png}
 
     Now whether this report now accurately represents your day, or whether it is a fiction you need to report (no judgement here), Timewarrior supports it, but let's stop - the example can't take much more.
@@ -547,6 +593,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Extensions}
+    \vfill
     Timewarrior reports are not sophisticated, they are minimally functional and focus on simply displaying the data. What if you need a report broken down by tags, with weekly subtotals?
 
     Timewarrior supports extension reports, via the \href{https://taskwarrior.orgdocs/timewarrior/api.html}{extension API}. This is mechanism that allows you to write a report using any language you choose. Don't like the way the summary report shows the data? Write your own. Better yet, share the result, and we'll build a list of 3rd party reports.
@@ -559,6 +606,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Extensions (2)}
+    \vfill
     Note that this is a Python script, and to use this you'll need to have Python installed.
 
     To install and use this extension, or any other, simply copy it to your \verb=~/.timewarrior/extensions= directory and make sure it is executable.
@@ -567,6 +615,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Caution}
+    \vfill
     \textbf{Extensions are dangerous things}.
 
     As with any downloaded program, be careful -- you are giving execute permission to software that may harm you.
@@ -581,6 +630,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Caution (2)}
+    \vfill
     Additionally, the \verb=diagnostics= command will report the presence and status of this extension.
 
     Once an extension is ready to use, it is used in the same way that the \verb=summary= report is used, with date range and/or tag filtering. The command you use is compared to the name of the script, and if unique, is a match. All of these commands are equivalent:
@@ -589,6 +639,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Caution (3)}
+    \vfill
     Here is the report run with no filter, and therefore against all recorded data, which is not much in this example.
 
     \includegraphics[width=12cm]{images/tutorial48.png}
@@ -599,6 +650,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \section{Integration in Takswarrior}
 
 \begin{frame}[fragile]\frametitle{Integration}
+    \vfill
     Timewarrior integrates with Taskwarrior by means of a Taskwarrior \verb=on-modify= hook script. Once installed, this means that whenever a task is active, Timewarrior is used to track the time.
 
     To install the script, copy it into your Taskwarrior directory:
@@ -609,6 +661,7 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Integration (2)}
+    \vfill
     Now we can create a task, start it, complete it and automatically track it.
 
     \includegraphics[width=12cm]{images/tutorial50.png}
@@ -619,9 +672,10 @@ import /usr/local/share/doc/timew/doc/holidays/holidays.en-US\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Links}
+    \vfill
     This talk was shamelessly converted from the \href{https://taskwarrior.org/docs/timewarrior/tutorial.html}{Online Tutorial}, there are more detailed \href{https://taskwarrior.orgdocs/timewarrior/index.html}{Online Docs}.
 
-    Starting today, there is XXX as well.
+    Starting today, there is \href{http://timewarrior.net/}{http://timewarrior.net/} as well.
 
     Feedback is highly appreciated!
 \end{frame}
