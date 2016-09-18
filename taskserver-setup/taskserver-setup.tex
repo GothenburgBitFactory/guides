@@ -496,13 +496,30 @@ $ git branch -a
 \begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (2)}
     \vfill
     The convention we use is that \verb+master+ represents the stable release.  The numbered branches represent the latest development (1.2.0, the 'highest' branch number, ending in '.0') and a patch branch (1.1.1, ending in a non-zero number).
+\end{frame}
 
-    Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this:
+\begin{frame}[fragile]\frametitle{Installation -- Special Circumstances (2)}
+    \vfill
+    Patch branches are reserved for emergency releases, so in this example you would choose to build 1.2.0 as the latest development branch like this (please not that starting with version 1.2.0 we make use of submodules):
 
     \begin{lstlisting}
 $ git checkout 1.2.0
 Branch 1.2.0 set up to track remote branch 1.2.0 from origin.
-Switched to a new branch '1.2.0'\end{lstlisting}
+Switched to a new branch '1.2.0'
+
+$ git submodule init
+Submodule 'src/libshared' (https://git.tasktools.org/scm/tm/libshared.git) registered for path 'src/libshared'
+
+$ git submodule update
+Cloning into 'src/libshared'...
+remote: Counting objects: 2180, done.
+remote: Compressing objects: 100% (1379/1379), done.
+remote: Total 2180 (delta 1641), reused 1018 (delta 796)
+Receiving objects: 100% (2180/2180), 369.13 KiB | 554.00 KiB/s, done.
+Resolving deltas: 100% (1641/1641), done.
+Checking connectivity... done.
+Submodule path 'src/libshared': checked out '2b0b70d90acb9a3ff3548befab9db8beb85a0c2d'\end{lstlisting}
+
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build from Git}\label{buildgit}
