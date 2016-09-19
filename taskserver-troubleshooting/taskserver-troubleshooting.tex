@@ -138,23 +138,29 @@
 
 \parskip1ex
 
+%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Troubleshooting Sync}
-  Here is a list of problems you may encounter, with the most common
-  ones listed first.
+    \vfill
+    Here is a list of problems you may encounter, with the most common ones listed first.
 
-  The single most common problem has been that the Taskserver Setup Instructions were not properly followed.  Please review the steps you took.
+    The single most common problem has been that the Taskserver Setup Instructions were not properly followed.  Please review the steps you took.
 
-  It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
+    It is always a good idea to make sure that you are using the latest release of Taskwarrior and Taskserver, not just because bugs are fixed that may help you, but also because the solutions below are geared toward the current releases.
 
-  If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
+    If you upgrade from an older release of Taskserver, you will need to follow the \href{http://taskwarrior.org/docs/taskserver/upgrade.html}{upgrade instructions}.
 \end{frame}
 
+%%%%%%%%%%%%%%%
 \section{Cases}
+%%%%%%%%%%%%%%%
+
 \subsection{'task sync' showed task list}
 
 \begin{frame}[fragile]\frametitle{'task sync' showed task list}
+    \vfill
     \textbf{You tried \texttt{task sync} but Taskwarrior showed you a task list instead}
 
     You have a version of Taskwarrior older than \verb+2.3.0+, which means there was no \verb+sync+ command, and you are seeing a list filtered by the search term 'sync'. Upgrading is the only solution.
@@ -163,6 +169,7 @@
 \subsection{Taskwarrior without GnuTLS}
 
 \begin{frame}[fragile]\frametitle{Taskwarrior without GnuTLS}
+    \vfill
     \textbf{You tried \texttt{task sync} and saw 'Taskwarrior was built without GnuTLS support.  Sync is not available.'}
 
     You are using version \verb+2.3.0+ or later, but the Taskwarrior binary was compiled without \href{http://www.gnutls.org}{GnuTLS} support.
@@ -175,6 +182,7 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Taskwarrior without GnuTLS -- continued}
+    \vfill
     Verify that your Taskwarrior was built with GnuTLS support by running \verb+task diagnostics+:
 
     \begin{lstlisting}
@@ -185,6 +193,7 @@ libgnutls: 3.3.18\end{lstlisting}
 \subsection{nodename nor servname provided}
 
 \begin{frame}[fragile]\frametitle{nodename nor servname provided}
+    \vfill
     \textbf{nodename nor servname provided, or not known}
 
     Despite the terrible wording, this means the Taskwarrior setting \verb+taskd.server=<host>:<port>+ refers to a host name that cannot be seen by Taskwarrior.
@@ -197,9 +206,12 @@ libgnutls: 3.3.18\end{lstlisting}
     \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Could not connect}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Could not connect}
+    \vfill
     \textbf{Could not connect to <host> <port>}
 
     Taskserver may not be running on \verb+<host>+.
@@ -210,6 +222,7 @@ libgnutls: 3.3.18\end{lstlisting}
 \subsection{Unable to use port}
 
 \begin{frame}[fragile]\frametitle{Unable to use port}
+    \vfill
     \textbf{Unable to use port 53589?}
 
     By default, port \verb+53589+ is used, but whichever you chose must be open on the server.
@@ -220,9 +233,12 @@ libgnutls: 3.3.18\end{lstlisting}
 $ ssh -L localport:dsthost:dstport user@example.com\end{lstlisting}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Handshake failed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Handshake failed}
+    \vfill
     \textbf{Certificate fails validation, Handshake failed}
 
     There are many reasons that the TLS handshake can fail.
@@ -236,9 +252,12 @@ $ ssh -L localport:dsthost:dstport user@example.com\end{lstlisting}
     Setting \verb+taskd.ciphers+ can force the use of different ciphers. Use \verb+gnutls-cli --list+ to see a list of installed ciphers, and confirm that there is overlap between client and server. There needs to be a cipher that is available to both, otherwise they cannot communicate.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Certificate still valid?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Certificate still valid?}
+    \vfill
     \textbf{Is your certificate still valid?}
 
     Certificates have expiration dates, and if you followed our instructions, you created a certificate that is valid for one year.  Check your certificate with this command:
@@ -251,9 +270,12 @@ $ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
     Note that creating certificates that never expire is a bad idea. Certificates may be compromised. A certificate that is considered secure today, may not be considered secure in a year. Is the key length you chose something that will remain suitable in the future? Will the algorithms you          chose remain secure? For these reasons, choose an expiration date that lets you reevaluate your choices in the relatively near future.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{GnuTLS outdated?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{GnuTLS outdated?}\label{gnutlsproblem}
+    \vfill
     \textbf{Is your GnuTLS library up to date?}
 
     As a \href{http://gnutls.org/security.html}{security product}, it is imperative that you keep your GnuTLS up to date.
@@ -268,6 +290,7 @@ $ certtool -i --infile ~/.task/<YOUR NAME>.cert.pem\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{GnuTLS outdated? -- continued}
+    \vfill
     Upgrading GnuTLS does nothing to upgrade taskd -- it has to be rebuilt from scratch, which means:
 
     \begin{lstlisting}
@@ -280,9 +303,12 @@ $ sudo make install\end{lstlisting}
     This can then be verified using \verb+taskd diagnostics+.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ancestor not found}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Ancestor not found}
+    \vfill
     \textbf{ERROR: Could not find common ancestor for ...\\
 Client sync key not found.}
 
@@ -297,9 +323,13 @@ $ task sync init\end{lstlisting}
     \end{alertblock}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%
 \section{Debugging}
+%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Hostname and IP address}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Hostname and IP address}
     \vfill
@@ -308,17 +338,19 @@ $ task sync init\end{lstlisting}
 
         \textbf{So please use the hostname where you are advised to do it!}
     \end{alertblock}
-    \vfill
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Diagnostics}
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Debugging -- Diagnostics}
-      You may wish to try and debug the problem yourself. You will probably not. But if you do, here is how.
+    \vfill
+    You may wish to try and debug the problem yourself. You will probably not. But if you do, here is how.
 
-      Both Taskwarrior and Taskserver have a \verb+diagnostics+ command, the purpose of which is to show you relevant troubleshooting details. Additionally it will indicate problems directly, for example, it will tell you if your cert/key files are not readable. The output from \verb+diagnostics+ is intended to be included in bug reports, and doing so saves you a lot of time, because it's the first thing we'll ask for.
+    Both Taskwarrior and Taskserver have a \verb+diagnostics+ command, the purpose of which is to show you relevant troubleshooting details. Additionally it will indicate problems directly, for example, it will tell you if your cert/key files are not readable. The output from \verb+diagnostics+ is intended to be included in bug reports, and doing so saves you a lot of time, because it's the first thing we'll ask for.
 
-      \begin{lstlisting}
+    \begin{lstlisting}
 $ task diagnostics
 ...
 $ taskd diagnostics
@@ -327,9 +359,12 @@ $ taskd diagnostics
     Read the output of the \verb+diagnostics+ commands carefully, there may be several types of problems mentioned, which need to be addressed before going further.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Debug Mode}
+%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Debug Mode}
+    \vfill
     The next step would be to run the server in debug mode. First shutdown your Taskserver, then launch it interactively:
 
     \begin{lstlisting}
@@ -349,9 +384,13 @@ $ task rc.debug=1 rc.debug.tls=2 sync
 ...\end{lstlisting}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%
 \subsection{Tools}
+%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Server}
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Server: IP Address}\label{S1}
     \vfill
@@ -383,7 +422,6 @@ $ ip addr list
     link/ether 52:54:a2:01:25:9d brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0
        valid_lft forever preferred_lft forever\end{lstlisting}
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server: Ports}\label{S2}
@@ -396,7 +434,6 @@ taskd   1167 taskserver    4u  IPv4  16682      0t0  TCP taskd.example.net:53589
 
 $ netstat -tl | grep 53589
 tcp        0      0 taskd.example.net:53589 0.0.0.0:*               LISTEN\end{lstlisting}
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server: Certificate}\label{S3}
@@ -409,7 +446,6 @@ subject= /CN=taskd.example.net/O=My own IT
 $ certtool -i --infile=server.cert.pem | grep Subject:
         Subject: CN=taskd.example.net,O=My own IT\end{lstlisting}
 
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Server: taskd diagnostics}\label{S4}
@@ -442,11 +478,11 @@ Configuration
  Max Request: 1048576 bytes
      Ciphers:
        Trust: strict\end{lstlisting}
-
-    \vfill
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Client}
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Client: General Reachability}\label{C1}
     \vfill
@@ -470,7 +506,6 @@ Starting Nmap 6.40 ( http://nmap.org ) at 2016-05-15 11:24 CEST
 Nmap scan report for taskd.example.net (192.168.1.100)
 Host is up (0.00012s latency).
 Nmap done: 1 IP address (1 host up) scanned in 0.01 seconds\end{lstlisting}
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Client: Port Reachability}\label{C2}
@@ -497,8 +532,6 @@ Nmap done: 1 IP address (1 host up) scanned in 0.18 seconds
 $ openssl s_client -host taskd.example.net -port 53589
 CONNECTED(00000003)
 ...\end{lstlisting}
-
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Client: Hostname resolution}\label{C3}
@@ -515,12 +548,11 @@ Address:        192.168.178.1#53
 Non-authoritative answer:
 Name:   taskd.example.net
 Address: 192.168.1.100\end{lstlisting}
-    \vfill
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Client: task diagnostics}\label{C4}
     \vfill
-        Shows client diagnostic data.
+    Shows client diagnostic data.
 
     \begin{lstlisting}
 task diagnostics
@@ -551,18 +583,21 @@ Hooks
 
 Tests
 ...\end{lstlisting}
-    \vfill
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%
 \section{Getting Help}
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]\frametitle{Getting Help}
+    \vfill
     As a last resort, ask for help. But please make sure you have carefully reviewed your setup, and gone through the checks above before asking. No one wants to lead you through the steps above to discover that you didn't.
 
     We'll ask you to provide the \verb+diagnostics+ output for both Taskwarrior and Taskserver, then we're going to go through the steps above, because this is our checklist also.
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Getting Help}
+    \vfill
     There are several ways of getting help and there is \textbf{no realtime support}, even though answers might come pretty fast:
 
     \begin{itemize}
@@ -572,7 +607,6 @@ Tests
         \item We have a \href{https://groups.google.com/forum/\#!forum/taskwarrior-user}{User Mailinglist} which you can join anytime to discuss about Taskwarrior and techniques. The \href{https://groups.google.com/forum/\#!forum/taskwarrior-dev}{Developer Mailinglist} is focussing on a more technical oriented audience.
         \item Submit your details to our \href{https://answers.tasktools.org}{Q \& A site}, then wait patiently for the community to respond.
     \end{itemize}
-
 \end{frame}
 
 % \iffalse
