@@ -217,6 +217,8 @@ libgnutls: 3.3.18\end{lstlisting}
     Taskserver may not be running on \verb+<host>+.
 
     Check with \verb+ps -leaf | grep taskd+.
+
+    Sometimes the error message is misleading, please check "Handshake failed" as well.
 \end{frame}
 
 \subsection{Unable to use port}
@@ -239,12 +241,32 @@ $ ssh -L localport:dsthost:dstport user@example.com\end{lstlisting}
 
 \begin{frame}[fragile]\frametitle{Handshake failed}
     \vfill
+    There are many reasons that the TLS handshake can fail.
+
+    Please do the following on your client:
+
+    \begin{lstlisting}
+$ openssl s_client -CAfile .task/ca.cert.pem -host HOST -port PORT\end{lstlisting}
+
+    The result should be something like \verb=Verify return code: 0 (ok)=.
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Handshake failed (continued)}
+    \vfill
     \textbf{Certificate fails validation, Handshake failed}
 
-    There are many reasons that the TLS handshake can fail.
+    \textbf{Could not connect to <host> <port>}
 
     When you generated certificates, you modified a \verb+vars+ file, in particular the \verb+CN=<name>+ setting. That name must match the output of  \verb+$ hostname -f+ on the server for the certificate to validate.
 
+    \begin{lstlisting}
+$ certtool -i < server.cert.pem | grep Subject:
+
+$ openssl x509 -noout -in server.cert.pem -subject\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Handshake failed (continued)}
+    \vfill
     Additionally, that name must also be used in the \verb+taskd.server=<host>:<port>+ setting for Taskwarrior. Otherwise you'll need \verb+taskd.trust=ignore hostname+.
 
     If you are using a self-signed certificate, did you specify it using the \verb+taskd.ca+ setting?
