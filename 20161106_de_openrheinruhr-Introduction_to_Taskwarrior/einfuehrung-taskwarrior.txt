@@ -1,0 +1,22 @@
+In diesem zweistündigen Hands-On-Workshop wird Taskwarrior aus den Quellen übersetzt, installiert und konfiguriert.
+
+Im weiteren Verlauf wird die Verwaltung von einfachen ToDo-Listen immer stärker mit erweiterten Features verfeinert, so dass auch komplexere Szenarien möglich werden.
+
+Dabei geht es im Besonderen um die Möglichkeit zur Terminierung von Aufgaben, wiederkehrende Aufgaben, Prioritäten und (konfigurierbare) Dringlichkeiten, Projekte und Tags, Abhängigkeiten, Notzizen, Filter, selbst erstellte Reports, Suchen und Finden, "virtuelle Tags", durch den Benutzer definierte Attribute und das Document Object Model (DOM).
+
+- Übersetzen und installieren aus dem Quelltext
+- Einfache ToDo-Listen
+- Datumsverwendung
+- Wiederkehrende Termine
+- Prioritäten und Dringlichkeit
+- Projekte und Tags
+- Abhängigkeiten
+- Notizen
+- Reports
+- Filtern
+- Suchen und Finden
+- Virtual Tags
+- DOM
+- Eventuell "User defined Attributes"
+
+---
