@@ -370,7 +370,7 @@ $ brew install gnutls\end{lstlisting}
     You can download the tarball with \verb+curl+, as an example of just one of many ways to download the tarball.
 
     \begin{lstlisting}
-$ curl -O http://taskwarrior.org/download/taskd-latest.tar.gz\end{lstlisting}
+$ curl -LO https://taskwarrior.org/download/taskd-latest.tar.gz\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Installation -- Build}\label{buildtar}
@@ -645,6 +645,8 @@ Created /var/taskd\end{lstlisting}
 
     \begin{alertblock}{pki directory}
         It is a good idea to copy the \verb=pki= subdirectory from your \verb=SOURCEDIR= to your \verb=TASKDDATA= directory.
+
+        If you installed from a package (manager) search for the pki directory, \verb+find / -name pki -type d+ \\ (example \verb+/usr/share/taskd/pki/+ for Ubuntu).
     \end{alertblock}
 \end{frame}
 
