@@ -1,0 +1,406 @@
+\documentclass[t,handout,aspectratio=169]{beamer}
+% \documentclass[t,aspectratio=169]{beamer}
+\usetheme[
+    sectionpage=none, % progressbar,
+    numbering=none,
+    block=fill,
+]{metropolis}
+
+\usepackage[T1]{fontenc} % for copy'n'paste
+\usepackage[utf8]{inputenc}
+% \usepackage[english,nswissgerman]{babel}
+\usepackage[nswissgerman,english]{babel}
+\usepackage{listings}
+\lstset{ %
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    language=bash,
+    tabsize=2
+}
+
+% black, blue, brown, cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink, purple, red, teal, violet, white, yellow.
+\hypersetup{ %
+    colorlinks=true,
+    linkcolor=,
+    urlcolor=orange
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Lessons Learned}
+\subtitle{From Running \\ an Open Source Project \\ for more than a decade.}
+\titlegraphic{\hfill\includegraphics[height=3cm]{tw-xl.png}}
+
+\date{August, 19th 2017}
+\author{Dirk Deimeke}
+\institute{Taskwarrior Academy @ FrOSCon}
+
+\subject{Taskwarrior}
+\keywords{Taskwarrior}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Prolog}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parskip1ex
+
+\begin{frame}[standout]
+    Taskwarrior -- \href{https://taskwarrior.org/}{taskwarrior.org}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Taskwarrior Philosophy}
+    \vfill
+    \begin{itemize}
+        \item Openness
+        \item Low Friction
+        \item No Penalty
+        \item Methodology Agnostic
+        \item Toolkit
+        \item Extension Friendly
+        \item Community
+        \item Focus
+    \end{itemize}
+
+    \href{https://taskwarrior.org/docs/philosophy.html}{taskwarrior.org/docs/philosophy.html}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lessons learned}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{What Have We Learned From This Open Source Project?}
+    \vfill
+    Here is the collected \textit{wisdom} that \textbf{we} have gained from \\
+    running the Taskwarrior project for more than a decade. \pause
+
+    It has been \textbf{rewarding}, \textbf{enjoyable}, and sometimes \textbf{frustrating}. \pause
+
+    We learned a lot about users and Open Source expectations.
+\end{frame}
+
+\begin{frame}[standout]
+    I will speak about our experiences \\
+    and would like to hear yours.
+\end{frame}
+
+\begin{frame}[standout]
+    Who in this room is involved in an open source project?
+\end{frame}
+
+\begin{frame}[standout]
+    What describes your role(s) best?
+\end{frame}
+
+\begin{frame}[standout]
+    Developer -- Sysadmin -- Documentatalist -- Graphic designer -- Website maintainer / creator -- Evangelist -- Donator (money / resources) -- Something else?
+\end{frame}
+
+\begin{frame}[standout]
+    Who wants to start an open source project?
+\end{frame}
+
+\begin{frame}[standout]
+    Why?
+\end{frame}
+
+\begin{frame}[fragile] % \frametitle{Motivation}
+    \vfill
+    \onslide<1->{\textbf{Start an open source project if you want to learn all you can}} \onslide<4->{about software design, development, planning, testing, documenting, and delivery;} \onslide<2->{\textbf{enjoy technical challenges}}\onslide<4->{, administrative challenges, compromise, and will} \onslide<3->{\textbf{be satisfied hoping that someone out there is benefitting from your work}.}
+\end{frame}
+
+\begin{frame}[fragile] % \frametitle{Demotivation}
+    \vfill
+    \onslide<1->{Do \textbf{not} start an open source project} \onslide<2->{if you need praise, warmth and love from your fellow human beings.}
+\end{frame}
+
+\begin{frame}[standout]
+    Sounds like the job description \\ for a systems administrator \ldots
+\end{frame}
+
+\begin{frame}[fragile] % \frametitle{Boundaries}
+    \vfill
+    If you could draw a boundary between that which is already supported, and that which is not, \pause you would find that all the activity, discussion and drama occurs at that boundary.
+\end{frame}
+
+\begin{frame}[fragile] % \frametitle{Boundaries}
+    \vfill
+    Feature requests only nibble at the periphery. \pause
+
+    Bold changes originate elsewhere.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    People will get excited about something a project doesn't yet support. \pause
+
+    Deliver it, and they will get excited about the next thing.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    If a feature works well, you'll never hear about it again.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    There is a fine line between \textit{richly-featured} and \textit{bloated}. \pause
+
+    There may not be a line at all.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    If you demo two features, and talk about twenty more, \\
+    users still only know about the two. \pause
+
+    Visual demonstrations have far greater impact.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Every change will ruin someone's day.
+
+    They will be sure to tell you about it. \pause
+
+    The same change will improve someone's day.
+
+    You will not hear of this.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    People will disguise feature requests as bugs, \pause \\
+    which means either they consider difference of opinion a defect, \pause \\
+    or believe that calling it a flaw will force implementation, \pause \\
+    but hopefully they just forgot to set the issue type to \textit{enhancement}.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Some people find it very difficult to articulate what they want. \pause
+
+    It's worth being patient and finding out what they need.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    What you keep out of a project \pause \\
+    is just as important as what you allow in to a project.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Many new users will submit feature requests, \\
+    just to show that they are knowledgeable and clever. \pause
+
+    They don't really want that feature, it's a form of positive feedback.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Beware of suggestions from users \\
+    who have used your software for only a day or so. \pause
+
+    Be equally aware of suggestions from users \\
+    who have used your software for a long, long time.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    People will threaten to not use open source software because it lacks a feature, \pause \\
+    thereby mistaking themselves for paying customers.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Many believe that if a change is small, it deserves to be in the project, \pause \\
+    regardless of whether it makes sense for it to be there.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Users will go to the effort of seeking you out online, \pause \\
+    to directly ask you a question \pause \\
+    that is answered two clicks from the front page of a website.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    A looping, animated GIF will be watched over and over, scrutinized and understood. \pause
+
+    A paragraph of text will be ignored.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Man pages are too densely crammed with information, \\
+    and too lengthy, for most modern humans to ingest.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    The best question to identify time wasters: \pause
+
+    \textit{What have you tried so far?}
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    People will pick a fight with you about all your incidental choices. \pause
+
+    Your issue tracker, \\
+    your branching strategy, \\
+    your version numbers, \\
+    the text editor you use, \\
+    and so on.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    You can choose the most permissive software license, \\
+    and people will still argue with you about your choice.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    SEO consultants are not very good at searching the web, \pause \\
+    and learning that you operate an open source, non-profit project. \pause
+
+    It says a lot.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    No one has ever complained about an algorithm choice, \\
+    code structure, or code comments, \pause \\
+    but dozens have told us that our use of whitespace is wrong. \pause
+
+    Complaints have not been about the code, but the gaps between code. \pause
+
+    Prioritize the complaints.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    We hard-coded XTerm color control sequences, bypassing termcap.
+
+    That was more than ten years ago.
+
+    No one has noticed. \pause
+
+    Sometimes, what looks like an expedient shortcut is perfectly good.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    We had a very long and detailed tutorial page on the site for years.
+
+    To go through and read it all would have taken at least an hour. \pause
+
+    At the very bottom, was a video of a band playing the \\
+    Mexican Hat Dance using only hand-fart noises. \pause
+
+    No one ever mentioned this.
+
+    Keep your tutorials short.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Presence at industry events is important. \pause
+
+    Offering talks and workshops helps make people aware of your project.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    \textit{Virtual teams} work well, \pause \\
+    but it gets even better after meeting in real life.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    It is good if the members of your team share the same sense of humor. \pause
+
+    If not, be careful writing messages with an ironic tone.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    A development-class machine is no indication \\
+    of the kind of hardware and software your users are running. \pause
+
+    Dependencies and tools are often far behind the latest versions.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Respond to every means of communication.
+
+    It is worth it.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Have a recognizable logo. \pause
+
+    Do not make the logo yourself, if you are not a designer. \pause
+
+    If you have no budget, ask a designer to judge your work.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Offering gratis stickers is great, \pause \\
+    having SWAG -- Souvenirs, Wearables And Gifts -- users can choose from is even better.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    People love to make mashups of two \texttt{things}, or add an extension to a \texttt{thing}. \pause
+
+    Very few contributors want to work on the \texttt{thing}.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Create a website containing the philosophy behind your project \\
+    to help people understand what your project is about.
+\end{frame}
+
+\begin{frame}[fragile]% \frametitle{x}
+    \vfill
+    Calm down, take a deep breath and look back at what you achieved. \pause
+
+    Details, mistakes, compromises, incomplete plans and unfulfilled wishes \\
+    are only visible from inside the project. Be proud, and make new plans.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Epilog}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]\frametitle{That's all!}
+    \vfill
+    \begin{center}
+        Dirk Deimeke, Taskwarrior-Team, 2017, \href{https://creativecommons.org/licenses/by/4.0/}{CC-BY}
+
+        \href{mailto:dirk@deimeke.net}{dirk@deimeke.net}
+
+        \href{https://d5e.org/}{d5e.org} -- \href{https://speakerdeck.com/ddeimeke}{speakerdeck.com/ddeimeke} \\
+        {\tiny Download the PDF from Speakerdeck for clickable links.}
+
+        \href{taskwarrior.org/docs/advice.html}{https://taskwarrior.org/docs/advice.html}
+    \end{center}
+\end{frame}
+
+\end{document}
